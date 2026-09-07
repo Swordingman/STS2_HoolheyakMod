@@ -40,18 +40,14 @@ public class ContingencyPlan : HoolheyakBaseCard
     /// <summary>
     /// 博览/逶迤触发时，将弃牌堆中的应急方案移回手牌。
     /// </summary>
-    public static async Task ReturnFromDiscard(PlayerChoiceContext choiceContext, Player player, bool isEruditionTrigger)
+    public static async Task ReturnFromDiscard(PlayerChoiceContext choiceContext, Player player, bool requireUpgrade)
     {
-        if (player == null) return;
-
         var discard = PileType.Discard.GetPile(player);
         var cardsToMove = discard.Cards
-            .Where(c => c is ContingencyPlan && (!isEruditionTrigger || c.IsUpgraded))
+            .Where(c => c is ContingencyPlan && (!requireUpgrade || c.IsUpgraded))
             .ToList();
 
         foreach (var card in cardsToMove)
-        {
             await CardPileCmd.Add(card, PileType.Hand);
-        }
     }
 }

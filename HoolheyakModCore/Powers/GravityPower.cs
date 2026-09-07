@@ -41,7 +41,7 @@ public class GravityPower : CustomPowerModel
 
     public static int CalculateGravity(Creature owner)
     {
-        int baseGravity = Math.Max(1, owner.MaxHp / 10);
+        int baseGravity = Math.Max(1, (owner.MaxHp + 9) / 10);
 
         bool hasOpposition = owner.CombatState?.PlayerCreatures
             .Any(c => c.GetPower<OppositionPower>() != null) ?? false;

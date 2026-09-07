@@ -1,3 +1,4 @@
+/*
 using BaseLib.Abstracts;
 using HoolheyakMod.Code.Encounters;
 using MegaCrit.Sts2.Core.Rewards;
@@ -103,3 +104,4 @@ public sealed class WaterLikeShapeEvent : CustomEventModel
         return null;
     }
 }
+*/

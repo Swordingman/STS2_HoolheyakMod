@@ -96,7 +96,8 @@
   "HOOLHEYAKMOD-PARAMETER_CORRECTION.description": "[gold]消耗[/gold]。\n回合结束时，若此牌在你手中，可以至多使{ParameterCorrection-Magic:diff()}张手牌在本回合中获得[gold]保留[/gold]。\n每次触发该效果，获得1层[gold]逶迤[/gold]。",
 
   "HOOLHEYAKMOD-LITERATURE_RETRIEVAL.title": "文献检索",
-  "HOOLHEYAKMOD-LITERATURE_RETRIEVAL.description": "从3张随机颜色的牌中选择1张加入你的手牌。",
+  "HOOLHEYAKMOD-LITERATURE_RETRIEVAL.description": "从3张随机颜色的牌中选择1张加入你的手牌{IfUpgraded:show:，这张牌在本回合中费用为0。|。}",
+  "HOOLHEYAKMOD-LITERATURE_RETRIEVAL.selectionScreenPrompt": "选择1张牌加入你的手牌。",
 
   "HOOLHEYAKMOD-MASS_OFFSET.title": "质量抵消",
   "HOOLHEYAKMOD-MASS_OFFSET.description": "使所有敌人获得X点[gold]升力[/gold]，并获得X点[gold]解析[/gold]。",
@@ -119,6 +120,7 @@
   "HOOLHEYAKMOD-STARGAZING.description": "查看牌堆顶的{Stargazing-Magic:diff()}张牌，\n选择至多{Stargazing-Magic:diff()}张卡，[gold]变量[/gold]：\n弃掉它们；\n将它们置于抽牌堆底部。",
   "HOOLHEYAKMOD-STARGAZING.variable.0": "弃掉它们。",
   "HOOLHEYAKMOD-STARGAZING.variable.1": "将它们置于抽牌堆底部。",
+  "HOOLHEYAKMOD-STARGAZING.selectionScreenPrompt": "选择至多5张牌。",
 
   "HOOLHEYAKMOD-RECURSIVE_EXPERIMENT.title": "递归实验",
   "HOOLHEYAKMOD-RECURSIVE_EXPERIMENT.description": "[gold]消耗[/gold]。\n以1点费用开启一次实验。\n[gold]变量[/gold]：\n终止本次实验；\n随机打出1张牌并将其从卡组中永久移除。战斗结束后，额外获得一组相同类型的选牌奖励。然后再开启一次实验。",
@@ -156,7 +158,7 @@
   "HOOLHEYAKMOD-ANCIENT_COVENANT.variable.1": "触发[gold]逶迤[/gold]时，获得{Covenant-Magic:diff()}[gold]敏捷[/gold]。",
 
   "HOOLHEYAKMOD-WARDROBE.title": "羽蛇的衣柜",
-  "HOOLHEYAKMOD-WARDROBE.description": "每打出1张其他颜色的牌，随机将*1张本颜色牌加入手牌并赋予[gold]消耗[/gold]。",
+  "HOOLHEYAKMOD-WARDROBE.description": "每打出1张其他颜色的牌，随机将1张本颜色牌加入手牌并赋予[gold]消耗[/gold]。",
 
   "HOOLHEYAKMOD-OMNISCIENT_HORIZON.title": "全知视界",
   "HOOLHEYAKMOD-OMNISCIENT_HORIZON.description": "每当有敌人进入[gold]浮空[/gold]状态，抽2张牌，获得{energyPrefix:energyIcons(2)}。",
@@ -171,7 +173,7 @@
   "HOOLHEYAKMOD-CORRECTED_VARIABLE.description": "每当你抽到一张状态牌，获得1点[gold]博览[/gold]。\n每当你抽到一张诅咒牌，获得1点[gold]逶迤[/gold]。",
 
   "HOOLHEYAKMOD-BYPRODUCT.title": "副产品",
-  "HOOLHEYAKMOD-BYPRODUCT.description": "每当你进行一次[gold]变量[/gold]，获得1张随机牌。",
+  "HOOLHEYAKMOD-BYPRODUCT.description": "每当你进行一次[gold]变量[/gold]，获得1张{IfUpgraded:show:升级后的|}随机牌。",
 
   "HOOLHEYAKMOD-COMPLEMENTARY_EXPERIMENT.title": "互补实验",
   "HOOLHEYAKMOD-COMPLEMENTARY_EXPERIMENT.description": "每当你进行一次[gold]变量[/gold]时，获得{Complementary-Magic:diff()}点[gold]格挡[/gold]。",
@@ -180,7 +182,7 @@
   "HOOLHEYAKMOD-KUKULKAN_LEGACY.description": "使你的[gold]博览[/gold]和[gold]逶迤[/gold]上限各+{Kukulkan-Magic:diff()}。但是造成的伤害和给予的[gold]升力[/gold]翻倍。",
 
   "HOOLHEYAKMOD-TWIN_EXPERIMENT.title": "双生子实验",
-  "HOOLHEYAKMOD-TWIN_EXPERIMENT.description": "对随机两个敌人造成{Damage:diff()}点伤害2次。\n若击中两个不同的敌人，则将额外的*2次{Damage:diff()}点伤害给予[gold]变量[/gold]：\n剩余血量更多的敌人；\n剩余血量更少的敌人。",
+  "HOOLHEYAKMOD-TWIN_EXPERIMENT.description": "对随机两个敌人造成{Damage:diff()}点伤害2次。\n若击中两个不同的敌人，则将额外的2次{Damage:diff()}点伤害给予[gold]变量[/gold]：\n剩余血量更多的敌人；\n剩余血量更少的敌人。",
   "HOOLHEYAKMOD-TWIN_EXPERIMENT.variable.0": "将额外的伤害给予剩余血量更多的敌人。",
   "HOOLHEYAKMOD-TWIN_EXPERIMENT.variable.1": "将额外的伤害给予剩余血量更少的敌人。",
 
@@ -209,6 +211,7 @@
 
   "HOOLHEYAKMOD-TRANSIT.title": "行运",
   "HOOLHEYAKMOD-TRANSIT.description": "[gold]消耗[/gold]。\n选择并触发一个[gold]相位[/gold]。",
+  "HOOLHEYAKMOD-TRANSIT.selectionScreenPrompt": "选择并触发一个相位。",
 
   "HOOLHEYAKMOD-SHOCKWAVE.title": "激波",
   "HOOLHEYAKMOD-SHOCKWAVE.description": "对所有敌人造成{Damage:diff()}点伤害，并给予{Shockwave-Magic:diff()}层[gold]失重[/gold]。",
@@ -222,7 +225,7 @@
   "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.variable.1": "打出抽牌堆顶端的技能牌。",
 
   "HOOLHEYAKMOD-CONTINGENCY_PLAN.title": "预案",
-  "HOOLHEYAKMOD-CONTINGENCY_PLAN.description": "获得{energyPrefix:energyIcons(1)}。\n每当触发[gold]逶迤[/gold]时，将此牌从弃牌堆移回手牌。",
+  "HOOLHEYAKMOD-CONTINGENCY_PLAN.description": "获得{energyPrefix:energyIcons(1)}。\n每当触发[gold]逶迤[/gold]{IfUpgraded:show:或逶迤|}时，将此牌从弃牌堆移回手牌。",
 
   "HOOLHEYAKMOD-DYNAMIC_PRESSURE.title": "动压",
   "HOOLHEYAKMOD-DYNAMIC_PRESSURE.description": "造成{Damage:diff()}点伤害。\n抽{DynamicPressure-Magic:diff()}张攻击牌。",
@@ -247,7 +250,7 @@
   "HOOLHEYAKMOD-APOPTOSIS_EXPERIMENT.variable.1": "给予{Apoptosis-Deconstruction:diff()}层[gold]解构[/gold]。",
 
   "HOOLHEYAKMOD-CONTROL_EXPERIMENT.title": "对照实验",
-  "HOOLHEYAKMOD-CONTROL_EXPERIMENT.description": "造成{Damage:diff()}点伤害。\n[gold]变量[/gold]：\n将1张随机[gold]相位[/gold]置入你的抽牌堆，并抽*2张牌；\n将1张随机[gold]相位[/gold]置入你的弃牌堆，随后立即洗牌。",
+  "HOOLHEYAKMOD-CONTROL_EXPERIMENT.description": "造成{Damage:diff()}点伤害。\n[gold]变量[/gold]：\n将1张随机[gold]相位[/gold]置入你的抽牌堆，并抽2张牌；\n将1张随机[gold]相位[/gold]置入你的弃牌堆，随后立即洗牌。",
   "HOOLHEYAKMOD-CONTROL_EXPERIMENT.variable.0": "将1张随机[gold]相位[/gold]置入你的抽牌堆，并抽2张牌。",
   "HOOLHEYAKMOD-CONTROL_EXPERIMENT.variable.1": "将1张随机[gold]相位[/gold]置入你的弃牌堆，随后立即洗牌。",
 
@@ -278,7 +281,7 @@
   "HOOLHEYAKMOD-RAPIDS.description": "[gold]消耗[/gold]。\n给予99层[gold]失重[/gold]。",
 
   "HOOLHEYAKMOD-FACTORIAL_EXPERIMENT.title": "析因实验",
-  "HOOLHEYAKMOD-FACTORIAL_EXPERIMENT.description": "造成{Damage:diff()}点伤害。\n[gold]变量[/gold]：\n触发手牌中（大部分）[gold]变量[/gold]卡的随机[gold]变量[/gold]；\n将3张随机[gold]变量[/gold]卡置入你的手牌，并在本回合中使它们的耗能变为*0。",
+  "HOOLHEYAKMOD-FACTORIAL_EXPERIMENT.description": "造成{Damage:diff()}点伤害。\n[gold]变量[/gold]：\n触发手牌中（大部分）[gold]变量[/gold]卡的随机[gold]变量[/gold]；\n将3张随机[gold]变量[/gold]卡置入你的手牌，并在本回合中使它们的耗能变为0。",
   "HOOLHEYAKMOD-FACTORIAL_EXPERIMENT.variable.0": "触发手牌中所有允许自动触发的[gold]变量[/gold]卡的随机[gold]变量[/gold]。",
   "HOOLHEYAKMOD-FACTORIAL_EXPERIMENT.variable.1": "将{Factorial-Count:diff()}张随机[gold]变量[/gold]卡置入你的手牌，并在本回合中使它们的耗能变为0。"
 }

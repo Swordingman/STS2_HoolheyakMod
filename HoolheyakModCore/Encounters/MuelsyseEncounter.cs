@@ -1,3 +1,4 @@
+/*
 using BaseLib.Abstracts;
 using HoolheyakMod.Code.Monsters;
 using MegaCrit.Sts2.Core.Models;
@@ -24,3 +25,4 @@ public sealed class MuelsyseEncounter : CustomEncounterModel
         (ModelDb.Monster<Muelsyse>().ToMutable(), "main")
     ];
 }
+*/

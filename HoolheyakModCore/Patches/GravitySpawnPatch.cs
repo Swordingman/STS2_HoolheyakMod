@@ -40,7 +40,7 @@ internal static class GravitySpawnPatch
         if (enemy.GetPower<GravityPower>() != null)
             return;
 
-        int gravityAmount = (enemy.MaxHp + 9) / 10;
+        int gravityAmount = GravityPower.CalculateGravity(enemy);
 
         GravityPower gravity = (GravityPower)ModelDb.Power<GravityPower>().ToMutable();
         gravity.Applier = enemy;

@@ -36,39 +36,25 @@ public class FlyUp : HoolheyakBaseCard, IVariableCard
     public IReadOnlyList<VariableChoice> GetVariableChoices(PlayerChoiceContext choiceContext, CardPlay cardPlay, bool isAutoTriggered = false)
     {
         int effect = isAutoTriggered ? 2 : ResolveEnergyXValue();
-        if (IsUpgraded) effect += 1;
+        if (IsUpgraded) effect++;
 
         return [
-            new VariableChoice(async context => {
-                if (effect <= 0) return;
-                await PowerCmd.Apply<EruditionPower>(
-                    context,
-                    Owner.Creature,
-                    effect,
-                    Owner.Creature,
-                    this
-                );
+            new VariableChoice(async context =>
+            {
+                for (int i = 0; i < effect; i++)
+                    await TriggerErudition.Trigger(context, Owner.Creature);
             }),
-            new VariableChoice(async context => {
-                if (effect <= 0) return;
-                await PowerCmd.Apply<MeanderPower>(
-                    context,
-                    Owner.Creature,
-                    effect,
-                    Owner.Creature,
-                    this
-                );
+            new VariableChoice(async context =>
+            {
+                for (int i = 0; i < effect; i++)
+                    await TriggerMeander.Trigger(context, Owner.Creature);
             })
         ];
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var player = Owner;
-        if (player == null || player.Creature == null)
-            return;
-
-        await PowerCmd.Apply<AnalysisPower>(choiceContext, player.Creature, DynamicVars["FlyUp-Analysis"].IntValue, player.Creature, this);
+        await PowerCmd.Apply<AnalysisPower>(choiceContext, Owner.Creature, DynamicVars["FlyUp-Analysis"].IntValue, Owner.Creature, this);
 
         await VariableCmd.Choose(choiceContext, this, cardPlay);
     }

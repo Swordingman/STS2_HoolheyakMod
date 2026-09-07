@@ -52,20 +52,26 @@ public class WardrobePower : CustomPowerModel
 
         var card = cardPlay.Card;
 
-        // 非本职业牌，且不是状态/诅咒
+        // 状态和诅咒不算“其他颜色牌”
         if (card.Type == CardType.Curse || card.Type == CardType.Status)
             return;
 
-        if (card.Pool == ModelDb.CardPool<HoolheyakModCardPool>())
+        var hoolheyakPool = ModelDb.CardPool<HoolheyakModCardPool>();
+
+        // 本颜色牌不触发
+        if (card.Pool == hoolheyakPool)
             return;
 
         Flash();
 
         var player = Owner.Player;
+
+        // 只从本颜色牌中随机
         var candidates = ModelDb.AllCards
-            .Where(c => c.Type != CardType.Status
-                     && c.Type != CardType.Curse
-                     && c.Rarity != CardRarity.Token)
+            .Where(c => c.Pool == hoolheyakPool
+                    && c.Type != CardType.Status
+                    && c.Type != CardType.Curse
+                    && c.Rarity != CardRarity.Token)
             .ToList();
 
         if (candidates.Count == 0)
@@ -83,11 +89,13 @@ public class WardrobePower : CustomPowerModel
             randomCard.AddKeyword(CardKeyword.Exhaust);
 
             if (MakeZeroCost)
-            {
                 randomCard.SetToFreeThisCombat();
-            }
 
-            await CardPileCmd.AddGeneratedCardToCombat(randomCard, PileType.Hand, player);
+            await CardPileCmd.AddGeneratedCardToCombat(
+                randomCard,
+                PileType.Hand,
+                player
+            );
         }
     }
 }

@@ -18,22 +18,14 @@ public class DistilledTimePower : CustomPowerModel
 
     public override async Task AfterPlayerTurnStart(PlayerChoiceContext choiceContext, Player player)
     {
-        if (Owner?.Player == null || player != Owner.Player || Amount <= 0)
-            return;
+        if (Owner?.Player == null || player != Owner.Player || Amount <= 0) return;
 
         Flash();
 
         for (int i = 0; i < (int)Amount; i++)
         {
-            var potion = PotionFactory.CreateRandomPotionInCombat(
-                player,
-                player.RunState.Rng.CombatPotionGeneration,
-                null);
-
-            if (potion != null)
-            {
-                await PotionCmd.TryToProcure(potion, player, -1);
-            }
+            var potion = PotionFactory.CreateRandomPotionInCombat(player, player.RunState.Rng.CombatPotionGeneration).ToMutable();
+            await PotionCmd.TryToProcure(potion, player, -1);
         }
     }
 }

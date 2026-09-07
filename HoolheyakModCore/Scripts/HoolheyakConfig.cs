@@ -1,4 +1,5 @@
 using BaseLib.Config;
+using System.Collections.Generic;
 
 namespace HoolheyakMod.Scripts.Utils;
 
@@ -16,6 +17,9 @@ public sealed class HoolheyakConfig : SimpleModConfig
     [ConfigSection("Skin")]
     [ConfigHideInUI]
     public static int CurrentSkinIndex { get; set; } = 0;
+
+    [ConfigHideInUI]
+    public static List<int> EnabledChallenges { get; set; } = new();
 
     [ConfigHideInUI]
     public static int CurrentPreset { get; set; } = 0;
