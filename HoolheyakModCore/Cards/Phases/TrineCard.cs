@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace HoolheyakMod.Scripts.Cards;
 
-[Pool(typeof(CurseCardPool))]
+[Pool(typeof(StatusCardPool))]
 public class TrineCard : HoolheyakBaseCard
 {
     private bool _autoConsumed;

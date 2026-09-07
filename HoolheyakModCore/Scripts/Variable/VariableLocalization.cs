@@ -1,3 +1,4 @@
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using System;
@@ -14,6 +15,9 @@ public static class VariableLocalization
             throw new InvalidOperationException($"Missing variable localization: {sourceCard.Id.Entry}.variable.{index}");
 
         sourceCard.DynamicVars.AddTo(loc);
+        loc.Add("energyPrefix", EnergyIconHelper.GetPrefix(sourceCard));
+        loc.Add("singleStarIcon", "[img]res://images/packed/sprite_fonts/star_icon.png[/img]");
+
         return loc.GetFormattedText();
     }
 }

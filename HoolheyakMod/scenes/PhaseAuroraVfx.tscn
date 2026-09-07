@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://HoolheyakModCore/Scripts/Phases/NPhaseAuroraVfx.cs" id="1_phase_aurora"]
+
+[node name="PhaseAuroraVfx" type="Node2D"]
+script = ExtResource("1_phase_aurora")
+
+[node name="Darkness" type="ColorRect" parent="."]
+unique_name_in_owner = true
+offset_right = 1920.0
+offset_bottom = 1080.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="AuroraLayer" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="ParticleLayer" type="Node2D" parent="."]
+unique_name_in_owner = true

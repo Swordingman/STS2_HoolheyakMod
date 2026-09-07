@@ -3,7 +3,7 @@ using BaseLib.Utils;
 using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Powers;
 using HoolheyakMod.Code.Variables;
-using HoolheyakMod.Scripts.Utils;
+using HoolheyakMod.Scripts.Phases;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -47,7 +47,7 @@ public class MutagenesisExperiment : HoolheyakBaseCard, IVariableCard
                 await HoolheyakPhaseManager.ApplyPhase(
                     context,
                     Owner.Creature,
-                    HoolheyakPhaseManager.GetRandomPhase(Owner.Creature)
+                    HoolheyakPhaseManager.GetRandomGoodPhase(Owner.Creature)
                 );
             })
         ];

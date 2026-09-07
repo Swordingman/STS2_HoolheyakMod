@@ -1,7 +1,7 @@
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using HoolheyakMod.Code.Character;
-using HoolheyakMod.Scripts.Utils;
+using HoolheyakMod.Scripts.Phases;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Relics;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
