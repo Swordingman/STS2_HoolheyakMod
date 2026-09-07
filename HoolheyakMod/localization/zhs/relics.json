@@ -1,0 +1,81 @@
+{
+  "HOOLHEYAKMOD-BIBLIOTHECA.title": "“图书馆”",
+  "HOOLHEYAKMOD-BIBLIOTHECA.description": "战斗开始时，获得[blue]2[/blue]点[gold]解析[/gold]。",
+  "HOOLHEYAKMOD-BIBLIOTHECA.short_description": "战斗开始时，获得[blue]2[/blue]点[gold]解析[/gold]。",
+  "HOOLHEYAKMOD-BIBLIOTHECA.flavor": "记忆就像是一座图书馆，不过很明显，每座图书馆的藏书量都各不相同。",
+
+  "HOOLHEYAKMOD-FRENZIED_SUNDIAL.title": "狂乱星晷",
+  "HOOLHEYAKMOD-FRENZIED_SUNDIAL.description": "每回合开始时，获得{energyPrefix:energyIcons(1)}并进入一个随机[gold]相位[/gold]。",
+  "HOOLHEYAKMOD-FRENZIED_SUNDIAL.short_description": "每回合开始时，获得{energyPrefix:energyIcons(1)}并进入一个随机[gold]相位[/gold]。",
+  "HOOLHEYAKMOD-FRENZIED_SUNDIAL.flavor": "“折射真相，投映未来”",
+
+  "HOOLHEYAKMOD-STAR_MAP_PROJECTION.title": "星图投影",
+  "HOOLHEYAKMOD-STAR_MAP_PROJECTION.description": "大部分[gold]变量[/gold]可额外耗费{energyPrefix:energyIcons(1)}以同时触发所有效果。",
+  "HOOLHEYAKMOD-STAR_MAP_PROJECTION.short_description": "大部分[gold]变量[/gold]可额外耗费{energyPrefix:energyIcons(1)}以同时触发所有效果。",
+  "HOOLHEYAKMOD-STAR_MAP_PROJECTION.flavor": "许多人接触占星学的初衷，只是好奇自己的死期。",
+
+  "HOOLHEYAKMOD-OLD_NOTES.title": "陈旧的笔记",
+  "HOOLHEYAKMOD-OLD_NOTES.description": "每抽[blue]5[/blue]张攻击牌，获得[blue]1[/blue]层[gold]博览[/gold]；每抽[blue]5[/blue]张技能牌，获得[blue]1[/blue]层[gold]逶迤[/gold]。",
+  "HOOLHEYAKMOD-OLD_NOTES.short_description": "每抽[blue]5[/blue]张攻击牌，获得[blue]1[/blue]层[gold]博览[/gold]；每抽[blue]5[/blue]张技能牌，获得[blue]1[/blue]层[gold]逶迤[/gold]。",
+  "HOOLHEYAKMOD-OLD_NOTES.flavor": "这上面记录了很多珍贵的文献资料。至于收集到的途径嘛……",
+
+  "HOOLHEYAKMOD-TIME_MUSEUM.title": "羽蛇的时间博物馆",
+  "HOOLHEYAKMOD-TIME_MUSEUM.description": "每场战斗中，首次打出各类型的牌时，额外打出[blue]1[/blue]次。",
+  "HOOLHEYAKMOD-TIME_MUSEUM.short_description": "每场战斗中，首次打出各类型的牌时，额外打出[blue]1[/blue]次。",
+  "HOOLHEYAKMOD-TIME_MUSEUM.flavor": "愚人砌好了高墙，哲人推倒它，反之亦有……历史是个有趣的资料库，里面必然藏着对未来的启示，毕竟历史也曾是无数代人的未来。",
+
+  "HOOLHEYAKMOD-COCKTAIL_SHAKER.title": "调酒瓶",
+  "HOOLHEYAKMOD-COCKTAIL_SHAKER.description": "拾起时，最大生命值+[blue]3[/blue]。每打出[blue]1[/blue]张其他颜色的牌，回复[blue]1[/blue]点生命值。",
+  "HOOLHEYAKMOD-COCKTAIL_SHAKER.short_description": "拾起时，最大生命值+[blue]3[/blue]。每打出[blue]1[/blue]张其他颜色的牌，回复[blue]1[/blue]点生命值。",
+  "HOOLHEYAKMOD-COCKTAIL_SHAKER.flavor": "保持清醒。",
+
+  "HOOLHEYAKMOD-TAIL_CARE_KIT.title": "尾巴养护套装",
+  "HOOLHEYAKMOD-TAIL_CARE_KIT.description": "对局开始时，给予所有敌人[blue]7[/blue]层[gold]解构[/gold]。",
+  "HOOLHEYAKMOD-TAIL_CARE_KIT.short_description": "对局开始时，给予所有敌人[blue]7[/blue]层[gold]解构[/gold]。",
+  "HOOLHEYAKMOD-TAIL_CARE_KIT.flavor": "“你是粗尾巴党，还是细尾巴党？”",
+
+  "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.title": "装帧精美的历史书",
+  "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.description": "本局游戏中曾击败过的敌人，在战斗开始时失去[blue]50%[/blue]的最大生命值。\n（右键点击查看名单。）",
+  "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.short_description": "本局游戏中曾击败过的敌人，在战斗开始时失去[blue]50%[/blue]的最大生命值。\n（右键点击查看名单。）",
+  "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.flavor": "同样的招式对聪明人是无效的。",
+
+  "HOOLHEYAKMOD-ASTRONOMICAL_TELESCOPE.title": "天文望远镜",
+  "HOOLHEYAKMOD-ASTRONOMICAL_TELESCOPE.description": "拾起时，将牌组中[blue]1[/blue]张打击或防御随机变化为无色牌。若没有基础牌，则获得[blue]1[/blue]张随机[gold]稀有[/gold]无色牌。",
+  "HOOLHEYAKMOD-ASTRONOMICAL_TELESCOPE.short_description": "拾起时，将牌组中[blue]1[/blue]张打击或防御随机变化为无色牌。若没有基础牌，则获得[blue]1[/blue]张随机[gold]稀有[/gold]无色牌。",
+  "HOOLHEYAKMOD-ASTRONOMICAL_TELESCOPE.flavor": "那些星座、行星与轨迹，并非命令，而是隐喻。",
+
+  "HOOLHEYAKMOD-BOTTLED_CLOUD.title": "瓶装云朵",
+  "HOOLHEYAKMOD-BOTTLED_CLOUD.description": "每当你获得[gold]敏捷[/gold]时，额外获得[blue]1[/blue]点[gold]敏捷[/gold]。",
+  "HOOLHEYAKMOD-BOTTLED_CLOUD.short_description": "每当你获得[gold]敏捷[/gold]时，额外获得[blue]1[/blue]点[gold]敏捷[/gold]。",
+  "HOOLHEYAKMOD-BOTTLED_CLOUD.flavor": "“太好了，我现在可以更好地二连跳了。”",
+
+  "HOOLHEYAKMOD-WEATHER_BALLOON.title": "探空气球",
+  "HOOLHEYAKMOD-WEATHER_BALLOON.description": "敌人触发[gold]浮空[/gold]时，额外获得[blue]5[/blue]层[gold]升力[/gold]。",
+  "HOOLHEYAKMOD-WEATHER_BALLOON.short_description": "敌人触发[gold]浮空[/gold]时，额外获得[blue]5[/blue]层[gold]升力[/gold]。",
+  "HOOLHEYAKMOD-WEATHER_BALLOON.flavor": "“欲与天公试比高”",
+
+  "HOOLHEYAKMOD-ZODIAC_MODEL.title": "黄道盘模型",
+  "HOOLHEYAKMOD-ZODIAC_MODEL.description": "当敌人的意图与上一回合不同时，给予其[blue]2[/blue]层[gold]升力[/gold]。",
+  "HOOLHEYAKMOD-ZODIAC_MODEL.short_description": "当敌人的意图与上一回合不同时，给予其[blue]2[/blue]层[gold]升力[/gold]。",
+  "HOOLHEYAKMOD-ZODIAC_MODEL.flavor": "羽毛被森林的露珠打湿，尾巴扫过倾颓的石柱，知识就此代代延续。",
+
+  "HOOLHEYAKMOD-STARRY_REVELATION.title": "万星园之辉",
+  "HOOLHEYAKMOD-STARRY_REVELATION.description": "精英或首领战开始时，给予所有敌人等同于其一半[gold]重力[/gold]的[gold]升力[/gold]。",
+  "HOOLHEYAKMOD-STARRY_REVELATION.short_description": "精英或首领战开始时，给予所有敌人等同于其一半[gold]重力[/gold]的[gold]升力[/gold]。",
+  "HOOLHEYAKMOD-STARRY_REVELATION.flavor": "特里蒙的天幕已经恢复如初，但想必没人能忘记它被撕开后的景象。",
+
+  "HOOLHEYAKMOD-PURE_WATER_SPRITE_ASSIST.title": "纯水精灵的协助",
+  "HOOLHEYAKMOD-PURE_WATER_SPRITE_ASSIST.description": "战斗开始时，召唤[blue]1[/blue]个拥有[blue]16[/blue]点生命的流形。流形存活时敌人强制攻击它。流形死亡[blue]3[/blue]回合后满血复活。",
+  "HOOLHEYAKMOD-PURE_WATER_SPRITE_ASSIST.short_description": "战斗开始时，召唤[blue]1[/blue]个拥有[blue]16[/blue]点生命的流形。流形存活时敌人强制攻击它。流形死亡[blue]3[/blue]回合后满血复活。",
+  "HOOLHEYAKMOD-PURE_WATER_SPRITE_ASSIST.flavor": "“事先说好，仅限这一次。”",
+
+  "HOOLHEYAKMOD-FAILED_EXPERIMENT_PRODUCT.title": "实验失败的产物",
+  "HOOLHEYAKMOD-FAILED_EXPERIMENT_PRODUCT.description": "恭喜你！你的实验失败了[red]{FailureCount}[/red]次。",
+  "HOOLHEYAKMOD-FAILED_EXPERIMENT_PRODUCT.short_description": "恭喜你！你的实验失败了[red]{FailureCount}[/red]次。",
+  "HOOLHEYAKMOD-FAILED_EXPERIMENT_PRODUCT.flavor": "……看起来不能吃。",
+
+  "HOOLHEYAKMOD-EYES_OF_PRIESTESS.title": "女祭司之眼",
+  "HOOLHEYAKMOD-EYES_OF_PRIESTESS.description": "在你每次洗牌后进行回合开始的抽牌时，查看牌堆顶的[blue]5[/blue]张牌，选择至多[blue]5[/blue]张卡，[gold]变量[/gold]：[gold]弃掉它们[/gold]；[gold]将它们置于抽牌堆底部[/gold]。",
+  "HOOLHEYAKMOD-EYES_OF_PRIESTESS.short_description": "在你每次洗牌后进行回合开始的抽牌时，查看牌堆顶的[blue]5[/blue]张牌，选择至多[blue]5[/blue]张卡，[gold]变量[/gold]：[gold]弃掉它们[/gold]；[gold]将它们置于抽牌堆底部[/gold]。",
+  "HOOLHEYAKMOD-EYES_OF_PRIESTESS.flavor": "进入你的梦，塑造你的梦。"
+}

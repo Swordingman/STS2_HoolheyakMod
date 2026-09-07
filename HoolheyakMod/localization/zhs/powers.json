@@ -1,0 +1,137 @@
+{
+  "HOOLHEYAKMOD-ANALYSIS_POWER.title": "解析",
+  "HOOLHEYAKMOD-ANALYSIS_POWER.description": "用于增强特定效果的数值。",
+  "HOOLHEYAKMOD-ANALYSIS_POWER.smartDescription": "用于增强特定效果的数值。",
+
+  "HOOLHEYAKMOD-MEANDER_POWER.title": "逶迤",
+  "HOOLHEYAKMOD-MEANDER_POWER.description": "每打出[blue]{Threshold}[/blue]张技能牌，对随机敌人造成[blue]3[/blue]点伤害并给予[blue]1[/blue]层[gold]升力[/gold]。当前进度：[blue]{Progress}[/blue]/[blue]{Threshold}[/blue]。\n触发次数等同于[gold]解析[/gold]层数。",
+  "HOOLHEYAKMOD-MEANDER_POWER.smartDescription": "每打出[blue]{Threshold}[/blue]张技能牌，对随机敌人造成[blue]3[/blue]点伤害并给予[blue]1[/blue]层[gold]升力[/gold]。当前进度：[blue]{Progress}[/blue]/[blue]{Threshold}[/blue]。\n触发次数等同于[gold]解析[/gold]层数。",
+
+  "HOOLHEYAKMOD-ERUDITION_POWER.title": "博览",
+  "HOOLHEYAKMOD-ERUDITION_POWER.description": "每打出[blue]{Threshold}[/blue]张攻击牌，对随机敌人造成等同于[gold]解析[/gold]层数的伤害并给予[blue]1[/blue]层[gold]升力[/gold]。当前进度：[blue]{Progress}[/blue]/[blue]{Threshold}[/blue]。\n触发[blue]4[/blue]次。",
+  "HOOLHEYAKMOD-ERUDITION_POWER.smartDescription": "每打出[blue]{Threshold}[/blue]张攻击牌，对随机敌人造成等同于[gold]解析[/gold]层数的伤害并给予[blue]1[/blue]层[gold]升力[/gold]。当前进度：[blue]{Progress}[/blue]/[blue]{Threshold}[/blue]。\n触发[blue]4[/blue]次。",
+
+  "HOOLHEYAKMOD-GRAVITY_POWER.title": "重力",
+  "HOOLHEYAKMOD-GRAVITY_POWER.description": "固有属性，等于其最大生命值的[blue]10%[/blue]（向下取整）。当前重力：[blue]{Amount}[/blue]。\n当目标的[gold]升力[/gold]达到此数值时，触发[gold]浮空[/gold]。",
+  "HOOLHEYAKMOD-GRAVITY_POWER.smartDescription": "固有属性，等于其最大生命值的[blue]10%[/blue]（向下取整）。当前重力：[blue]{Amount}[/blue]。\n当目标的[gold]升力[/gold]达到此数值时，触发[gold]浮空[/gold]。",
+
+  "HOOLHEYAKMOD-LIFT_POWER.title": "升力",
+  "HOOLHEYAKMOD-LIFT_POWER.description": "当层数达到[gold]重力[/gold]时，清空层数并触发[gold]浮空[/gold]。",
+  "HOOLHEYAKMOD-LIFT_POWER.smartDescription": "当层数达到[gold]重力[/gold]时，清空层数并触发[gold]浮空[/gold]。",
+
+  "HOOLHEYAKMOD-LEVITATE_POWER.title": "浮空",
+  "HOOLHEYAKMOD-LEVITATE_POWER.description": "失去所有[gold]格挡[/gold]并获得[blue]20[/blue]层[gold]解构[/gold]。受到的伤害增加[blue]50%[/blue]，造成的伤害减少[blue]70%[/blue]。\n回合结束时，受到([gold]重力[/gold]+[gold]升力[/gold])×2点伤害，随后解除此状态并清空[gold]升力[/gold]。",
+  "HOOLHEYAKMOD-LEVITATE_POWER.smartDescription": "失去所有[gold]格挡[/gold]并获得[blue]20[/blue]层[gold]解构[/gold]。受到的伤害增加[blue]50%[/blue]，造成的伤害减少[blue]70%[/blue]。\n回合结束时，受到([gold]重力[/gold]+[gold]升力[/gold])×2点伤害，随后解除此状态并清空[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-WEIGHTLESS_POWER.title": "失重",
+  "HOOLHEYAKMOD-WEIGHTLESS_POWER.description": "获得的[gold]升力[/gold]翻倍。回合结束时，层数减[blue]1[/blue]。",
+  "HOOLHEYAKMOD-WEIGHTLESS_POWER.smartDescription": "获得的[gold]升力[/gold]翻倍。回合结束时，层数减[blue]1[/blue]。",
+
+  "HOOLHEYAKMOD-FORBIDDEN_KNOWLEDGE_ERU_POWER.title": "禁忌知识·博览",
+  "HOOLHEYAKMOD-FORBIDDEN_KNOWLEDGE_ERU_POWER.description": "每当触发[gold]博览[/gold]时，抽[blue]{Amount}[/blue]张牌。",
+  "HOOLHEYAKMOD-FORBIDDEN_KNOWLEDGE_ERU_POWER.smartDescription": "每当触发[gold]博览[/gold]时，抽[blue]{Amount}[/blue]张牌。",
+
+  "HOOLHEYAKMOD-FORBIDDEN_KNOWLEDGE_MEA_POWER.title": "禁忌知识·逶迤",
+  "HOOLHEYAKMOD-FORBIDDEN_KNOWLEDGE_MEA_POWER.description": "每当触发[gold]逶迤[/gold]时，对所有敌人造成[blue]{Amount}[/blue]点伤害。",
+  "HOOLHEYAKMOD-FORBIDDEN_KNOWLEDGE_MEA_POWER.smartDescription": "每当触发[gold]逶迤[/gold]时，对所有敌人造成[blue]{Amount}[/blue]点伤害。",
+
+  "HOOLHEYAKMOD-ENTROPY_INCREASE_POWER.title": "熵增",
+  "HOOLHEYAKMOD-ENTROPY_INCREASE_POWER.description": "回合开始时，将[blue]{Amount}[/blue]张随机颜色的[gold]能力牌[/gold]加入手牌。",
+  "HOOLHEYAKMOD-ENTROPY_INCREASE_POWER.smartDescription": "回合开始时，将[blue]{Amount}[/blue]张随机颜色的[gold]能力牌[/gold]加入手牌。",
+
+  "HOOLHEYAKMOD-COVENANT_STRENGTH_POWER.title": "古老盟约·力量",
+  "HOOLHEYAKMOD-COVENANT_STRENGTH_POWER.description": "每当触发[gold]博览[/gold]时，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。",
+  "HOOLHEYAKMOD-COVENANT_STRENGTH_POWER.smartDescription": "每当触发[gold]博览[/gold]时，获得[blue]{Amount}[/blue]点[gold]力量[/gold]。",
+
+  "HOOLHEYAKMOD-COVENANT_DEXTERITY_POWER.title": "古老盟约·敏捷",
+  "HOOLHEYAKMOD-COVENANT_DEXTERITY_POWER.description": "每当触发[gold]逶迤[/gold]时，获得[blue]{Amount}[/blue]点[gold]敏捷[/gold]。",
+  "HOOLHEYAKMOD-COVENANT_DEXTERITY_POWER.smartDescription": "每当触发[gold]逶迤[/gold]时，获得[blue]{Amount}[/blue]点[gold]敏捷[/gold]。",
+
+  "HOOLHEYAKMOD-WARDROBE_POWER.title": "羽蛇的衣柜",
+  "HOOLHEYAKMOD-WARDROBE_POWER.description": "每当你打出一张不属于你职业的牌时，随机将[blue]{Amount}[/blue]张本颜色的牌加入手牌并赋予[gold]消耗[/gold]。{Wardrobe-MakeZeroCost:cond:>0?且在本场战斗中耗能变为[blue]0[/blue]。|}",
+  "HOOLHEYAKMOD-WARDROBE_POWER.smartDescription": "每当你打出一张不属于你职业的牌时，随机将[blue]{Amount}[/blue]张本颜色的牌加入手牌并赋予[gold]消耗[/gold]。{Wardrobe-MakeZeroCost:cond:>0?且在本场战斗中耗能变为[blue]0[/blue]。|}",
+
+  "HOOLHEYAKMOD-OMNISCIENT_HORIZON_POWER.title": "全知视界",
+  "HOOLHEYAKMOD-OMNISCIENT_HORIZON_POWER.description": "每当敌人触发[gold]浮空[/gold]时，获得[blue]{Omniscient-Reward}[/blue]点能量并抽[blue]{Omniscient-Reward}[/blue]张牌。",
+  "HOOLHEYAKMOD-OMNISCIENT_HORIZON_POWER.smartDescription": "每当敌人触发[gold]浮空[/gold]时，获得[blue]{Omniscient-Reward}[/blue]点能量并抽[blue]{Omniscient-Reward}[/blue]张牌。",
+
+  "HOOLHEYAKMOD-SERPENT_BLOODLINE_POWER.title": "羽蛇血脉",
+  "HOOLHEYAKMOD-SERPENT_BLOODLINE_POWER.description": "获得等同于[gold]解析[/gold]层数的[gold]仪式[/gold]。每次获得[gold]解析[/gold]时，获得[blue]{Amount}[/blue]倍层数的[gold]仪式[/gold]。\n每回合开始时，失去[blue]{Amount}[/blue]点能量。",
+  "HOOLHEYAKMOD-SERPENT_BLOODLINE_POWER.smartDescription": "获得等同于[gold]解析[/gold]层数的[gold]仪式[/gold]。每次获得[gold]解析[/gold]时，获得[blue]{Amount}[/blue]倍层数的[gold]仪式[/gold]。\n每回合开始时，失去[blue]{Amount}[/blue]点能量。",
+
+  "HOOLHEYAKMOD-DISTANT_LIGHT_POWER.title": "光行遥遥",
+  "HOOLHEYAKMOD-DISTANT_LIGHT_POWER.description": "回合结束时，若本回合造成的伤害低于[blue]6[/blue]，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
+  "HOOLHEYAKMOD-DISTANT_LIGHT_POWER.smartDescription": "回合结束时，若本回合造成的伤害低于[blue]6[/blue]，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
+
+  "HOOLHEYAKMOD-CORRECTED_VARIABLE_POWER.title": "修正变量",
+  "HOOLHEYAKMOD-CORRECTED_VARIABLE_POWER.description": "每抽到[blue]1[/blue]张状态牌，获得[blue]1[/blue]层[gold]博览[/gold]；每抽到[blue]1[/blue]张诅咒牌，获得[blue]1[/blue]层[gold]逶迤[/gold]。",
+  "HOOLHEYAKMOD-CORRECTED_VARIABLE_POWER.smartDescription": "每抽到[blue]1[/blue]张状态牌，获得[blue]1[/blue]层[gold]博览[/gold]；每抽到[blue]1[/blue]张诅咒牌，获得[blue]1[/blue]层[gold]逶迤[/gold]。",
+
+  "HOOLHEYAKMOD-BYPRODUCT_POWER.title": "副产品",
+  "HOOLHEYAKMOD-BYPRODUCT_POWER.description": "每触发[blue]1[/blue]次[gold]变量[/gold]，获得[blue]{Amount}[/blue]张随机牌。{Byproduct-Upgraded:cond:>0?（升级的随机牌）|}",
+  "HOOLHEYAKMOD-BYPRODUCT_POWER.smartDescription": "每触发[blue]1[/blue]次[gold]变量[/gold]，获得[blue]{Amount}[/blue]张随机牌。{Byproduct-Upgraded:cond:>0?（升级的随机牌）|}",
+
+  "HOOLHEYAKMOD-COMPLEMENTARY_EXPERIMENT_POWER.title": "互补实验",
+  "HOOLHEYAKMOD-COMPLEMENTARY_EXPERIMENT_POWER.description": "每进行一次[gold]变量[/gold]，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。",
+  "HOOLHEYAKMOD-COMPLEMENTARY_EXPERIMENT_POWER.smartDescription": "每进行一次[gold]变量[/gold]，获得[blue]{Amount}[/blue]点[gold]格挡[/gold]。",
+
+  "HOOLHEYAKMOD-KUKULKAN_LEGACY_POWER.title": "库库尔坎的传承",
+  "HOOLHEYAKMOD-KUKULKAN_LEGACY_POWER.description": "[gold]博览[/gold]和[gold]逶迤[/gold]的触发上限增加[blue]{Kukulkan-TotalIncrease}[/blue]。\n造成的伤害和给予的[gold]升力[/gold]变为原来的[blue]{Kukulkan-Multiplier}[/blue]倍。",
+  "HOOLHEYAKMOD-KUKULKAN_LEGACY_POWER.smartDescription": "[gold]博览[/gold]和[gold]逶迤[/gold]的触发上限增加[blue]{Kukulkan-TotalIncrease}[/blue]。\n造成的伤害和给予的[gold]升力[/gold]变为原来的[blue]{Kukulkan-Multiplier}[/blue]倍。",
+
+  "HOOLHEYAKMOD-DECONSTRUCTION_POWER.title": "解构",
+  "HOOLHEYAKMOD-DECONSTRUCTION_POWER.description": "下次获得[gold]格挡[/gold]时，消耗等量层数来抵消[blue]{Amount}[/blue]点[gold]格挡[/gold]。",
+  "HOOLHEYAKMOD-DECONSTRUCTION_POWER.smartDescription": "下次获得[gold]格挡[/gold]时，消耗等量层数来抵消[blue]{Amount}[/blue]点[gold]格挡[/gold]。",
+
+  "HOOLHEYAKMOD-CONJUNCTION_POWER.title": "相位：合相",
+  "HOOLHEYAKMOD-CONJUNCTION_POWER.description": "[gold]中性[/gold]。\n所有角色造成的伤害增加[blue]50%[/blue]。",
+  "HOOLHEYAKMOD-CONJUNCTION_POWER.smartDescription": "[gold]中性[/gold]。\n所有角色造成的伤害增加[blue]50%[/blue]。",
+
+  "HOOLHEYAKMOD-QUINCUNX_POWER.title": "相位：梅花相",
+  "HOOLHEYAKMOD-QUINCUNX_POWER.description": "[gold]中性[/gold]。\n技能牌改为提供[gold]博览[/gold]，攻击牌改为提供[gold]逶迤[/gold]。",
+  "HOOLHEYAKMOD-QUINCUNX_POWER.smartDescription": "[gold]中性[/gold]。\n技能牌改为提供[gold]博览[/gold]，攻击牌改为提供[gold]逶迤[/gold]。",
+
+  "HOOLHEYAKMOD-SEXTILE_POWER.title": "相位：六合",
+  "HOOLHEYAKMOD-SEXTILE_POWER.description": "[gold]吉相[/gold]。\n[gold]博览[/gold]和[gold]逶迤[/gold]触发上限减少[blue]2[/blue]层。但无法再给予敌人[gold]升力[/gold]。",
+  "HOOLHEYAKMOD-SEXTILE_POWER.smartDescription": "[gold]吉相[/gold]。\n[gold]博览[/gold]和[gold]逶迤[/gold]触发上限减少[blue]2[/blue]层。但无法再给予敌人[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-TRINE_POWER.title": "相位：拱相",
+  "HOOLHEYAKMOD-TRINE_POWER.description": "[gold]吉相[/gold]。\n回合开始时，额外获得{energyPrefix:energyIcons(1)}并抽[blue]2[/blue]张牌。所有攻击牌获得[gold]消耗[/gold]。",
+  "HOOLHEYAKMOD-TRINE_POWER.smartDescription": "[gold]吉相[/gold]。\n回合开始时，额外获得{energyPrefix:energyIcons(1)}并抽[blue]2[/blue]张牌。所有攻击牌获得[gold]消耗[/gold]。",
+
+  "HOOLHEYAKMOD-SQUARE_POWER.title": "相位：刑克",
+  "HOOLHEYAKMOD-SQUARE_POWER.description": "[red]凶相[/red]。\n每打出一张牌，失去[blue]1[/blue]点生命，并给予所有敌人[blue]1[/blue]层[gold]升力[/gold]。",
+  "HOOLHEYAKMOD-SQUARE_POWER.smartDescription": "[red]凶相[/red]。\n每打出一张牌，失去[blue]1[/blue]点生命，并给予所有敌人[blue]1[/blue]层[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-OPPOSITION_POWER.title": "相位：对冲",
+  "HOOLHEYAKMOD-OPPOSITION_POWER.description": "[red]凶相[/red]。\n无法获得[gold]格挡[/gold]。所有敌人的[gold]重力[/gold]减半。",
+  "HOOLHEYAKMOD-OPPOSITION_POWER.smartDescription": "[red]凶相[/red]。\n无法获得[gold]格挡[/gold]。所有敌人的[gold]重力[/gold]减半。",
+
+  "HOOLHEYAKMOD-PURE_WATER_POWER.title": "净水即生命",
+  "HOOLHEYAKMOD-PURE_WATER_POWER.description": "存活时，将你受到的伤害转移至自身。死亡[blue]3[/blue]回合后复活。",
+  "HOOLHEYAKMOD-PURE_WATER_POWER.smartDescription": "存活时，将你受到的伤害转移至自身。死亡[blue]3[/blue]回合后复活。",
+
+  "HOOLHEYAKMOD-ENEMY_PURE_WATER_POWER.title": "净水即生命",
+  "HOOLHEYAKMOD-ENEMY_PURE_WATER_POWER.description": "受到致命伤害时化为水滩，[blue]3[/blue]回合后复活。若所有流形或[gold]缪尔赛斯[/gold]被击败，则彻底死亡。",
+  "HOOLHEYAKMOD-ENEMY_PURE_WATER_POWER.smartDescription": "受到致命伤害时化为水滩，[blue]3[/blue]回合后复活。若所有流形或[gold]缪尔赛斯[/gold]被击败，则彻底死亡。",
+
+  "HOOLHEYAKMOD-DISTILLED_TIME_POWER.title": "岁月蒸馏",
+  "HOOLHEYAKMOD-DISTILLED_TIME_POWER.description": "在你的回合开始时，随机获得[blue]{Amount}[/blue]瓶攻击药水、技能药水或能力药水。",
+  "HOOLHEYAKMOD-DISTILLED_TIME_POWER.smartDescription": "在你的回合开始时，随机获得[blue]{Amount}[/blue]瓶攻击药水、技能药水或能力药水。",
+
+  "HOOLHEYAKMOD-INHERITED_END_POWER.title": "传承终焉",
+  "HOOLHEYAKMOD-INHERITED_END_POWER.description": "每当交替打出攻击牌与技能牌时，获得[blue]{Amount}[/blue]点能量并抽[blue]{Amount}[/blue]张牌。",
+  "HOOLHEYAKMOD-INHERITED_END_POWER.smartDescription": "每当交替打出攻击牌与技能牌时，获得[blue]{Amount}[/blue]点能量并抽[blue]{Amount}[/blue]张牌。",
+
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT_POWER.title": "冗余实验",
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT_POWER.description": "本回合内，有[blue]{Amount}[/blue]张指定牌在被丢弃时会视为被打出。",
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT_POWER.smartDescription": "本回合内，有[blue]{Amount}[/blue]张指定牌在被丢弃时会视为被打出。",
+
+  "HOOLHEYAKMOD-BYGONE_WINGS_POWER.title": "曾有羽翼",
+  "HOOLHEYAKMOD-BYGONE_WINGS_POWER.description": "每打出[blue]1[/blue]张其他职业的牌，使[blue]{Amount}[/blue]张随机手牌耗能减少[blue]1[/blue]点。",
+  "HOOLHEYAKMOD-BYGONE_WINGS_POWER.smartDescription": "每打出[blue]1[/blue]张其他职业的牌，使[blue]{Amount}[/blue]张随机手牌耗能减少[blue]1[/blue]点。",
+
+  "HOOLHEYAKMOD-INHERITED_MEMORIES_POWER.title": "传承记忆",
+  "HOOLHEYAKMOD-INHERITED_MEMORIES_POWER.description": "每触发[blue]1[/blue]次[gold]逶迤[/gold]或[gold]博览[/gold]，获得[blue]{Amount}[/blue]层[gold]解析[/gold]。",
+  "HOOLHEYAKMOD-INHERITED_MEMORIES_POWER.smartDescription": "每触发[blue]1[/blue]次[gold]逶迤[/gold]或[gold]博览[/gold]，获得[blue]{Amount}[/blue]层[gold]解析[/gold]。"
+}

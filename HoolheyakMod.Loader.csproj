@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <LangVersion>12.0</LangVersion>
+
+    <!-- 文件最后会改名成 HoolheyakMod.dll，但程序集内部不能也叫 HoolheyakMod -->
+    <AssemblyName>HoolheyakMod.Loader</AssemblyName>
+    <RootNamespace>HoolheyakMod.Loader</RootNamespace>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+    <Sts2Dir>Z:\steam\steamapps\common\Slay the Spire 2</Sts2Dir>
+    <Sts2DataDir>$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
+    <StableReferenceDir>$(Sts2Dir)\mods\References\Stable</StableReferenceDir>
+    <ModOutputDir>$(Sts2Dir)\mods\HoolheyakMod</ModOutputDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Loader\HoolheyakModLoader.cs" />
+  </ItemGroup>
+
+  <!-- Loader 只引用最老的 Stable API，不引用 BaseLib -->
+  <ItemGroup>
+    <Reference Include="sts2">
+      <HintPath>$(StableReferenceDir)\sts2.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="DeployLoader" AfterTargets="Build">
+    <MakeDir Directories="$(ModOutputDir)" />
+
+    <Copy SourceFiles="$(TargetPath)"
+          DestinationFiles="$(ModOutputDir)\HoolheyakMod.dll" />
+
+    <Message Text="Loader 已部署到：$(ModOutputDir)\HoolheyakMod.dll"
+             Importance="high" />
+  </Target>
+
+  <Target Name="CleanHoolheyakOutput"
+          AfterTargets="DeployLoader">
+
+    <ItemGroup>
+      <!-- 1. 明确定义一个“白名单”，分行写非常安全，不会有格式问题 -->
+      <FilesToKeep Include="$(ModOutputDir)\HoolheyakMod.dll" />
+      <FilesToKeep Include="$(ModOutputDir)\HoolheyakMod.Stable.dll" />
+      <FilesToKeep Include="$(ModOutputDir)\HoolheyakMod.Beta.dll" />
+      <FilesToKeep Include="$(ModOutputDir)\HoolheyakMod.json" />
+      <FilesToKeep Include="$(ModOutputDir)\HoolheyakMod.pck" />
+
+      <!-- 2. 获取所有文件，并排除掉白名单中的文件 -->
+      <HoolheyakFilesToDelete 
+        Include="$(ModOutputDir)\**\*" 
+        Exclude="@(FilesToKeep)" />
+    </ItemGroup>
+
+    <!-- 3. 删除多余文件 -->
+    <Delete Files="@(HoolheyakFilesToDelete)"
+            TreatErrorsAsWarnings="true" />
+
+    <!-- 4. 清理空目录 (非空目录RemoveDir会自动跳过，产生一条警告，TreatErrorsAsWarnings会将其压制) -->
+    <ItemGroup>
+      <HoolheyakDirectories Include="$(ModOutputDir)\**\" />
+    </ItemGroup>
+
+    <RemoveDir Directories="@(HoolheyakDirectories)"
+               ContinueOnError="true" />
+
+    <Message Text="[HoolheyakMod.Loader] 输出目录清理完成，仅保留了白名单中的正式发布文件。"
+             Importance="high" />
+  </Target>
+</Project>

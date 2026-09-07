@@ -1,0 +1,284 @@
+{
+  "HOOLHEYAKMOD-VARIABLE_CHOICE_CARD.title": "变量{Symbol}",
+  "HOOLHEYAKMOD-VARIABLE_CHOICE_CARD.description": "{ChoiceDescription}",
+  "HOOLHEYAKMOD-VARIABLE_CHOICE_CARD.selectionScreenPrompt": "选择一个[gold]变量[/gold]。",
+  "HOOLHEYAKMOD-VARIABLE_CHOICE_CARD.allInDescription": "[gold]消耗[/gold]{energyPrefix:energyIcons(1)}，获得ALL!!!",
+
+  "HOOLHEYAKMOD-STRIKE_HOOLHEYAK.title": "打击",
+  "HOOLHEYAKMOD-STRIKE_HOOLHEYAK.description": "造成{Damage:diff()}点伤害。",
+
+  "HOOLHEYAKMOD-DEFEND_HOOLHEYAK.title": "防御",
+  "HOOLHEYAKMOD-DEFEND_HOOLHEYAK.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
+
+  "HOOLHEYAKMOD-FEATHER_STRIKE.title": "羽击",
+  "HOOLHEYAKMOD-FEATHER_STRIKE.description": "造成{Damage:diff()}点伤害。\n给予{FeatherStrike-Lift:diff()}层[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-LINGER.title": "盘亘",
+  "HOOLHEYAKMOD-LINGER.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n查看牌堆顶的{Linger-Look:diff()}张牌，\n选择至多{Linger-Look:diff()}张卡，[gold]变量[/gold]：\n弃掉它们；\n将它们置于抽牌堆底部。\n抽{Linger-Draw:diff()}张牌。",
+  "HOOLHEYAKMOD-LINGER.variable.0": "弃掉它们。",
+  "HOOLHEYAKMOD-LINGER.variable.1": "将它们置于抽牌堆底部。",
+
+  "HOOLHEYAKMOD-CONTROL_GROUP.title": "对照组",
+  "HOOLHEYAKMOD-CONTROL_GROUP.description": "造成{Damage:diff()}点伤害。\n给予{ControlGroup-Magic:diff()}层[gold]失重[/gold]。\n[gold]变量[/gold]：\n攻击卡；\n技能卡。",
+  "HOOLHEYAKMOD-CONTROL_GROUP.variable.0": "这张卡视为[gold]攻击卡[/gold]。",
+  "HOOLHEYAKMOD-CONTROL_GROUP.variable.1": "这张卡视为[gold]技能卡[/gold]。",
+
+  "HOOLHEYAKMOD-RESEARCH.title": "考据",
+  "HOOLHEYAKMOD-RESEARCH.description": "抽{Research-Draw:diff()}张牌。\n获得1点[gold]逶迤[/gold]。",
+
+  "HOOLHEYAKMOD-LAMINAR_FLOW.title": "层流",
+  "HOOLHEYAKMOD-LAMINAR_FLOW.description": "造成{Damage:diff()}点伤害。\n抽{LaminarFlow-Draw:diff()}张牌。",
+
+  "HOOLHEYAKMOD-DISTILLED_TIME.title": "岁月蒸馏",
+  "HOOLHEYAKMOD-DISTILLED_TIME.description": "在你的回合开始时，随机获得{DistilledTime-Magic:diff()}瓶攻击药水、技能药水或能力药水。",
+
+  "HOOLHEYAKMOD-COMPOSE.title": "撰写",
+  "HOOLHEYAKMOD-COMPOSE.description": "[gold]消耗[/gold]。\n直到回合结束，[gold]变量[/gold]：\n使一张手牌耗能-3；\n使所有手牌耗能-1。",
+  "HOOLHEYAKMOD-COMPOSE.variable.0": "使一张手牌耗能-3。",
+  "HOOLHEYAKMOD-COMPOSE.variable.1": "使所有手牌耗能-1。",
+
+  "HOOLHEYAKMOD-REFUTATION.title": "驳论",
+  "HOOLHEYAKMOD-REFUTATION.description": "造成{Damage:diff()}点伤害。\n随机使目标身上的增益效果减少1层。",
+
+  "HOOLHEYAKMOD-HEADWIND.title": "逆风",
+  "HOOLHEYAKMOD-HEADWIND.description": "对随机敌人造成{Damage:diff()}点伤害{Headwind-Hits:diff()}次。\n每次造成伤害，给予一层[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-WIND_SHEAR.title": "切变",
+  "HOOLHEYAKMOD-WIND_SHEAR.description": "造成{Damage:diff()}点伤害。",
+
+  "HOOLHEYAKMOD-TURBULENCE.title": "湍流",
+  "HOOLHEYAKMOD-TURBULENCE.description": "造成{Damage:diff()}点伤害。\n每回合限1次，本场战斗中每打出2张湍流，将{Turbulence-Magic:diff()}张湍流加入手牌。",
+
+  "HOOLHEYAKMOD-TAIL_STING.title": "尾刺",
+  "HOOLHEYAKMOD-TAIL_STING.description": "造成{Damage:diff()}点伤害。\n给予{TailSting-Magic:diff()}层[gold]易伤[/gold]。",
+
+  "HOOLHEYAKMOD-CONVECTION.title": "对流",
+  "HOOLHEYAKMOD-CONVECTION.description": "[gold]消耗[/gold]。\n造成{Damage:diff()}点伤害。\n本回合每打出1张攻击牌，耗能-1。",
+
+  "HOOLHEYAKMOD-ARCHIVE.title": "归档",
+  "HOOLHEYAKMOD-ARCHIVE.description": "[gold]消耗[/gold]。\n造成{Damage:diff()}点伤害。\n[gold]斩杀[/gold]时，[gold]变量[/gold]：\n在战斗结束后，额外选择一张随机颜色牌；\n在战斗结束后，额外选择一张无色牌。",
+  "HOOLHEYAKMOD-ARCHIVE.variable.0": "在战斗结束后，额外选择一张随机颜色牌。",
+  "HOOLHEYAKMOD-ARCHIVE.variable.1": "在战斗结束后，额外选择一张无色牌。",
+
+  "HOOLHEYAKMOD-COERCION.title": "强压",
+  "HOOLHEYAKMOD-COERCION.description": "造成{Damage:diff()}点伤害。\n若目标[gold]浮空[/gold]，使其摔落并获得相当于此次摔落伤害的[gold]格挡[/gold]，以及{energyPrefix:energyIcons(1)}。",
+
+  "HOOLHEYAKMOD-SURVEYING.title": "测绘",
+  "HOOLHEYAKMOD-SURVEYING.description": "造成{Damage:diff()}点伤害。\n获得{Surveying-Magic:diff()}[gold]解析[/gold]。",
+
+  "HOOLHEYAKMOD-BRUSHSTROKE.title": "笔锋",
+  "HOOLHEYAKMOD-BRUSHSTROKE.description": "造成{Damage:diff()}点伤害。\n获得{Brushstroke-Magic:diff()}[gold]博览[/gold]。",
+
+  "HOOLHEYAKMOD-MAD_WORDS.title": "博览者的狂语",
+  "HOOLHEYAKMOD-MAD_WORDS.description": "造成{Damage:diff()}点伤害，给予{MadWords-Lift:diff()}层[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-CROSS_EXPERIMENT.title": "交叉实验",
+  "HOOLHEYAKMOD-CROSS_EXPERIMENT.description": "造成{Damage:diff()}点伤害。\n获得{Block:diff()}层[gold]格挡[/gold]。\n打出时，该卡永久获得[gold]变量[/gold]：\n+{Cross-Growth:diff()}伤害；\n+{Cross-Growth:diff()}[gold]格挡[/gold]。",
+  "HOOLHEYAKMOD-CROSS_EXPERIMENT.variable.0": "+{Cross-Growth:diff()}伤害。",
+  "HOOLHEYAKMOD-CROSS_EXPERIMENT.variable.1": "+{Cross-Growth:diff()}[gold]格挡[/gold]。",
+
+  "HOOLHEYAKMOD-REVISION.title": "修订",
+  "HOOLHEYAKMOD-REVISION.description": "[gold]消耗[/gold]。\n[gold]消耗[/gold]你手中的一张牌，并随机获得一张与其同类型的牌。",
+
+  "HOOLHEYAKMOD-FORESHADOWING.title": "伏笔",
+  "HOOLHEYAKMOD-FORESHADOWING.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n获得{Foreshadowing-Magic:diff()}点[gold]博览[/gold]。\n获得{Foreshadowing-Meander:diff()}点[gold]逶迤[/gold]。",
+
+  "HOOLHEYAKMOD-OBSERVATION.title": "观测",
+  "HOOLHEYAKMOD-OBSERVATION.description": "抽{Observation-Draw:diff()}张牌。\n获得{energyPrefix:energyIcons(1)}。",
+
+  "HOOLHEYAKMOD-FOOTNOTE.title": "脚注",
+  "HOOLHEYAKMOD-FOOTNOTE.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n抽1张技能牌。",
+
+  "HOOLHEYAKMOD-TAMPER.title": "篡改",
+  "HOOLHEYAKMOD-TAMPER.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n如果本牌触发了[gold]逶迤[/gold]，额外打出一次。",
+
+  "HOOLHEYAKMOD-PARAMETER_CORRECTION.title": "参数修正",
+  "HOOLHEYAKMOD-PARAMETER_CORRECTION.description": "[gold]消耗[/gold]。\n回合结束时，若此牌在你手中，可以至多使{ParameterCorrection-Magic:diff()}张手牌在本回合中获得[gold]保留[/gold]。\n每次触发该效果，获得1层[gold]逶迤[/gold]。",
+
+  "HOOLHEYAKMOD-LITERATURE_RETRIEVAL.title": "文献检索",
+  "HOOLHEYAKMOD-LITERATURE_RETRIEVAL.description": "从3张随机颜色的牌中选择1张加入你的手牌。",
+
+  "HOOLHEYAKMOD-MASS_OFFSET.title": "质量抵消",
+  "HOOLHEYAKMOD-MASS_OFFSET.description": "使所有敌人获得X点[gold]升力[/gold]，并获得X点[gold]解析[/gold]。",
+
+  "HOOLHEYAKMOD-FLY_UP.title": "飞起来！",
+  "HOOLHEYAKMOD-FLY_UP.description": "触发X次[gold]变量[/gold]：\n[gold]博览[/gold]；\n[gold]逶迤[/gold]。",
+  "HOOLHEYAKMOD-FLY_UP.variable.0": "触发[gold]博览[/gold]。",
+  "HOOLHEYAKMOD-FLY_UP.variable.1": "触发[gold]逶迤[/gold]。",
+
+  "HOOLHEYAKMOD-COLD_EYE.title": "冷眼",
+  "HOOLHEYAKMOD-COLD_EYE.description": "如果目标在本回合中受到过来自你的伤害，则获得{ColdEye-Magic:diff()}点[gold]解析[/gold]；如果没有，则获得{Block:diff()}点[gold]格挡[/gold]。",
+
+  "HOOLHEYAKMOD-INHERITED_END.title": "传承终焉",
+  "HOOLHEYAKMOD-INHERITED_END.description": "[gold]消耗[/gold]。\n本回合中，每当交替打出攻击牌与技能牌时，获得{energyPrefix:energyIcons(1)}并抽1张牌。",
+
+  "HOOLHEYAKMOD-POWERED_EXOSKELETON.title": "动力外骨骼",
+  "HOOLHEYAKMOD-POWERED_EXOSKELETON.description": "获得{PoweredExoskeleton-Magic:diff()}层[gold]多重护甲[/gold]。",
+
+  "HOOLHEYAKMOD-STARGAZING.title": "观星",
+  "HOOLHEYAKMOD-STARGAZING.description": "查看牌堆顶的{Stargazing-Magic:diff()}张牌，\n选择至多{Stargazing-Magic:diff()}张卡，[gold]变量[/gold]：\n弃掉它们；\n将它们置于抽牌堆底部。",
+  "HOOLHEYAKMOD-STARGAZING.variable.0": "弃掉它们。",
+  "HOOLHEYAKMOD-STARGAZING.variable.1": "将它们置于抽牌堆底部。",
+
+  "HOOLHEYAKMOD-RECURSIVE_EXPERIMENT.title": "递归实验",
+  "HOOLHEYAKMOD-RECURSIVE_EXPERIMENT.description": "[gold]消耗[/gold]。\n以1点费用开启一次实验。\n[gold]变量[/gold]：\n终止本次实验；\n随机打出1张牌并将其从卡组中永久移除。战斗结束后，额外获得一组相同类型的选牌奖励。然后再开启一次实验。",
+  "HOOLHEYAKMOD-RECURSIVE_EXPERIMENT.variable.0": "终止本次实验。",
+  "HOOLHEYAKMOD-RECURSIVE_EXPERIMENT.variable.1": "随机打出1张牌并将其从卡组中永久移除。战斗结束后，额外获得一组相同类型的选牌奖励。然后再开启一次实验。",
+
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.title": "冗余实验",
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.description": "选择手牌中的{Redundant-Count:diff()}张牌，[gold]变量[/gold]：\n在本回合中，被选中的牌在被丢弃时视为被打出。（回合结束的弃牌也会触发！）；\n弃掉它们，并抽等量的牌。",
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.variable.0": "使它们在丢弃时视为被打出。",
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.variable.1": "弃掉它们，并抽等量的牌。",
+
+  "HOOLHEYAKMOD-BYGONE_WINGS.title": "曾有羽翼",
+  "HOOLHEYAKMOD-BYGONE_WINGS.description": "每当你使用一张其他颜色的卡牌时，使一张随机手牌费用-1。",
+
+  "HOOLHEYAKMOD-INHERITED_MEMORIES.title": "传承记忆",
+  "HOOLHEYAKMOD-INHERITED_MEMORIES.description": "你每触发一次[gold]逶迤[/gold]或者[gold]博览[/gold]，就获得1点[gold]解析[/gold]。",
+
+  "HOOLHEYAKMOD-FORBIDDEN_KNOWLEDGE.title": "禁忌知识",
+  "HOOLHEYAKMOD-FORBIDDEN_KNOWLEDGE.description": "[gold]变量[/gold]：\n触发[gold]博览[/gold]时，额外抽1张牌；\n触发[gold]逶迤[/gold]时，对所有敌人造成5点伤害。",
+  "HOOLHEYAKMOD-FORBIDDEN_KNOWLEDGE.variable.0": "触发[gold]博览[/gold]时，额外抽1张牌。",
+  "HOOLHEYAKMOD-FORBIDDEN_KNOWLEDGE.variable.1": "触发[gold]逶迤[/gold]时，对所有敌人造成5点伤害。",
+
+  "HOOLHEYAKMOD-CYCLONE.title": "气旋",
+  "HOOLHEYAKMOD-CYCLONE.description": "造成{Damage:diff()}点伤害。\n获得{Cyclone-Magic:diff()}点[gold]博览[/gold]。\n获得{Cyclone-Analysis:diff()}层[gold]解析[/gold]。",
+
+  "HOOLHEYAKMOD-WINGBLADE.title": "翼刃",
+  "HOOLHEYAKMOD-WINGBLADE.description": "造成{Damage:diff()}点伤害。\n如果本牌触发了[gold]博览[/gold]，额外打出一次。",
+
+  "HOOLHEYAKMOD-ENTROPY_INCREASE.title": "熵增",
+  "HOOLHEYAKMOD-ENTROPY_INCREASE.description": "在回合开始时，增加1张随机颜色的能力牌到你的手牌。",
+
+  "HOOLHEYAKMOD-ANCIENT_COVENANT.title": "古老盟约",
+  "HOOLHEYAKMOD-ANCIENT_COVENANT.description": "[gold]变量[/gold]：\n触发[gold]博览[/gold]时，获得{Covenant-Magic:diff()}[gold]力量[/gold]；\n触发[gold]逶迤[/gold]时，获得{Covenant-Magic:diff()}[gold]敏捷[/gold]。",
+  "HOOLHEYAKMOD-ANCIENT_COVENANT.variable.0": "触发[gold]博览[/gold]时，获得{Covenant-Magic:diff()}[gold]力量[/gold]。",
+  "HOOLHEYAKMOD-ANCIENT_COVENANT.variable.1": "触发[gold]逶迤[/gold]时，获得{Covenant-Magic:diff()}[gold]敏捷[/gold]。",
+
+  "HOOLHEYAKMOD-WARDROBE.title": "羽蛇的衣柜",
+  "HOOLHEYAKMOD-WARDROBE.description": "每打出1张其他颜色的牌，随机将*1张本颜色牌加入手牌并赋予[gold]消耗[/gold]。",
+
+  "HOOLHEYAKMOD-OMNISCIENT_HORIZON.title": "全知视界",
+  "HOOLHEYAKMOD-OMNISCIENT_HORIZON.description": "每当有敌人进入[gold]浮空[/gold]状态，抽2张牌，获得{energyPrefix:energyIcons(2)}。",
+
+  "HOOLHEYAKMOD-SERPENT_BLOODLINE.title": "羽蛇血脉",
+  "HOOLHEYAKMOD-SERPENT_BLOODLINE.description": "获得等同于[gold]解析[/gold]层数的[gold]仪式[/gold]。然后每次获得[gold]解析[/gold]时，获得等量[gold]仪式[/gold]。\n每回合开始时，失去{energyPrefix:energyIcons(1)}。",
+
+  "HOOLHEYAKMOD-DISTANT_LIGHT.title": "光行遥遥",
+  "HOOLHEYAKMOD-DISTANT_LIGHT.description": "回合结束时，若你本回合造成的攻击伤害低于6，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
+
+  "HOOLHEYAKMOD-CORRECTED_VARIABLE.title": "修正变量",
+  "HOOLHEYAKMOD-CORRECTED_VARIABLE.description": "每当你抽到一张状态牌，获得1点[gold]博览[/gold]。\n每当你抽到一张诅咒牌，获得1点[gold]逶迤[/gold]。",
+
+  "HOOLHEYAKMOD-BYPRODUCT.title": "副产品",
+  "HOOLHEYAKMOD-BYPRODUCT.description": "每当你进行一次[gold]变量[/gold]，获得1张随机牌。",
+
+  "HOOLHEYAKMOD-COMPLEMENTARY_EXPERIMENT.title": "互补实验",
+  "HOOLHEYAKMOD-COMPLEMENTARY_EXPERIMENT.description": "每当你进行一次[gold]变量[/gold]时，获得{Complementary-Magic:diff()}点[gold]格挡[/gold]。",
+
+  "HOOLHEYAKMOD-KUKULKAN_LEGACY.title": "库库尔坎的传承",
+  "HOOLHEYAKMOD-KUKULKAN_LEGACY.description": "使你的[gold]博览[/gold]和[gold]逶迤[/gold]上限各+{Kukulkan-Magic:diff()}。但是造成的伤害和给予的[gold]升力[/gold]翻倍。",
+
+  "HOOLHEYAKMOD-TWIN_EXPERIMENT.title": "双生子实验",
+  "HOOLHEYAKMOD-TWIN_EXPERIMENT.description": "对随机两个敌人造成{Damage:diff()}点伤害2次。\n若击中两个不同的敌人，则将额外的*2次{Damage:diff()}点伤害给予[gold]变量[/gold]：\n剩余血量更多的敌人；\n剩余血量更少的敌人。",
+  "HOOLHEYAKMOD-TWIN_EXPERIMENT.variable.0": "将额外的伤害给予剩余血量更多的敌人。",
+  "HOOLHEYAKMOD-TWIN_EXPERIMENT.variable.1": "将额外的伤害给予剩余血量更少的敌人。",
+
+  "HOOLHEYAKMOD-KNOCK_IN_EXPERIMENT.title": "敲入实验",
+  "HOOLHEYAKMOD-KNOCK_IN_EXPERIMENT.description": "造成{Damage:diff()}点伤害。\n[gold]变量[/gold]：\n花费{energyPrefix:energyIcons(1)}，回复3生命；\n获得{energyPrefix:energyIcons(1)}。",
+  "HOOLHEYAKMOD-KNOCK_IN_EXPERIMENT.variable.0": "花费{energyPrefix:energyIcons(1)}，回复3生命。",
+  "HOOLHEYAKMOD-KNOCK_IN_EXPERIMENT.variable.1": "获得{energyPrefix:energyIcons(1)}。",
+
+  "HOOLHEYAKMOD-CONJUNCTION_CARD.title": "合相",
+  "HOOLHEYAKMOD-CONJUNCTION_CARD.description": "[gold]中性[/gold]\n[gold]不可打出[/gold]。\n抽到时自动触发并[gold]消耗[/gold]。\n替换当前的场地相位为合相：所有角色造成的伤害增加50%。",
+
+  "HOOLHEYAKMOD-QUINCUNX_CARD.title": "梅花相",
+  "HOOLHEYAKMOD-QUINCUNX_CARD.description": "[gold]中性[/gold]\n[gold]不可打出[/gold]。\n抽到时自动触发并[gold]消耗[/gold]。\n替换当前的场地相位为梅花相：你的技能牌提供[gold]博览[/gold]，攻击牌提供[gold]逶迤[/gold]。",
+
+  "HOOLHEYAKMOD-SEXTILE_CARD.title": "六合",
+  "HOOLHEYAKMOD-SEXTILE_CARD.description": "[gold]吉相[/gold]\n[gold]不可打出[/gold]。\n抽到时自动触发并[gold]消耗[/gold]。\n替换当前的场地相位为六合：你的[gold]博览[/gold]与[gold]逶迤[/gold]触发需要的层数减少2点，但你无法再给予[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-TRINE_CARD.title": "拱相",
+  "HOOLHEYAKMOD-TRINE_CARD.description": "[gold]吉相[/gold]\n[gold]不可打出[/gold]。\n抽到时自动触发并[gold]消耗[/gold]。\n替换当前的场地相位为拱相：回合开始时获得{energyPrefix:energyIcons(1)}并抽2张牌。你的攻击牌附带[gold]消耗[/gold]。",
+
+  "HOOLHEYAKMOD-SQUARE_CARD.title": "刑克",
+  "HOOLHEYAKMOD-SQUARE_CARD.description": "[gold]凶相[/gold]\n[gold]不可打出[/gold]。\n抽到时自动触发并[gold]消耗[/gold]。\n替换当前的场地相位为刑克：你每打出一张牌，失去1点生命并给予所有敌人1层[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-OPPOSITION_CARD.title": "对冲",
+  "HOOLHEYAKMOD-OPPOSITION_CARD.description": "[gold]凶相[/gold]\n[gold]不可打出[/gold]。\n抽到时自动触发并[gold]消耗[/gold]。\n替换当前的场地相位为对冲：你无法获得[gold]格挡[/gold]。敌人的[gold]重力[/gold]视为原本的一半。",
+
+  "HOOLHEYAKMOD-TRANSIT.title": "行运",
+  "HOOLHEYAKMOD-TRANSIT.description": "[gold]消耗[/gold]。\n选择并触发一个[gold]相位[/gold]。",
+
+  "HOOLHEYAKMOD-SHOCKWAVE.title": "激波",
+  "HOOLHEYAKMOD-SHOCKWAVE.description": "对所有敌人造成{Damage:diff()}点伤害，并给予{Shockwave-Magic:diff()}层[gold]失重[/gold]。",
+
+  "HOOLHEYAKMOD-SEPARATION.title": "分离",
+  "HOOLHEYAKMOD-SEPARATION.description": "造成{Damage:diff()}点伤害。\n扣除目标等量的最大生命值。",
+
+  "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.title": "嵌合体实验",
+  "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.description": "打出你的抽牌堆顶端的X张[gold]变量[/gold]：\n攻击牌；\n技能牌。",
+  "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.variable.0": "打出抽牌堆顶端的攻击牌。",
+  "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.variable.1": "打出抽牌堆顶端的技能牌。",
+
+  "HOOLHEYAKMOD-CONTINGENCY_PLAN.title": "预案",
+  "HOOLHEYAKMOD-CONTINGENCY_PLAN.description": "获得{energyPrefix:energyIcons(1)}。\n每当触发[gold]逶迤[/gold]时，将此牌从弃牌堆移回手牌。",
+
+  "HOOLHEYAKMOD-DYNAMIC_PRESSURE.title": "动压",
+  "HOOLHEYAKMOD-DYNAMIC_PRESSURE.description": "造成{Damage:diff()}点伤害。\n抽{DynamicPressure-Magic:diff()}张攻击牌。",
+
+  "HOOLHEYAKMOD-BAROCLINIC_INSTABILITY.title": "斜压不稳",
+  "HOOLHEYAKMOD-BAROCLINIC_INSTABILITY.description": "对所有敌人造成{Damage:diff()}点伤害，\n给予{Baroclinic-Magic:diff()}层[gold]解构[/gold]，\n并给予{Baroclinic-Lift:diff()}层[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-DEEPTHINK.title": "深思",
+  "HOOLHEYAKMOD-DEEPTHINK.description": "获得{Deepthink-Analysis:diff()}点[gold]解析[/gold]。\n获得{Deepthink-Magic:diff()}层[gold]逶迤[/gold]和[gold]博览[/gold]。",
+
+  "HOOLHEYAKMOD-BORROWED_WEAPONS.title": "借用武装",
+  "HOOLHEYAKMOD-BORROWED_WEAPONS.description": "[gold]消耗[/gold]。\n造成{Damage:diff()}点伤害。\n随机将1张其他颜色的攻击牌加入你的手牌。",
+
+  "HOOLHEYAKMOD-AUGMENTATION_EXPERIMENT.title": "扩增实验",
+  "HOOLHEYAKMOD-AUGMENTATION_EXPERIMENT.description": "造成{Damage:diff()}点伤害。\n[gold]变量[/gold]：\n获得{Augmentation-Analysis:diff()}层[gold]解析[/gold]；\n将一张本卡置入手牌，并获得{Augmentation-BonusAnalysis:diff()}层[gold]解析[/gold]。",
+  "HOOLHEYAKMOD-AUGMENTATION_EXPERIMENT.variable.0": "获得{Augmentation-Analysis:diff()}层[gold]解析[/gold]。",
+  "HOOLHEYAKMOD-AUGMENTATION_EXPERIMENT.variable.1": "将一张本卡置入手牌，并获得{Augmentation-BonusAnalysis:diff()}层[gold]解析[/gold]。",
+
+  "HOOLHEYAKMOD-APOPTOSIS_EXPERIMENT.title": "凋亡实验",
+  "HOOLHEYAKMOD-APOPTOSIS_EXPERIMENT.description": "[gold]消耗[/gold]。\n造成{Damage:diff()}点伤害。\n给予目标[gold]变量[/gold]：\n{Apoptosis-Lift:diff()}层[gold]升力[/gold]；\n{Apoptosis-Deconstruction:diff()}层[gold]解构[/gold]。",
+  "HOOLHEYAKMOD-APOPTOSIS_EXPERIMENT.variable.0": "给予{Apoptosis-Lift:diff()}层[gold]升力[/gold]。",
+  "HOOLHEYAKMOD-APOPTOSIS_EXPERIMENT.variable.1": "给予{Apoptosis-Deconstruction:diff()}层[gold]解构[/gold]。",
+
+  "HOOLHEYAKMOD-CONTROL_EXPERIMENT.title": "对照实验",
+  "HOOLHEYAKMOD-CONTROL_EXPERIMENT.description": "造成{Damage:diff()}点伤害。\n[gold]变量[/gold]：\n将1张随机[gold]相位[/gold]置入你的抽牌堆，并抽*2张牌；\n将1张随机[gold]相位[/gold]置入你的弃牌堆，随后立即洗牌。",
+  "HOOLHEYAKMOD-CONTROL_EXPERIMENT.variable.0": "将1张随机[gold]相位[/gold]置入你的抽牌堆，并抽2张牌。",
+  "HOOLHEYAKMOD-CONTROL_EXPERIMENT.variable.1": "将1张随机[gold]相位[/gold]置入你的弃牌堆，随后立即洗牌。",
+
+  "HOOLHEYAKMOD-MUTAGENESIS_EXPERIMENT.title": "诱变实验",
+  "HOOLHEYAKMOD-MUTAGENESIS_EXPERIMENT.description": "造成{Damage:diff()}点伤害。\n[gold]变量[/gold]：\n随机触发一个[gold]相位[/gold]；\n[gold]消耗[/gold]{energyPrefix:energyIcons(1)}，随机触发一个[gold]吉相[/gold]。",
+  "HOOLHEYAKMOD-MUTAGENESIS_EXPERIMENT.variable.0": "随机触发一个[gold]相位[/gold]。",
+  "HOOLHEYAKMOD-MUTAGENESIS_EXPERIMENT.variable.1": "[gold]消耗[/gold]{energyPrefix:energyIcons(1)}，随机触发一个[gold]吉相[/gold]。",
+
+  "HOOLHEYAKMOD-TRANSITIONAL_FLOW.title": "过渡流",
+  "HOOLHEYAKMOD-TRANSITIONAL_FLOW.description": "获得{Block:diff()}点[gold]格挡[/gold]。",
+
+  "HOOLHEYAKMOD-WAKE.title": "尾流",
+  "HOOLHEYAKMOD-WAKE.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n获得{Wake-Magic:diff()}层[gold]解析[/gold]。\n如果你打出的上一张牌是技能牌，本牌额外打出一次。",
+
+  "HOOLHEYAKMOD-UNIVERSAL_MAPPING.title": "万界测绘",
+  "HOOLHEYAKMOD-UNIVERSAL_MAPPING.description": "造成{Damage:diff()}点伤害。随机打出{UniversalMapping-Count:diff()}张其他颜色的稀有攻击牌。",
+
+  "HOOLHEYAKMOD-DIVERGENCE.title": "气流辐散",
+  "HOOLHEYAKMOD-DIVERGENCE.description": "[gold]消耗[/gold]。\n获得{Block:diff()}点[gold]格挡[/gold]。\n[gold]消耗[/gold]目标所有[gold]升力[/gold]，每[gold]消耗[/gold]1层，额外获得{Divergence-Magic:diff()}点[gold]格挡[/gold]。",
+
+  "HOOLHEYAKMOD-CONVERGENCE.title": "气流辐合",
+  "HOOLHEYAKMOD-CONVERGENCE.description": "[gold]消耗[/gold]。\n获得{Block:diff()}点[gold]格挡[/gold]。\n额外获得所有敌人[gold]重力[/gold]总和的[gold]格挡[/gold]（最多{Convergence-Cap:diff()}点）。",
+
+  "HOOLHEYAKMOD-CROSS_SEARCH.title": "交叉检索",
+  "HOOLHEYAKMOD-CROSS_SEARCH.description": "抽{CrossSearch-Draw:diff()}张牌，弃1张牌。\n若弃置攻击牌，获得1点[gold]博览[/gold]；\n若弃置技能牌，获得1点[gold]逶迤[/gold]。",
+
+  "HOOLHEYAKMOD-RAPIDS.title": "急流",
+  "HOOLHEYAKMOD-RAPIDS.description": "[gold]消耗[/gold]。\n给予99层[gold]失重[/gold]。",
+
+  "HOOLHEYAKMOD-FACTORIAL_EXPERIMENT.title": "析因实验",
+  "HOOLHEYAKMOD-FACTORIAL_EXPERIMENT.description": "造成{Damage:diff()}点伤害。\n[gold]变量[/gold]：\n触发手牌中（大部分）[gold]变量[/gold]卡的随机[gold]变量[/gold]；\n将3张随机[gold]变量[/gold]卡置入你的手牌，并在本回合中使它们的耗能变为*0。",
+  "HOOLHEYAKMOD-FACTORIAL_EXPERIMENT.variable.0": "触发手牌中所有允许自动触发的[gold]变量[/gold]卡的随机[gold]变量[/gold]。",
+  "HOOLHEYAKMOD-FACTORIAL_EXPERIMENT.variable.1": "将{Factorial-Count:diff()}张随机[gold]变量[/gold]卡置入你的手牌，并在本回合中使它们的耗能变为0。"
+}

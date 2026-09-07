@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://ucer37re0p5f"]
+
+[ext_resource type="Texture2D" uid="uid://bu5eh6jfdjbsb" path="res://HoolheyakMod/7b539722-4009-4b95-b558-b94ed77bbbc1 - 副本.png" id="1_hbeyj"]
+
+[node name="HoolheyakIcon" type="TextureRect"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("1_hbeyj")
+expand_mode = 1
+stretch_mode = 5

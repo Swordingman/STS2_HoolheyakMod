@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://d0qliq55ng574"
+path="res://.godot/imported/skeleton.atlas-61fb73669b54aec9445894106e657f52.spatlas"
+
+[deps]
+
+source_file="res://HoolheyakMod/scenes/resource/skeleton.atlas"
+dest_files=["res://.godot/imported/skeleton.atlas-61fb73669b54aec9445894106e657f52.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -1,0 +1,9 @@
+{
+  "HOOLHEYAKMOD-ANTI_GRAVITY_GEL.title": "Anti-Gravity Gel",
+  "HOOLHEYAKMOD-ANTI_GRAVITY_GEL.description": "Apply [blue]{Gel-Weightless:diff()}[/blue] [gold]Weightless[/gold] and [blue]{Gel-Lift:diff()}[/blue] [gold]Lift[/gold].",
+  "HOOLHEYAKMOD-ELIXIR_OF_EPIPHANY.title": "Elixir of Epiphany",
+  "HOOLHEYAKMOD-ELIXIR_OF_EPIPHANY.description": "Gain [blue]{Elixir-Analysis:diff()}[/blue] [gold]Analysis[/gold]. Immediately trigger [gold]Erudition[/gold] and [gold]Meander[/gold] [blue]1[/blue] time(s).",
+  "HOOLHEYAKMOD-ASTROLABE_RESIDUE.title": "Astrolabe Residue",
+  "HOOLHEYAKMOD-ASTROLABE_RESIDUE.description": "Choose and trigger [blue]1[/blue] [gold]Aspect[/gold].",
+  "HOOLHEYAKMOD-ASTROLABE_RESIDUE.select_message": "Choose a Phase."
+}

@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://cpwmcx7mcq8kw"
+path="res://.godot/imported/char_249_mlyss.atlas-2b63203891a62f4b91eb3efad26bc8b6.spatlas"
+
+[deps]
+
+source_file="res://HoolheyakMod/char/Mlyss/char_249_mlyss.atlas"
+dest_files=["res://.godot/imported/char_249_mlyss.atlas-2b63203891a62f4b91eb3efad26bc8b6.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

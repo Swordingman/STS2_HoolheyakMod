@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c7d0lts6lfx4g"]
+
+[ext_resource type="SpineSkeletonDataResource" uid="uid://bevjyyrnxt0sv" path="res://HoolheyakMod/scenes/Relaxed_Hoolheyak_anim_skin1.tres" id="1_0ty8d"]
+
+[node name="HoolheyakMerchant" type="Node2D"]
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("1_0ty8d")
+preview_skin = "Default"
+preview_animation = "Sit"
+preview_frame = false
+preview_time = 0.0
+scale = Vector2(0.8, 0.8)

@@ -1,0 +1,117 @@
+<Project Sdk="Godot.NET.Sdk/4.5.1">
+
+  <Import Project="LocalBranch.props"
+          Condition="Exists('LocalBranch.props')" />
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>true</ImplicitUsings>
+    <LangVersion>12.0</LangVersion>
+    <Nullable>enable</Nullable>
+    <AssemblyName>HoolheyakMod</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+
+    <Sts2Dir>Z:\steam\steamapps\common\Slay the Spire 2</Sts2Dir>
+    <Sts2DataDir>$(Sts2Dir)\data_sts2_windows_x86_64</Sts2DataDir>
+
+    <!-- LocalBranch.props 不存在时默认使用 Beta -->
+    <GameBranch Condition="'$(GameBranch)' == ''">Beta</GameBranch>
+
+    <GameReferenceDir>Z:\steam\steamapps\common\Slay the Spire 2\mods\References\$(GameBranch)</GameReferenceDir>
+
+    <DefineConstants Condition="'$(GameBranch)' == 'Beta'">$(DefineConstants);STS2_BETA</DefineConstants>
+
+    <GodotExe>D:\Godot_v4.5.1-stable_mono_win64\Godot_v4.5.1-stable_mono_win64.exe</GodotExe>
+    
+    <!-- 导出预设名称，现在在下方命令行中被正确引用 -->
+    <ExportPresetName>1</ExportPresetName>
+
+    <!-- 排除不需要被 Godot/C# 编译的文件，这已经足够了，不需要下面的 Compile Remove -->
+    <DefaultItemExcludes>$(DefaultItemExcludes);.godot\**;Loader\**</DefaultItemExcludes>
+  
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+  </PropertyGroup>
+
+  <!-- 正确做法：把删除额外目录的逻辑注入到自带的 Clean 流程中 -->
+  <PropertyGroup>
+    <CleanDependsOn>$(CleanDependsOn);CleanExtraGodotDirs</CleanDependsOn>
+  </PropertyGroup>
+
+  <Target Name="CleanExtraGodotDirs">
+    <Message Text="[HoolheyakMod] 正在清理：删除 Godot C# 缓存目录 (.godot/mono)..." Importance="high" />
+    <!-- bin 和 obj 目录 MSBuild 自带的 Clean 会自动清理，我们只需额外处理 .godot/mono -->
+    <RemoveDir Directories="$(MSBuildProjectDirectory)\.godot\mono" ContinueOnError="true" />
+  </Target>
+
+  <ItemGroup>
+    <Reference Include="sts2">
+      <HintPath>$(GameReferenceDir)\sts2.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="0Harmony">
+      <HintPath>$(Sts2DataDir)\0Harmony.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+    <Reference Include="BaseLib">
+      <HintPath>$(Sts2Dir)\mods\BaseLib\BaseLib.dll</HintPath>
+      <Private>true</Private>
+    </Reference>
+  </ItemGroup>
+
+  <Target Name="ShowCurrentBuildBranch" BeforeTargets="CoreCompile">
+    <Message Text="[HoolheyakMod] 当前编译分支：$(GameBranch)" Importance="high" />
+    <Message Text="[HoolheyakMod] sts2 引用：$(GameReferenceDir)\sts2.dll" Importance="high" />
+  </Target>
+
+  <!-- 正常编译后的部署流程 -->
+  <Target Name="DeployImplementation"
+          AfterTargets="Build"
+          Condition="'$(HOOLHEYAK_INSIDE_GODOT_EXPORT)' != '1'">
+
+    <PropertyGroup>
+      <ModOutputDir>$(Sts2Dir)\mods\HoolheyakMod</ModOutputDir>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(ModOutputDir)" />
+
+    <Copy SourceFiles="$(TargetPath)"
+          DestinationFiles="$(ModOutputDir)\HoolheyakMod.$(GameBranch).dll" />
+
+    <Copy SourceFiles="$(MSBuildProjectDirectory)\HoolheyakMod.json"
+          DestinationFiles="$(ModOutputDir)\HoolheyakMod.json" />
+
+    <Message Text="已部署：HoolheyakMod.$(GameBranch).dll"
+             Importance="high" />
+  </Target>
+
+  <!-- 导出 PCK 流程 -->
+  <Target Name="ExportAndDeployPck"
+          AfterTargets="DeployImplementation"
+          Condition="'$(HOOLHEYAK_INSIDE_GODOT_EXPORT)' != '1'
+                 And '$(SkipGodotExport)' != 'true'">
+
+    <PropertyGroup>
+      <ModOutputDir>$(Sts2Dir)\mods\HoolheyakMod</ModOutputDir>
+      <PckOutputPath>$(MSBuildProjectDirectory)\build\HoolheyakMod.pck</PckOutputPath>
+    </PropertyGroup>
+
+    <MakeDir Directories="$(MSBuildProjectDirectory)\build" />
+    <MakeDir Directories="$(ModOutputDir)" />
+
+    <Message Text="正在导出共用 PCK，使用分支：$(GameBranch)"
+             Importance="high" />
+
+    <!-- 移除了此处多余的 DLL Copy 操作，交由下方的 CopyGodotRuntimeDependencies 处理 -->
+    <!-- 将原来硬编码的 "1" 替换为了全局属性 "$(ExportPresetName)" -->
+    <Exec WorkingDirectory="$(MSBuildProjectDirectory)"
+          EnvironmentVariables="HOOLHEYAK_INSIDE_GODOT_EXPORT=1;GameBranch=$(GameBranch)"
+          Command="&quot;$(GodotExe)&quot; --headless --verbose --path &quot;$(MSBuildProjectDirectory)&quot; --export-pack &quot;$(ExportPresetName)&quot; &quot;$(PckOutputPath)&quot;" />
+
+    <Copy SourceFiles="$(PckOutputPath)"
+          DestinationFiles="$(ModOutputDir)\HoolheyakMod.pck" />
+
+    <Message Text="已部署：HoolheyakMod.pck"
+             Importance="high" />
+  </Target>
+</Project>

@@ -1,0 +1,20 @@
+{
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.aromaPrinciple": "[sine][gold]我能感知到，这座塔里可能藏着连建筑师都接触不到的秘密，我可太好奇了！[/gold][/sine]",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.banter.alive.endTurnPing": "你的回合打算持续到下一个纪元吗？快点做出选择吧。",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.banter.dead.endTurnPing": "看你发呆可真是一种折磨呢，你还要让我等多久？",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.cardsModifierDescription": "霍尔海雅的卡牌现在会出现在奖励和商店中。",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.cardsModifierTitle": "霍尔海雅卡牌",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.description": "术师干员霍尔海雅，漫游于历史的长河之中。\n曾经她试图逆流而上，如今她决定顺势而为。",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.eventDeathPrevention": "没有百分百的真实，同理，也没有百分百的虚假。",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.goldMonologue": "[sine]这么多金币足够我买下博物馆中藏得最深的典籍……[/sine]",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.possessiveAdjective": "她的",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.pronounObject": "她",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.pronounPossessive": "她的",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.pronounSubject": "她",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.title": "霍尔海雅",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.titleObject": "霍尔海雅",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.unlockText": "用[pink]{Prerequisite}[/pink]进行一局游戏来解锁这个角色。",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.skin0": "默认",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.skin1": "历世流风",
+  "HOOLHEYAKMOD-HOOLHEYAK_MOD.skin2": "恒久祭礼"
+}

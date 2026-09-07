@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://cgub2dmo8wgjl"
+path="res://.godot/imported/build_char_4027_heyak_epoque_5042.skel-b7aab0da7c4001926876fc9f0cdd3616.spskel"
+
+[deps]
+
+source_file="res://HoolheyakMod/scenes/resource/build_char_4027_heyak_epoque_5042.skel"
+dest_files=["res://.godot/imported/build_char_4027_heyak_epoque_5042.skel-b7aab0da7c4001926876fc9f0cdd3616.spskel"]
+
+[params]
+

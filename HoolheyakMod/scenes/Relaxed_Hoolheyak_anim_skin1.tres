@@ -1,0 +1,8 @@
+[gd_resource type="SpineSkeletonDataResource" load_steps=3 format=3 uid="uid://bevjyyrnxt0sv"]
+
+[ext_resource type="SpineAtlasResource" uid="uid://dwcxdu3kqua1f" path="res://HoolheyakMod/scenes/resource/build_char_4027_heyak_ambienceSynesthesia_4.atlas" id="1_ofkxr"]
+[ext_resource type="SpineSkeletonFileResource" uid="uid://yjap4nwu6qou" path="res://HoolheyakMod/scenes/resource/build_char_4027_heyak_ambienceSynesthesia_442.skel" id="2_1oiav"]
+
+[resource]
+atlas_res = ExtResource("1_ofkxr")
+skeleton_file_res = ExtResource("2_1oiav")

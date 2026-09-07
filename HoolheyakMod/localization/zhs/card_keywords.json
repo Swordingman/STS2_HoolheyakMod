@@ -1,0 +1,40 @@
+{
+  "HOOLHEYAKMOD-ANALYSIS.title": "解析",
+  "HOOLHEYAKMOD-ANALYSIS.description": "用于增强特定效果的数值。",
+
+  "HOOLHEYAKMOD-MEANDER.title": "逶迤",
+  "HOOLHEYAKMOD-MEANDER.description": "每打出5张技能牌（标准难度下默认），对随机敌人造成3点伤害并给予1层[gold]升力[/gold]（触发次数等同于[gold]解析[/gold]层数）。",
+
+  "HOOLHEYAKMOD-ERUDITION.title": "博览",
+  "HOOLHEYAKMOD-ERUDITION.description": "每打出4张攻击牌（标准难度下默认），对随机敌人造成等同于[gold]解析[/gold]层数的伤害，并给予1层[gold]升力[/gold]（触发4次）。",
+
+  "HOOLHEYAKMOD-GRAVITY.title": "重力",
+  "HOOLHEYAKMOD-GRAVITY.description": "敌人的固有属性，等于其最大生命值的10%（向下取整）。当[gold]升力[/gold]达到此数值时，触发[gold]浮空[/gold]。",
+
+  "HOOLHEYAKMOD-LIFT.title": "升力",
+  "HOOLHEYAKMOD-LIFT.description": "当层数达到[gold]重力[/gold]时，清空层数并触发[gold]浮空[/gold]。",
+
+  "HOOLHEYAKMOD-LEVITATION.title": "浮空",
+  "HOOLHEYAKMOD-LEVITATION.description": "失去所有[gold]格挡[/gold]并获得20层[gold]解构[/gold]。受到的伤害增加50%，造成的伤害减少70%。\n回合结束时，受到([gold]重力[/gold]+[gold]升力[/gold])×2点伤害，随后解除此状态并清空[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-WEIGHTLESSNESS.title": "失重",
+  "HOOLHEYAKMOD-WEIGHTLESSNESS.description": "获得的[gold]升力[/gold]翻倍。回合结束时，层数-1。",
+
+  "HOOLHEYAKMOD-VARIABLE.title": "变量",
+  "HOOLHEYAKMOD-VARIABLE.description": "打出时，选择一项效果发动。",
+
+  "HOOLHEYAKMOD-DECONSTRUCTION.title": "解构",
+  "HOOLHEYAKMOD-DECONSTRUCTION.description": "获得[gold]格挡[/gold]时，消耗等量层数以抵消获得的[gold]格挡[/gold]。",
+
+  "HOOLHEYAKMOD-PHASE.title": "相位",
+  "HOOLHEYAKMOD-PHASE.description": "全局场地效果。触发新[gold]相位[/gold]时会替换原有的[gold]相位[/gold]。同一时间只能存在1个。",
+
+  "HOOLHEYAKMOD-BENEFIC_PHASE.title": "吉相",
+  "HOOLHEYAKMOD-BENEFIC_PHASE.description": "偏向于带来正面增益或连击机会的[gold]相位[/gold]。",
+
+  "HOOLHEYAKMOD-MALEFIC_PHASE.title": "凶相",
+  "HOOLHEYAKMOD-MALEFIC_PHASE.description": "伴随着强烈负面惩罚或极高风险的[gold]相位[/gold]。",
+
+  "HOOLHEYAKMOD-NEUTRAL_PHASE.title": "中性",
+  "HOOLHEYAKMOD-NEUTRAL_PHASE.description": "具有双刃剑效果，或能够改变基础运转规则的[gold]相位[/gold]。"
+}

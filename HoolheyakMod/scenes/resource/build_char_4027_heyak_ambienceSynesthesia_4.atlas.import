@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dwcxdu3kqua1f"
+path="res://.godot/imported/build_char_4027_heyak_ambienceSynesthesia_4.atlas-07adc136383e6b8fdee57175545b03d9.spatlas"
+
+[deps]
+
+source_file="res://HoolheyakMod/scenes/resource/build_char_4027_heyak_ambienceSynesthesia_4.atlas"
+dest_files=["res://.godot/imported/build_char_4027_heyak_ambienceSynesthesia_4.atlas-07adc136383e6b8fdee57175545b03d9.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

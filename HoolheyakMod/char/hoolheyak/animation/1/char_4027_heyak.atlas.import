@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://crcungkbm8sxk"
+path="res://.godot/imported/char_4027_heyak.atlas-cd8a6648b855b3ce95429d685c16da12.spatlas"
+
+[deps]
+
+source_file="res://HoolheyakMod/char/hoolheyak/animation/1/char_4027_heyak.atlas"
+dest_files=["res://.godot/imported/char_4027_heyak.atlas-cd8a6648b855b3ce95429d685c16da12.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

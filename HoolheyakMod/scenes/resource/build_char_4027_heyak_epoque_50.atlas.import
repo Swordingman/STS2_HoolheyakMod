@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://b1efhaffq2opx"
+path="res://.godot/imported/build_char_4027_heyak_epoque_50.atlas-c4e55b4b7e9658320b4f8addc306f3b3.spatlas"
+
+[deps]
+
+source_file="res://HoolheyakMod/scenes/resource/build_char_4027_heyak_epoque_50.atlas"
+dest_files=["res://.godot/imported/build_char_4027_heyak_epoque_50.atlas-c4e55b4b7e9658320b4f8addc306f3b3.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

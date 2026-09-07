@@ -1,0 +1,11 @@
+{
+  "HOOLHEYAKMOD-ANTI_GRAVITY_GEL.title": "反重力凝胶",
+  "HOOLHEYAKMOD-ANTI_GRAVITY_GEL.description": "给予目标[blue]{Gel-Weightless:diff()}[/blue]层[gold]失重[/gold] 与[blue]{Gel-Lift:diff()}[/blue]层[gold]升力[/gold]。",
+
+  "HOOLHEYAKMOD-ELIXIR_OF_EPIPHANY.title": "顿悟灵药",
+  "HOOLHEYAKMOD-ELIXIR_OF_EPIPHANY.description": "获得[blue]{Elixir-Analysis:diff()}[/blue]层[gold]解析[/gold]。立即触发[blue]1[/blue]次[gold]博览[/gold] 与[gold]逶迤[/gold]。",
+  
+  "HOOLHEYAKMOD-ASTROLABE_RESIDUE.title": "星象仪残液",
+  "HOOLHEYAKMOD-ASTROLABE_RESIDUE.description": "选择并触发 [blue]1[/blue] 个[gold]相位[/gold]。",
+  "HOOLHEYAKMOD-ASTROLABE_RESIDUE.select_message": "选择一张相位牌。"
+}

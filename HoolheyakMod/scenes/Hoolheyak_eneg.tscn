@@ -1,0 +1,132 @@
+[gd_scene load_steps=8 format=3 uid="uid://dkabvtnrx7kul"]
+
+[ext_resource type="Texture2D" uid="uid://b1dit64xe76ea" path="res://HoolheyakMod/images/character/energyorb/cover.png" id="1_4uq5p"]
+[ext_resource type="Texture2D" uid="uid://6p0gres6ac4n" path="res://HoolheyakMod/images/character/energyorb/layer1.png" id="2_o1kst"]
+[ext_resource type="Texture2D" uid="uid://c62u54ae3eb6s" path="res://HoolheyakMod/images/character/energyorb/layer2.png" id="3_525w3"]
+[ext_resource type="Texture2D" uid="uid://d3hmaltu7spjb" path="res://HoolheyakMod/images/character/energyorb/layer3.png" id="4_0y6vb"]
+[ext_resource type="Texture2D" uid="uid://bv6i6vigednw7" path="res://HoolheyakMod/images/character/energyorb/layer4.png" id="5_m5cr2"]
+[ext_resource type="Texture2D" uid="uid://d06sublqpsboo" path="res://HoolheyakMod/images/character/energyorb/layer5.png" id="6_x0aye"]
+[ext_resource type="Texture2D" uid="uid://c0kmoq8o4wu57" path="res://HoolheyakMod/images/character/energyorb/vfx.png" id="7_68x11"]
+
+[node name="TestEnergyCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 128.0
+offset_bottom = 128.0
+metadata/_edit_lock_ = true
+
+[node name="EnergyVfxBack" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(64, 64)
+
+[node name="Layers" type="Control" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RotationLayers" type="Control" parent="Layers"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Layer1" type="TextureRect" parent="Layers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_4uq5p")
+expand_mode = 1
+
+[node name="Layer2" type="TextureRect" parent="Layers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_o1kst")
+expand_mode = 1
+
+[node name="Layer3" type="TextureRect" parent="Layers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_525w3")
+expand_mode = 1
+
+[node name="Layer4" type="TextureRect" parent="Layers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_0y6vb")
+expand_mode = 1
+
+[node name="Layer5" type="TextureRect" parent="Layers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_m5cr2")
+expand_mode = 1
+
+[node name="Layer6" type="TextureRect" parent="Layers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_x0aye")
+expand_mode = 1
+
+[node name="Layer7" type="TextureRect" parent="Layers"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("7_68x11")
+expand_mode = 1
+
+[node name="EnergyVfxFront" type="Node2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(64, 64)
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -29.0
+offset_right = -16.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.14698029, 0.76784, 0.836587, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.4)
+theme_override_colors/font_outline_color = Color(6.016344e-07, 0.27258423, 0.37448427, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 16
+theme_override_constants/shadow_outline_size = 16
+theme_override_font_sizes/font_size = 36
+text = "3/3"
+horizontal_alignment = 1
+vertical_alignment = 1

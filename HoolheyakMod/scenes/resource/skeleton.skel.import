@@ -1,0 +1,13 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://df2m4jnun54da"
+valid=false
+
+[deps]
+
+source_file="res://HoolheyakMod/scenes/resource/skeleton.skel"
+
+[params]
+

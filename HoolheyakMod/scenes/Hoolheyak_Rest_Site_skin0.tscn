@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://bteo6l83ujh0u"]
+
+[ext_resource type="Script" uid="uid://dp6wtnl8rl7b5" path="res://HoolheyakModCore/Scripts/RestSiteNode.cs" id="1_pql4l"]
+[ext_resource type="SpineSkeletonDataResource" uid="uid://nm71gmsu3jih" path="res://HoolheyakMod/scenes/Relaxed_Hoolheyak_anim_skin0.tres" id="2_h17x3"]
+[ext_resource type="Script" uid="uid://bvvjnbld1wc77" path="res://HoolheyakModCore/Scripts/RestSiteOptionNode.cs" id="3_h17x3"]
+
+[node name="HoolheyakRestSite" type="Node2D"]
+position = Vector2(15, 40)
+scale = Vector2(0.760006, 0.760006)
+script = ExtResource("1_pql4l")
+
+[node name="SpineSprite" type="SpineSprite" parent="."]
+skeleton_data_res = ExtResource("2_h17x3")
+preview_skin = "Default"
+preview_animation = "Sit"
+preview_frame = false
+preview_time = 0.0
+position = Vector2(-17.385, 50.195)
+scale = Vector2(1.39, 1.39)
+
+[node name="ControlRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+metadata/_edit_use_anchors_ = true
+
+[node name="SelectionReticle" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -235.0
+offset_top = -368.0
+offset_right = 215.78778
+offset_bottom = 219.7351
+script = ExtResource("3_h17x3")
+
+[node name="Hitbox" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -235.0
+offset_top = -368.0
+offset_right = 215.78778
+offset_bottom = 219.7351
+metadata/_edit_use_anchors_ = true
+
+[node name="ThoughtBubbleRight" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = 146.05148
+offset_top = -317.103
+offset_right = 146.05148
+offset_bottom = -317.103
+metadata/_edit_use_anchors_ = true
+
+[node name="ThoughtBubbleLeft" type="Control" parent="ControlRoot"]
+unique_name_in_owner = true
+anchors_preset = 0
+offset_left = -200.0
+offset_top = -324.997
+offset_right = -200.0
+offset_bottom = -324.997
+metadata/_edit_use_anchors_ = true
