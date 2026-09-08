@@ -14,20 +14,20 @@ using System.Threading.Tasks;
 namespace HoolheyakMod.Scripts.Cards;
 
 [Pool(typeof(HoolheyakModCardPool))]
-public class DistantLight : HoolheyakBaseCard
+public class VoyageOfLoneTrail : HoolheyakBaseCard
 {
-    public DistantLight() : base(3, CardType.Power, CardRarity.Rare, TargetType.Self, true)
+    public VoyageOfLoneTrail() : base(3, CardType.Power, CardRarity.Rare, TargetType.Self, true)
     {
     }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("DistantLight-Magic", 1m)
+        new DynamicVar("VoyageOfLoneTrail-Magic", 1m)
     ];
 
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<DistantLightPower>(choiceContext, Owner.Creature, DynamicVars["DistantLight-Magic"].IntValue, Owner.Creature, this);
+        await PowerCmd.Apply<VoyageOfLoneTrailPower>(choiceContext, Owner.Creature, DynamicVars["VoyageOfLoneTrail-Magic"].IntValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()

@@ -59,9 +59,9 @@
   "HOOLHEYAKMOD-SERPENT_BLOODLINE_POWER.description": "获得等同于[gold]解析[/gold]层数的[gold]仪式[/gold]。每次获得[gold]解析[/gold]时，获得[blue]{Amount}[/blue]倍层数的[gold]仪式[/gold]。\n每回合开始时，失去[blue]{Amount}[/blue]点能量。",
   "HOOLHEYAKMOD-SERPENT_BLOODLINE_POWER.smartDescription": "获得等同于[gold]解析[/gold]层数的[gold]仪式[/gold]。每次获得[gold]解析[/gold]时，获得[blue]{Amount}[/blue]倍层数的[gold]仪式[/gold]。\n每回合开始时，失去[blue]{Amount}[/blue]点能量。",
 
-  "HOOLHEYAKMOD-DISTANT_LIGHT_POWER.title": "光行遥遥",
-  "HOOLHEYAKMOD-DISTANT_LIGHT_POWER.description": "回合结束时，若本回合造成的伤害低于[blue]6[/blue]，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
-  "HOOLHEYAKMOD-DISTANT_LIGHT_POWER.smartDescription": "回合结束时，若本回合造成的伤害低于[blue]6[/blue]，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
+  "HOOLHEYAKMOD-VOYAGE_OF_LONE_TRAIL_POWER.title": "孤星映盈",
+  "HOOLHEYAKMOD-VOYAGE_OF_LONE_TRAIL_POWER.description": "回合结束时，若本回合造成的伤害低于[blue]6[/blue]，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
+  "HOOLHEYAKMOD-VOYAGE_OF_LONE_TRAIL_POWER.smartDescription": "回合结束时，若本回合造成的伤害低于[blue]6[/blue]，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
 
   "HOOLHEYAKMOD-CORRECTED_VARIABLE_POWER.title": "修正变量",
   "HOOLHEYAKMOD-CORRECTED_VARIABLE_POWER.description": "每抽到[blue]1[/blue]张状态牌，获得[blue]1[/blue]层[gold]博览[/gold]；每抽到[blue]1[/blue]张诅咒牌，获得[blue]1[/blue]层[gold]逶迤[/gold]。",

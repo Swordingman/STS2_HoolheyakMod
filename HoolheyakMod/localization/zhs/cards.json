@@ -166,8 +166,8 @@
   "HOOLHEYAKMOD-SERPENT_BLOODLINE.title": "羽蛇血脉",
   "HOOLHEYAKMOD-SERPENT_BLOODLINE.description": "获得等同于[gold]解析[/gold]层数的[gold]仪式[/gold]。然后每次获得[gold]解析[/gold]时，获得等量[gold]仪式[/gold]。\n每回合开始时，失去{energyPrefix:energyIcons(1)}。",
 
-  "HOOLHEYAKMOD-DISTANT_LIGHT.title": "光行遥遥",
-  "HOOLHEYAKMOD-DISTANT_LIGHT.description": "回合结束时，若你本回合造成的攻击伤害低于6，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
+  "HOOLHEYAKMOD-VOYAGE_OF_LONE_TRAIL.title": "孤星映盈",
+  "HOOLHEYAKMOD-VOYAGE_OF_LONE_TRAIL.description": "回合结束时，若你本回合造成的攻击伤害低于6，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
 
   "HOOLHEYAKMOD-CORRECTED_VARIABLE.title": "修正变量",
   "HOOLHEYAKMOD-CORRECTED_VARIABLE.description": "每当你抽到一张状态牌，获得1点[gold]博览[/gold]。\n每当你抽到一张诅咒牌，获得1点[gold]逶迤[/gold]。",
@@ -225,7 +225,7 @@
   "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.variable.1": "打出抽牌堆顶端的技能牌。",
 
   "HOOLHEYAKMOD-CONTINGENCY_PLAN.title": "预案",
-  "HOOLHEYAKMOD-CONTINGENCY_PLAN.description": "获得{energyPrefix:energyIcons(1)}。\n每当触发[gold]逶迤[/gold]{IfUpgraded:show:或逶迤|}时，将此牌从弃牌堆移回手牌。",
+  "HOOLHEYAKMOD-CONTINGENCY_PLAN.description": "获得{energyPrefix:energyIcons(1)}。\n每当触发[gold]逶迤[/gold]{IfUpgraded:show:或[gold]逶迤[/gold]|}时，将此牌从弃牌堆移回手牌。",
 
   "HOOLHEYAKMOD-DYNAMIC_PRESSURE.title": "动压",
   "HOOLHEYAKMOD-DYNAMIC_PRESSURE.description": "造成{Damage:diff()}点伤害。\n抽{DynamicPressure-Magic:diff()}张攻击牌。",

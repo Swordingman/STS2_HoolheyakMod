@@ -11,12 +11,12 @@ using MegaCrit.Sts2.Core.ValueProps;
 
 namespace HoolheyakMod.Code.Powers;
 
-public class DistantLightPower : CustomPowerModel
+public class VoyageOfLoneTrailPower : CustomPowerModel
 {
     public override PowerType Type => PowerType.Buff;
     public override PowerStackType StackType => PowerStackType.Counter;
-    public override string? CustomPackedIconPath => $"res://HoolheyakMod/images/powers/{nameof(DistantLightPower)}.png";
-    public override string? CustomBigIconPath => $"res://HoolheyakMod/images/powers/large/{nameof(DistantLightPower)}.png";
+    public override string? CustomPackedIconPath => $"res://HoolheyakMod/images/powers/{nameof(VoyageOfLoneTrailPower)}.png";
+    public override string? CustomBigIconPath => $"res://HoolheyakMod/images/powers/large/{nameof(VoyageOfLoneTrailPower)}.png";
 
     private int _damageDealtThisTurn;
 
