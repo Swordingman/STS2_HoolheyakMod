@@ -61,7 +61,7 @@
   "HOOLHEYAKMOD-ARCHIVE.variable.1": "在战斗结束后，额外选择一张无色牌。",
 
   "HOOLHEYAKMOD-COERCION.title": "强压",
-  "HOOLHEYAKMOD-COERCION.description": "造成{Damage:diff()}点伤害。\n若目标[gold]浮空[/gold]，使其摔落并获得相当于此次摔落伤害的[gold]格挡[/gold]，以及{energyPrefix:energyIcons(1)}。",
+  "HOOLHEYAKMOD-COERCION.description": "造成{Damage:diff()}点伤害。\n若目标[gold]浮空[/gold]，使其摔落并获得相当于此次摔落伤害的[gold]格挡[/gold]，以及{IfUpgraded:show:{energyPrefix:energyIcons(2)}|{energyPrefix:energyIcons(1)}}。",
 
   "HOOLHEYAKMOD-SURVEYING.title": "测绘",
   "HOOLHEYAKMOD-SURVEYING.description": "造成{Damage:diff()}点伤害。\n获得{Surveying-Magic:diff()}[gold]解析[/gold]。",
@@ -78,7 +78,7 @@
   "HOOLHEYAKMOD-CROSS_EXPERIMENT.variable.1": "+{Cross-Growth:diff()}[gold]格挡[/gold]。",
 
   "HOOLHEYAKMOD-REVISION.title": "修订",
-  "HOOLHEYAKMOD-REVISION.description": "[gold]消耗[/gold]。\n[gold]消耗[/gold]你手中的一张牌，并随机获得一张与其同类型的牌。",
+  "HOOLHEYAKMOD-REVISION.description": "[gold]消耗[/gold]。\n[gold]消耗[/gold]你手中的一张牌，并随机获得一张与其同类型的牌。{IfUpgraded:show:使其在本回合中耗能变为0。|}",
 
   "HOOLHEYAKMOD-FORESHADOWING.title": "伏笔",
   "HOOLHEYAKMOD-FORESHADOWING.description": "获得{Block:diff()}点[gold]格挡[/gold]。\n获得{Foreshadowing-Magic:diff()}点[gold]博览[/gold]。\n获得{Foreshadowing-Meander:diff()}点[gold]逶迤[/gold]。",
@@ -100,10 +100,10 @@
   "HOOLHEYAKMOD-LITERATURE_RETRIEVAL.selectionScreenPrompt": "选择1张牌加入你的手牌。",
 
   "HOOLHEYAKMOD-MASS_OFFSET.title": "质量抵消",
-  "HOOLHEYAKMOD-MASS_OFFSET.description": "使所有敌人获得X点[gold]升力[/gold]，并获得X点[gold]解析[/gold]。",
+  "HOOLHEYAKMOD-MASS_OFFSET.description": "使所有敌人获得{IfUpgraded:show:X+1|X}点[gold]升力[/gold]，并获得{IfUpgraded:show:X+1|X}点[gold]解析[/gold]。",
 
   "HOOLHEYAKMOD-FLY_UP.title": "飞起来！",
-  "HOOLHEYAKMOD-FLY_UP.description": "触发X次[gold]变量[/gold]：\n[gold]博览[/gold]；\n[gold]逶迤[/gold]。",
+  "HOOLHEYAKMOD-FLY_UP.description": "获得{FlyUp-Analysis:diff()}点[gold]解析[/gold]。\n触发{IfUpgraded:show:X+1|X}次[gold]变量[/gold]：\n[gold]博览[/gold]；\n[gold]逶迤[/gold]。",
   "HOOLHEYAKMOD-FLY_UP.variable.0": "触发[gold]博览[/gold]。",
   "HOOLHEYAKMOD-FLY_UP.variable.1": "触发[gold]逶迤[/gold]。",
 
@@ -158,7 +158,7 @@
   "HOOLHEYAKMOD-ANCIENT_COVENANT.variable.1": "触发[gold]逶迤[/gold]时，获得{Covenant-Magic:diff()}[gold]敏捷[/gold]。",
 
   "HOOLHEYAKMOD-WARDROBE.title": "羽蛇的衣柜",
-  "HOOLHEYAKMOD-WARDROBE.description": "每打出1张其他颜色的牌，随机将1张本颜色牌加入手牌并赋予[gold]消耗[/gold]。",
+  "HOOLHEYAKMOD-WARDROBE.description": "每打出1张其他颜色的牌，随机将1张本颜色牌加入手牌并赋予[gold]消耗[/gold]{IfUpgraded:show:，并使其在本场战斗中耗能变为0|}。",
 
   "HOOLHEYAKMOD-OMNISCIENT_HORIZON.title": "全知视界",
   "HOOLHEYAKMOD-OMNISCIENT_HORIZON.description": "每当有敌人进入[gold]浮空[/gold]状态，抽2张牌，获得{energyPrefix:energyIcons(2)}。",
@@ -170,7 +170,7 @@
   "HOOLHEYAKMOD-VOYAGE_OF_LONE_TRAIL.description": "回合结束时，若你本回合造成的攻击伤害低于6，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
 
   "HOOLHEYAKMOD-CORRECTED_VARIABLE.title": "修正变量",
-  "HOOLHEYAKMOD-CORRECTED_VARIABLE.description": "每当你抽到一张状态牌，获得1点[gold]博览[/gold]。\n每当你抽到一张诅咒牌，获得1点[gold]逶迤[/gold]。",
+  "HOOLHEYAKMOD-CORRECTED_VARIABLE.description": "每当你抽到一张状态牌，获得{Corrected-Magic:diff()}点[gold]博览[/gold]。\n每当你抽到一张诅咒牌，获得{Corrected-Magic:diff()}点[gold]逶迤[/gold]。",
 
   "HOOLHEYAKMOD-BYPRODUCT.title": "副产品",
   "HOOLHEYAKMOD-BYPRODUCT.description": "每当你进行一次[gold]变量[/gold]，获得1张{IfUpgraded:show:升级后的|}随机牌。",
@@ -220,12 +220,12 @@
   "HOOLHEYAKMOD-SEPARATION.description": "造成{Damage:diff()}点伤害。\n扣除目标等量的最大生命值。",
 
   "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.title": "嵌合体实验",
-  "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.description": "打出你的抽牌堆顶端的X张[gold]变量[/gold]：\n攻击牌；\n技能牌。",
+  "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.description": "打出你的抽牌堆顶端的{IfUpgraded:show:X+1|X}张[gold]变量[/gold]：\n攻击牌；\n技能牌。",
   "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.variable.0": "打出抽牌堆顶端的攻击牌。",
   "HOOLHEYAKMOD-CHIMERA_EXPERIMENT.variable.1": "打出抽牌堆顶端的技能牌。",
 
   "HOOLHEYAKMOD-CONTINGENCY_PLAN.title": "预案",
-  "HOOLHEYAKMOD-CONTINGENCY_PLAN.description": "获得{energyPrefix:energyIcons(1)}。\n每当触发[gold]逶迤[/gold]{IfUpgraded:show:或[gold]逶迤[/gold]|}时，将此牌从弃牌堆移回手牌。",
+  "HOOLHEYAKMOD-CONTINGENCY_PLAN.description": "获得{energyPrefix:energyIcons(1)}。\n每当触发[gold]逶迤[/gold]{IfUpgraded:show:或[gold]博览[/gold]|}时，将此牌从弃牌堆移回手牌。",
 
   "HOOLHEYAKMOD-DYNAMIC_PRESSURE.title": "动压",
   "HOOLHEYAKMOD-DYNAMIC_PRESSURE.description": "造成{Damage:diff()}点伤害。\n抽{DynamicPressure-Magic:diff()}张攻击牌。",

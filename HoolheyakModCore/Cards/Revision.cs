@@ -63,10 +63,10 @@ public class Revision : HoolheyakBaseCard
 
         foreach (var card in generated)
         {
-            if (IsUpgraded && card.IsUpgradable)
+            // 升级后：生成的牌在本回合中耗能变为 0。
+            if (IsUpgraded)
             {
-                card.UpgradeInternal();
-                card.FinalizeUpgradeInternal();
+                card.SetToFreeThisTurn();
             }
 
             await CardPileCmd.AddGeneratedCardToCombat(card, PileType.Hand, player);

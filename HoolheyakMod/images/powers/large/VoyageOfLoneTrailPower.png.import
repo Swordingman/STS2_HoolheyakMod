@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://djui5fa461oh5"
-path="res://.godot/imported/DestructionBeforeCreation.png-21461a08c87b9b7ea4200ac3199f8a7e.ctex"
+uid="uid://p5oedvey0swh"
+path="res://.godot/imported/VoyageOfLoneTrailPower.png-5c182da65419dae2aa1e4cac0f47f367.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://HoolheyakMod/images/cards/DestructionBeforeCreation.png"
-dest_files=["res://.godot/imported/DestructionBeforeCreation.png-21461a08c87b9b7ea4200ac3199f8a7e.ctex"]
+source_file="res://HoolheyakMod/images/powers/large/VoyageOfLoneTrailPower.png"
+dest_files=["res://.godot/imported/VoyageOfLoneTrailPower.png-5c182da65419dae2aa1e4cac0f47f367.ctex"]
 
 [params]
 

@@ -64,8 +64,8 @@
   "HOOLHEYAKMOD-VOYAGE_OF_LONE_TRAIL_POWER.smartDescription": "回合结束时，若本回合造成的伤害低于[blue]6[/blue]，触发[gold]逶迤[/gold]与[gold]博览[/gold]。",
 
   "HOOLHEYAKMOD-CORRECTED_VARIABLE_POWER.title": "修正变量",
-  "HOOLHEYAKMOD-CORRECTED_VARIABLE_POWER.description": "每抽到[blue]1[/blue]张状态牌，获得[blue]1[/blue]层[gold]博览[/gold]；每抽到[blue]1[/blue]张诅咒牌，获得[blue]1[/blue]层[gold]逶迤[/gold]。",
-  "HOOLHEYAKMOD-CORRECTED_VARIABLE_POWER.smartDescription": "每抽到[blue]1[/blue]张状态牌，获得[blue]1[/blue]层[gold]博览[/gold]；每抽到[blue]1[/blue]张诅咒牌，获得[blue]1[/blue]层[gold]逶迤[/gold]。",
+  "HOOLHEYAKMOD-CORRECTED_VARIABLE_POWER.description": "每抽到[blue]1[/blue]张状态牌，获得[blue]{Amount}[/blue]层[gold]博览[/gold]；每抽到[blue]1[/blue]张诅咒牌，获得[blue]{Amount}[/blue]层[gold]逶迤[/gold]。",
+  "HOOLHEYAKMOD-CORRECTED_VARIABLE_POWER.smartDescription": "每抽到[blue]1[/blue]张状态牌，获得[blue]{Amount}[/blue]层[gold]博览[/gold]；每抽到[blue]1[/blue]张诅咒牌，获得[blue]{Amount}[/blue]层[gold]逶迤[/gold]。",
 
   "HOOLHEYAKMOD-BYPRODUCT_POWER.title": "副产品",
   "HOOLHEYAKMOD-BYPRODUCT_POWER.description": "每触发[blue]1[/blue]次[gold]变量[/gold]，获得[blue]{Amount}[/blue]张随机牌。{Byproduct-Upgraded:cond:>0?（升级的随机牌）|}",

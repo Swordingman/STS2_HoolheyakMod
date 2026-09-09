@@ -27,7 +27,8 @@ internal static class PlayerSkinSceneHelper
 {
     public static int GetSkin(Player player)
     {
-        return HoolheyakSkinState.GetSkin(player.NetId);
+        // 使用 Player 重载：本地玩家回退到已保存的皮肤配置，联机玩家使用网络同步的皮肤。
+        return HoolheyakSkinState.GetSkin(player);
     }
 
     public static NCreatureVisuals CreateCombatVisuals(Player player)
