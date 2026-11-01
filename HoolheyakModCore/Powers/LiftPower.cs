@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Abstracts;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
@@ -23,18 +24,10 @@ public class LiftPower : CustomPowerModel
         if (Amount <= 0)
             return;
 
-        // 六合相位：首次挂上时也禁止升力
-        if (HasSextile())
-        {
-            await PowerCmd.Remove(this);
-            return;
-        }
-
-        // 失重：首次获得的升力翻倍
-        if (Owner?.GetPower<WeightlessPower>() != null)
-        {
-            SetAmount(Amount * 2);
-        }
+        // 首次施加时还没有升力能力参与接收钩子，在此应用相同的倍率。
+        int multiplier = GetLiftMultiplier();
+        if (multiplier != 1)
+            SetAmount(Amount * multiplier);
 
         // 首次挂上升力时立即检查浮空
         await CheckLevitateAsync(new ThrowingPlayerChoiceContext());
@@ -50,23 +43,29 @@ public class LiftPower : CustomPowerModel
         // 只处理“正在给本能力持有者施加升力”的情况
         if (target == Owner && canonicalPower.Id == Id && amount > 0)
         {
-            // 六合相位：禁止获得/叠加升力
-            if (HasSextile())
+            int multiplier = GetLiftMultiplier();
+            if (multiplier != 1)
             {
-                modifiedAmount = 0m;
-                return true;
-            }
-
-            // 失重：获得的升力翻倍
-            if (Owner?.GetPower<WeightlessPower>() != null)
-            {
-                modifiedAmount = amount * 2;
+                modifiedAmount = amount * multiplier;
                 return true;
             }
         }
 
         modifiedAmount = amount;
         return false;
+    }
+
+    private int GetLiftMultiplier()
+    {
+        int multiplier = Owner?.GetPower<WeightlessPower>() != null ? 2 : 1;
+
+        // 对冲与失重独立相乘；多位对冲持有者仍只提供一次对冲倍率。
+        if (Owner?.Side == CombatSide.Enemy &&
+            Owner.CombatState?.PlayerCreatures.Any(c =>
+                c.IsAlive && c.GetPower<OppositionPower>() != null) == true)
+            multiplier *= 2;
+
+        return multiplier;
     }
 
     public override async Task AfterPowerAmountChanged(
@@ -76,7 +75,7 @@ public class LiftPower : CustomPowerModel
         Creature? applier,
         CardModel? cardSource)
     {
-        if (!ReferenceEquals(power, this) || _handlingAmountChange || amount <= 0 || HasSextile())
+        if (!ReferenceEquals(power, this) || _handlingAmountChange || amount <= 0)
             return;
 
         _handlingAmountChange = true;
@@ -95,7 +94,7 @@ public class LiftPower : CustomPowerModel
     /// </summary>
     public async Task CheckLevitateAsync(PlayerChoiceContext choiceContext)
     {
-        if (Owner == null || Owner.GetPower<LevitatePower>() != null)
+        if (Owner == null || !Owner.IsAlive || Amount <= 0 || Owner.GetPower<LevitatePower>() != null)
             return;
 
         var gravity = Owner.GetPower<GravityPower>();
@@ -106,18 +105,12 @@ public class LiftPower : CustomPowerModel
             return;
         }
 
-        if (gravity.Amount > 0 && Amount >= gravity.Amount)
+        if (Amount >= gravity.Amount)
         {
-            await PowerCmd.Apply<LevitatePower>(choiceContext, Owner, 1, Owner, null);
-            await PowerCmd.Apply<LiftPower>(choiceContext, Owner, -gravity.Amount, Owner, null);
+            var target = Owner;
+            await PowerCmd.Remove(this);
+            await PowerCmd.Apply<LevitatePower>(choiceContext, target, 1, target, null);
         }
     }
 
-    private bool HasSextile()
-    {
-        if (Owner?.CombatState == null)
-            return false;
-
-        return Owner.CombatState.PlayerCreatures.Any(c => c.GetPower<SextilePower>() != null);
-    }
 }

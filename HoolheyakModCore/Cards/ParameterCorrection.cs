@@ -2,6 +2,7 @@ using BaseLib.Abstracts;
 using BaseLib.Utils;
 using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Powers;
+using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -33,18 +34,38 @@ public class ParameterCorrection : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         // 打出时本身没有即时效果
         await Task.CompletedTask;
     }
 
     /// <summary>
-    /// 回合结束时若在手牌中，获得 1 层逶迤（近似原版 RetainCardsAction + MeanderPower）。
+    /// 回合结束时选择其他手牌，使其仅在本回合保留，并获得逶迤。
     /// </summary>
     protected override async Task OnTurnEndInHand(PlayerChoiceContext choiceContext)
     {
-        if (Owner?.Creature == null) return;
+        var player = Owner;
+        // Stable resolves this callback in Hand; Beta first moves turn-end cards
+        // into Play. The engine already checked that the card ended the turn in Hand.
+        if (player?.Creature == null || Pile?.Type is not (PileType.Hand or PileType.Play)) return;
 
-        await PowerCmd.Apply<MeanderPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
+        var hand = PileType.Hand.GetPile(player);
+        bool CanRetain(CardModel card) => card != this && !card.ShouldRetainThisTurn;
+        int maxCount = System.Math.Min(DynamicVars["ParameterCorrection-Magic"].IntValue,
+            hand.Cards.Count(CanRetain));
+        if (maxCount <= 0) return;
+
+        var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 0, maxCount);
+        var selected = (await CardSelectCmd.FromHand(choiceContext, player, prefs, CanRetain, this))
+            .Where(card => card.Pile?.Type == PileType.Hand && card.Owner == player && CanRetain(card))
+            .ToList();
+        if (selected.Count == 0) return;
+
+        foreach (var card in selected)
+            card.GiveSingleTurnRetain();
+
+        await PowerCmd.Apply<MeanderPower>(choiceContext, player.Creature, 1, player.Creature, this);
     }
 
     protected override void OnUpgrade()

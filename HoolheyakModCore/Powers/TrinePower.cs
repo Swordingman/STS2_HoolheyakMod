@@ -1,6 +1,7 @@
 using System.Threading.Tasks;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Players;
@@ -17,34 +18,38 @@ public class TrinePower : CustomPowerModel
     public override string? CustomPackedIconPath => $"res://HoolheyakMod/images/powers/{nameof(TrinePower)}.png";
     public override string? CustomBigIconPath => $"res://HoolheyakMod/images/powers/large/{nameof(TrinePower)}.png";
 
-    private bool _justApplied = true;
+    private int _rewardRound = -1;
+    private CombatSide _rewardSide;
 
     public override async Task AfterApplied(Creature? applier, CardModel? cardSource)
     {
         // 获得三合相位的当回合立即生效一次
-        _justApplied = true;
+        RecordRewardTime();
         await GainRewardAsync(new ThrowingPlayerChoiceContext());
     }
 
     public override async Task AfterPlayerTurnStartLate(PlayerChoiceContext choiceContext, Player player)
     {
         // 跨回合后继续生效；刚挂上的当回合不重复触发
-        if (Owner != player.Creature || _justApplied)
+        if (Owner != player.Creature || !Owner.Powers.Contains(this) ||
+            (_rewardRound == Owner.CombatState?.RoundNumber && _rewardSide == Owner.Side))
             return;
 
+        RecordRewardTime();
         await GainRewardAsync(choiceContext);
     }
 
-    public override Task AfterSideTurnEnd(
-        PlayerChoiceContext choiceContext,
-        MegaCrit.Sts2.Core.Combat.CombatSide side,
+    private void RecordRewardTime()
+    {
+        _rewardRound = Owner.CombatState?.RoundNumber ?? -1;
+        _rewardSide = Owner.CombatState?.CurrentSide ?? Owner.Side;
+    }
+
+    public override Task AfterSideTurnEnd(PlayerChoiceContext choiceContext, CombatSide side,
         System.Collections.Generic.IEnumerable<Creature> participants)
     {
         if (Owner != null && side == Owner.Side)
-        {
-            _justApplied = false;
-        }
-
+            _rewardRound = -1;
         return Task.CompletedTask;
     }
 

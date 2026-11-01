@@ -3,9 +3,10 @@ using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.Entities.Powers;
-using MegaCrit.Sts2.Core.Factories;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Potions;
+using MegaCrit.Sts2.Core.Models.Powers;
 
 namespace HoolheyakMod.Code.Powers;
 
@@ -22,10 +23,24 @@ public class DistilledTimePower : CustomPowerModel
 
         Flash();
 
-        for (int i = 0; i < (int)Amount; i++)
+        for (int i = 0; i < Amount; i++)
         {
-            var potion = PotionFactory.CreateRandomPotionInCombat(player, player.RunState.Rng.CombatPotionGeneration).ToMutable();
-            await PotionCmd.TryToProcure(potion, player, -1);
+            await PowerCmd.Apply<DoomPower>(choiceContext, Owner, 3, Owner, null);
+            await GrantPotion(player);
         }
+    }
+
+    public static async Task GrantPotion(Player player)
+    {
+        var candidates = new PotionModel[]
+        {
+            ModelDb.Potion<AttackPotion>(),
+            ModelDb.Potion<SkillPotion>(),
+            ModelDb.Potion<PowerPotion>()
+        };
+        // The potion factory's candidate argument is an exclusion list.
+        // Pick directly so only these three potions can be generated.
+        var potion = candidates[player.RunState.Rng.CombatPotionGeneration.NextInt(candidates.Length)].ToMutable();
+        await PotionCmd.TryToProcure(potion, player, -1);
     }
 }

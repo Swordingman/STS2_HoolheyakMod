@@ -29,6 +29,8 @@ public class Research : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         // 抽 2 张牌并获得 1 层逶迤
         await CardPileCmd.Draw(choiceContext, DynamicVars["Research-Draw"].IntValue, Owner);
         await PowerCmd.Apply<MeanderPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);

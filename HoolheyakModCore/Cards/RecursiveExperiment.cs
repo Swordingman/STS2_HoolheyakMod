@@ -4,6 +4,7 @@ using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Relics;
 using HoolheyakMod.Code.Variables;
 using MegaCrit.Sts2.Core.Commands;
+using MegaCrit.Sts2.Core.Combat;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Players;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -11,6 +12,7 @@ using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
 using MegaCrit.Sts2.Core.Rewards;
+using MegaCrit.Sts2.Core.Rooms;
 using MegaCrit.Sts2.Core.Runs;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +23,14 @@ namespace HoolheyakMod.Scripts.Cards;
 [Pool(typeof(HoolheyakModCardPool))]
 public class RecursiveExperiment : HoolheyakBaseCard, IVariableCard
 {
+    private bool _continueExperiment;
+    private bool _firstExperiment;
+    protected override void DeepCloneFields()
+    {
+        base.DeepCloneFields();
+        _continueExperiment = false;
+        _firstExperiment = false;
+    }
     public RecursiveExperiment() : base(1, CardType.Skill, CardRarity.Rare, TargetType.None, true)
     {
     }
@@ -42,11 +52,6 @@ public class RecursiveExperiment : HoolheyakBaseCard, IVariableCard
                 if (player == null || player.Creature == null)
                     return;
 
-                if (player.PlayerCombatState == null || (int)player.PlayerCombatState.Energy < 1)
-                    return;
-
-                await PlayerCmd.LoseEnergy(1, player);
-
                 var candidates = new List<CardModel>();
                 candidates.AddRange(PileType.Draw.GetPile(player).Cards);
                 candidates.AddRange(PileType.Discard.GetPile(player).Cards);
@@ -60,22 +65,28 @@ public class RecursiveExperiment : HoolheyakBaseCard, IVariableCard
                 if (picked == null)
                     return;
 
+                if (!_firstExperiment)
+                {
+                    if (player.PlayerCombatState == null || player.PlayerCombatState.Energy < 1)
+                        return;
+                    await PlayerCmd.LoseEnergy(1, player);
+                }
+                _firstExperiment = false;
+
                 var removedType = picked.Type;
-                var clone = picked.CreateClone();
-
-                await CardPileCmd.RemoveFromCombat(picked, false);
-
-                var deckCard = player.Deck.Cards.FirstOrDefault(c => c.Id == picked.Id);
-                if (deckCard != null)
+                var deckCard = picked.DeckVersion;
+                if (deckCard != null && player.Deck.Cards.Contains(deckCard))
                 {
                     await CardPileCmd.RemoveFromDeck(deckCard);
                 }
 
-                await CardCmd.AutoPlay(context, clone, null);
-
                 if (removedType == CardType.Curse || removedType == CardType.Status)
                 {
-                    player.GetRelic<FailedExperimentProduct>()?.IncrementCounter();
+                    var failure = player.GetRelic<FailedExperimentProduct>();
+                    if (failure == null)
+                        await RelicCmd.Obtain<FailedExperimentProduct>(player);
+                    else
+                        failure.IncrementCounter();
                 }
                 else
                 {
@@ -84,27 +95,43 @@ public class RecursiveExperiment : HoolheyakBaseCard, IVariableCard
                         card => card.Type == removedType
                     );
                     var cardReward = new CardReward(options, 3, player);
-                    await RewardsCmd.OfferCustom(player, new List<Reward> { cardReward });
+                    if (player.RunState.CurrentRoom is CombatRoom room)
+                        room.AddExtraReward(player, cardReward);
                 }
 
-                if (player.PlayerCombatState != null && (int)player.PlayerCombatState.Energy >= 1)
-                {
-                    await VariableCmd.Choose(context, this, cardPlay);
-                }
+                // Register the reward before an autoplay can end combat.
+                await CardCmd.AutoPlay(context, picked, null);
+                if (picked.Pile?.IsCombatPile == true)
+                    await CardPileCmd.RemoveFromCombat(picked, false);
+                _continueExperiment = true;
             })
         ];
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         var player = Owner;
         if (player == null || player.Creature == null)
             return;
 
-        if (player.PlayerCombatState == null || (int)player.PlayerCombatState.Energy < 1)
-            return;
-
-        await VariableCmd.Choose(choiceContext, this, cardPlay);
+        // The initial experiment is paid for by this card's normal energy cost.
+        // Keep the action running while a selection/autoplay is still unresolved.
+        var context = new BlockingPlayerChoiceContext();
+        _firstExperiment = true;
+        try
+        {
+            while (true)
+            {
+                _continueExperiment = false;
+                await VariableCmd.Choose(context, this, cardPlay);
+                if (!_continueExperiment || CombatManager.Instance.IsOverOrEnding ||
+                    player.PlayerCombatState == null || player.PlayerCombatState.Energy < 1)
+                    break;
+            }
+        }
+        finally { _continueExperiment = false; }
     }
 
     protected override void OnUpgrade()

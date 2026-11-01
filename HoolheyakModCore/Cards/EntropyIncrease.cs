@@ -27,6 +27,8 @@ public class EntropyIncrease : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         await PowerCmd.Apply<EntropyIncreasePower>(choiceContext, Owner.Creature, DynamicVars["EntropyIncrease-Magic"].IntValue, Owner.Creature, this);
     }
 

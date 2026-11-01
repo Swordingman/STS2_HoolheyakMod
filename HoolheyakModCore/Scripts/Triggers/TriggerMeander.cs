@@ -2,22 +2,25 @@ using System;
 using System.Linq;
 using System.Threading.Tasks;
 using HoolheyakMod.Scripts.Cards;
+using HoolheyakMod.Scripts.Vfx;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
-using MegaCrit.Sts2.Core.Nodes.Vfx;
 using MegaCrit.Sts2.Core.ValueProps;
 
 namespace HoolheyakMod.Code.Powers;
 
 internal static class TriggerMeander
 {
-    public static async Task Trigger(PlayerChoiceContext choiceContext, Creature? owner)
+    public static async Task Trigger(PlayerChoiceContext choiceContext, Creature? owner, int? analysisSnapshot = null)
     {
         if (owner == null)
             return;
 
-        int analysis = owner.GetPower<AnalysisPower>()?.Amount ?? 0;
+        // Play once per activation, rather than once for every damage hit.
+        SfxCmd.Play("res://HoolheyakMod/audio/trigger_power.wav");
+
+        int analysis = analysisSnapshot ?? (owner.GetPower<AnalysisPower>()?.Amount ?? 0);
         int multiplier = GetLegacyMultiplier(owner);
         int finalDamage = 3 * multiplier;
         int finalLift = multiplier;
@@ -41,7 +44,7 @@ internal static class TriggerMeander
 
             await PowerCmd.Apply<LiftPower>(choiceContext, target, finalLift, owner, null);
             
-            VfxCmd.PlayOnCreatureCenter(target, VfxCmd.bluntPath);
+            HoolheyakVfx.PlayImpact(target);
 
 #if STS2_BETA
             await CreatureCmd.Damage(choiceContext, targets: new[] { target }, finalDamage, ValueProp.Unpowered, owner, null, null);

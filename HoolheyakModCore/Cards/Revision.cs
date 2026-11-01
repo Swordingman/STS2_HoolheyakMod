@@ -33,6 +33,8 @@ public class Revision : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         var player = Owner;
         if (player == null) return;
 
@@ -48,18 +50,29 @@ public class Revision : HoolheyakBaseCard
 
         var candidates = ModelDb.AllCards
             .Where(c => c.Type == sourceCard.Type
-                     && c.Rarity != CardRarity.Token
-                     && c.Rarity != CardRarity.Curse)
+                     // Explicit same-type replacement also supports Status,
+                     // Curse and Quest cards. Ordinary random resources still
+                     // respect combat generation restrictions and exclude tokens.
+                     && (sourceCard.Type is not (CardType.Attack or CardType.Skill or CardType.Power)
+                         || (c.CanBeGeneratedInCombat && c.Rarity != CardRarity.Token)))
             .ToList();
 
         if (candidates.Count == 0) return;
 
-        var generated = CardFactory.GetDistinctForCombat(
-            player,
-            candidates,
-            1,
-            player.RunState.Rng.CombatCardGeneration
-        ).ToList();
+        IEnumerable<CardModel> generated;
+        if (sourceCard.Type is CardType.Attack or CardType.Skill or CardType.Power)
+        {
+            generated = CardFactory.GetDistinctForCombat(player, candidates, 1,
+                player.RunState.Rng.CombatCardGeneration).ToList();
+        }
+        else
+        {
+            // This is an explicit same-type replacement, not an unrestricted
+            // resource roll. Native random generation can reject every Quest.
+            var canonical = player.RunState.Rng.CombatCardGeneration.NextItem(candidates);
+            if (canonical == null) return;
+            generated = [player.Creature.CombatState!.CreateCard(canonical, player)];
+        }
 
         foreach (var card in generated)
         {

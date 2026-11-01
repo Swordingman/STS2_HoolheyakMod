@@ -36,6 +36,7 @@ public class Cyclone : HoolheyakBaseCard
         // 造成 6 点伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.flyingSlashPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 

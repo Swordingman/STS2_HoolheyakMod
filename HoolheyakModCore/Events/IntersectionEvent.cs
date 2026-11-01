@@ -23,28 +23,38 @@ public sealed class IntersectionEvent : CustomEventModel
     public override string? CustomInitialPortraitPath => "res://HoolheyakMod/images/events/tin_man.png";
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new GoldVar(50)
+        new GoldVar(50),
+        new DynamicVar("HpLoss", 5)
     ];
 
-    public override bool IsAllowed(IRunState runState) => true;
+    public override void CalculateVars()
+    {
+        base.CalculateVars();
+        DynamicVars["HpLoss"].BaseValue = Owner?.RunState.AscensionLevel >= (int)MegaCrit.Sts2.Core.Entities.Ascension.AscensionLevel.DeadlyEnemies ? 8 : 5;
+    }
+
+    public override bool IsAllowed(IRunState runState) =>
+        runState.CurrentActIndex is 0 or 1 &&
+        runState.Players.Count == 1 &&
+        runState.Players[0].Character is HoolheyakMod.Code.Character.HoolheyakMod;
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         var options = new List<EventOption>();
 
-        options.Add(new EventOption(this, PoliteReply,
-            new LocString("events", "HOOLHEYAKMOD-INTERSECTION.pages.INITIAL.options.POLITE_REPLY.title"),
-            new LocString("events", "HOOLHEYAKMOD-INTERSECTION.pages.INITIAL.options.POLITE_REPLY.description"),
+        options.Add(new EventOption(this, Owner?.Deck.Cards.Any(c => c.IsUpgradable) == true ? PoliteReply : null,
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.POLITE_REPLY.title"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.POLITE_REPLY.description"),
             "POLITE_REPLY", Array.Empty<IHoverTip>()));
 
         options.Add(new EventOption(this, Quarrel,
-            new LocString("events", "HOOLHEYAKMOD-INTERSECTION.pages.INITIAL.options.QUARREL.title"),
-            new LocString("events", "HOOLHEYAKMOD-INTERSECTION.pages.INITIAL.options.QUARREL.description"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.QUARREL.title"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.QUARREL.description"),
             "QUARREL", Array.Empty<IHoverTip>()));
 
         options.Add(new EventOption(this, SeekHelp,
-            new LocString("events", "HOOLHEYAKMOD-INTERSECTION.pages.INITIAL.options.SEEK_HELP.title"),
-            new LocString("events", "HOOLHEYAKMOD-INTERSECTION.pages.INITIAL.options.SEEK_HELP.description"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.SEEK_HELP.title"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.SEEK_HELP.description"),
             "SEEK_HELP", Array.Empty<IHoverTip>()));
 
         return options;
@@ -59,8 +69,9 @@ public sealed class IntersectionEvent : CustomEventModel
         var upgradable = Owner.Deck.Cards.Where(c => c.IsUpgradable).ToList();
         if (upgradable.Count > 0)
         {
-            var card = upgradable[new Random().Next(upgradable.Count)];
-            CardCmd.Upgrade(card);
+            var card = Owner.RunState.Rng.UpFront.NextItem(upgradable);
+            if (card != null)
+                CardCmd.Upgrade(card);
         }
 
         SetEventFinished(PageDescription("POLITE_REPLY_DONE"));
@@ -70,26 +81,27 @@ public sealed class IntersectionEvent : CustomEventModel
     {
         if (Owner == null) return;
 
-        // 失去 5 点生命（进阶 15+ 为 8，这里先用固定 5，后续可接 AscensionHelper）
         #if STS2_BETA
         await CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
-            5,
+            DynamicVars["HpLoss"].IntValue,
             MegaCrit.Sts2.Core.ValueProps.ValueProp.Unblockable,
-            (CardModel?)null!,
+            (MegaCrit.Sts2.Core.Entities.Creatures.Creature?)null,
+            null,
             null);
         #else
         await CreatureCmd.Damage(
             new ThrowingPlayerChoiceContext(),
             Owner.Creature,
-            5,
+            DynamicVars["HpLoss"].IntValue,
             MegaCrit.Sts2.Core.ValueProps.ValueProp.Unblockable,
-            (CardModel?)null!);
+            (MegaCrit.Sts2.Core.Entities.Creatures.Creature?)null,
+            null);
         #endif
 
-        var removable = Owner.Deck.Cards.ToList();
-        if (removable.Count > 0)
+        var removable = Owner.Deck.Cards.Where(c => c.IsRemovable).ToList();
+        if (Owner.Creature.IsAlive && removable.Count > 0)
         {
             var cardsToRemove = (await CardSelectCmd.FromDeckForRemoval(
                 Owner,
@@ -117,3 +129,4 @@ public sealed class IntersectionEvent : CustomEventModel
         SetEventFinished(PageDescription("SEEK_HELP_DONE"));
     }
 }
+

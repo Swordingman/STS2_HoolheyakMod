@@ -1,5 +1,6 @@
 using BaseLib.Abstracts;
 using BaseLib.Utils;
+using MegaCrit.Sts2.Core.CardSelection;
 using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
@@ -30,15 +31,19 @@ public class CrossSearch : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         // 抽 2 张牌
         await CardPileCmd.Draw(choiceContext, DynamicVars["CrossSearch-Draw"].IntValue, Owner);
 
-        // 近似：丢弃一张手牌；若为攻击牌获得博览，若为技能牌获得逶迤
         var player = Owner;
         if (player != null)
         {
             var hand = PileType.Hand.GetPile(player);
-            var cardToDiscard = hand.Cards.FirstOrDefault();
+            if (hand.Cards.Count == 0) return;
+            var prefs = new CardSelectorPrefs(SelectionScreenPrompt, 1);
+            var cardToDiscard = (await CardSelectCmd.FromHand(
+                choiceContext, player, prefs, null, this)).FirstOrDefault();
             if (cardToDiscard != null)
             {
                 await CardCmd.Discard(choiceContext, cardToDiscard);

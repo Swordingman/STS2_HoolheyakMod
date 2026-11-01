@@ -27,6 +27,8 @@ public class InheritedMemories : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         await PowerCmd.Apply<InheritedMemoriesPower>(choiceContext, Owner.Creature, DynamicVars["InheritedMemories-Magic"].IntValue, Owner.Creature, this);
     }
 

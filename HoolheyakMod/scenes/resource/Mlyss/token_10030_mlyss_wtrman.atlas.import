@@ -1,0 +1,16 @@
+[remap]
+
+importer="spine.atlas"
+type="SpineAtlasResource"
+uid="uid://dqem85ocnkoba"
+path="res://.godot/imported/token_10030_mlyss_wtrman.atlas-0e60b076d6e78d99b9c76f727990ff5d.spatlas"
+
+[deps]
+
+source_file="res://HoolheyakMod/scenes/resource/Mlyss/token_10030_mlyss_wtrman.atlas"
+dest_files=["res://.godot/imported/token_10030_mlyss_wtrman.atlas-0e60b076d6e78d99b9c76f727990ff5d.spatlas"]
+
+[params]
+
+normal_map_prefix="n"
+specular_map_prefix="s"

@@ -3,6 +3,7 @@ using BaseLib.Utils;
 using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Powers;
 using HoolheyakMod.Scripts.Cards;
+using HoolheyakMod.Scripts.Phases;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -53,17 +54,7 @@ public class AstrolabeResidue : CustomPotionModel
         var creature = player.Creature;
         var chosen = selected[0];
 
-        if (chosen is ConjunctionCard)
-            await PowerCmd.Apply<ConjunctionPower>(choiceContext, creature, 1, creature, null);
-        else if (chosen is OppositionCard)
-            await PowerCmd.Apply<OppositionPower>(choiceContext, creature, 1, creature, null);
-        else if (chosen is QuincunxCard)
-            await PowerCmd.Apply<QuincunxPower>(choiceContext, creature, 1, creature, null);
-        else if (chosen is SextileCard)
-            await PowerCmd.Apply<SextilePower>(choiceContext, creature, 1, creature, null);
-        else if (chosen is SquareCard)
-            await PowerCmd.Apply<SquarePower>(choiceContext, creature, 1, creature, null);
-        else if (chosen is TrineCard)
-            await PowerCmd.Apply<TrinePower>(choiceContext, creature, 1, creature, null);
+        if (HoolheyakPhaseManager.TryGetPhase(chosen, out var phase))
+            await HoolheyakPhaseManager.ApplyPhase(choiceContext, creature, phase);
     }
 }

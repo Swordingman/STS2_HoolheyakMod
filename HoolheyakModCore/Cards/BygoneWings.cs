@@ -27,6 +27,8 @@ public class BygoneWings : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         // 获得 1 层逝去之翼
         await PowerCmd.Apply<BygoneWingsPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
     }

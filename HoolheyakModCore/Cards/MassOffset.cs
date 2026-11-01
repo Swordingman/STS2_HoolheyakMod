@@ -32,20 +32,23 @@ public class MassOffset : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         var player = Owner;
         if (player == null || player.Creature == null || player.Creature.CombatState == null)
             return;
 
-        int effect = ResolveEnergyXValue() + DynamicVars["MassOffset-Bonus"].IntValue;
-        if (effect <= 0)
+        int analysis = ResolveEnergyXValue() + DynamicVars["MassOffset-Bonus"].IntValue;
+        if (analysis <= 0)
             return;
 
+        await PowerCmd.Apply<AnalysisPower>(choiceContext, player.Creature, analysis, player.Creature, this);
+
+        int lift = analysis * 2;
         foreach (var enemy in player.Creature.CombatState.HittableEnemies)
         {
-            await PowerCmd.Apply<LiftPower>(choiceContext, enemy, effect, player.Creature, this);
+            await PowerCmd.Apply<LiftPower>(choiceContext, enemy, lift, player.Creature, this);
         }
-
-        await PowerCmd.Apply<AnalysisPower>(choiceContext, player.Creature, effect, player.Creature, this);
     }
 
     protected override void OnUpgrade()

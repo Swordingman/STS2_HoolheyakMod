@@ -36,6 +36,7 @@ public class Separation : HoolheyakBaseCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.dramaticStabPath)
             .Targeting(target)
             .Execute(choiceContext);
 

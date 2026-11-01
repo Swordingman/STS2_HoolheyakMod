@@ -59,6 +59,7 @@ public class MutagenesisExperiment : HoolheyakBaseCard, IVariableCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.starryImpactVfx)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 

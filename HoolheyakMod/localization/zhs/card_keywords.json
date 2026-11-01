@@ -9,7 +9,7 @@
   "HOOLHEYAKMOD-ERUDITION.description": "每打出4张攻击牌（标准难度下默认），对随机敌人造成等同于[gold]解析[/gold]层数的伤害，并给予1层[gold]升力[/gold]（触发4次）。",
 
   "HOOLHEYAKMOD-GRAVITY.title": "重力",
-  "HOOLHEYAKMOD-GRAVITY.description": "敌人的固有属性，等于其最大生命值的10%（向下取整）。当[gold]升力[/gold]达到此数值时，触发[gold]浮空[/gold]。",
+  "HOOLHEYAKMOD-GRAVITY.description": "敌人的固有属性，等于其最大生命值的10%（向下取整，最低为1）。当[gold]升力[/gold]达到此数值时，触发[gold]浮空[/gold]。",
 
   "HOOLHEYAKMOD-LIFT.title": "升力",
   "HOOLHEYAKMOD-LIFT.description": "当层数达到[gold]重力[/gold]时，清空层数并触发[gold]浮空[/gold]。",
@@ -21,13 +21,13 @@
   "HOOLHEYAKMOD-WEIGHTLESSNESS.description": "获得的[gold]升力[/gold]翻倍。回合结束时，层数-1。",
 
   "HOOLHEYAKMOD-VARIABLE.title": "变量",
-  "HOOLHEYAKMOD-VARIABLE.description": "打出时，选择一项效果发动。",
+  "HOOLHEYAKMOD-VARIABLE.description": "满足牌面条件时，从列出的效果中选择一项发动。",
 
   "HOOLHEYAKMOD-DECONSTRUCTION.title": "解构",
   "HOOLHEYAKMOD-DECONSTRUCTION.description": "获得[gold]格挡[/gold]时，消耗等量层数以抵消获得的[gold]格挡[/gold]。",
 
   "HOOLHEYAKMOD-PHASE.title": "相位",
-  "HOOLHEYAKMOD-PHASE.description": "全局场地效果。触发新[gold]相位[/gold]时会替换原有的[gold]相位[/gold]。同一时间只能存在1个。",
+  "HOOLHEYAKMOD-PHASE.description": "霍尔海雅的场地效果。触发新[gold]相位[/gold]时会替换自己的相位。每名霍尔海雅同时只能存在1个。对友方的效果仅作用于相位持有者。",
 
   "HOOLHEYAKMOD-BENEFIC_PHASE.title": "吉相",
   "HOOLHEYAKMOD-BENEFIC_PHASE.description": "偏向于带来正面增益或连击机会的[gold]相位[/gold]。",
@@ -36,5 +36,7 @@
   "HOOLHEYAKMOD-MALEFIC_PHASE.description": "伴随着强烈负面惩罚或极高风险的[gold]相位[/gold]。",
 
   "HOOLHEYAKMOD-NEUTRAL_PHASE.title": "中性",
-  "HOOLHEYAKMOD-NEUTRAL_PHASE.description": "具有双刃剑效果，或能够改变基础运转规则的[gold]相位[/gold]。"
+  "HOOLHEYAKMOD-NEUTRAL_PHASE.description": "具有双刃剑效果，或能够改变基础运转规则的[gold]相位[/gold]。",
+  "HOOLHEYAKMOD-SLOUGH.title": "蜕生",
+  "HOOLHEYAKMOD-SLOUGH.description": "当你拥有负面效果时，额外触发效果。"
 }

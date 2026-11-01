@@ -38,13 +38,12 @@ public class BaroclinicInstability : HoolheyakBaseCard
         var lift = DynamicVars["Baroclinic-Lift"].IntValue;
 
         // 对所有敌人造成 6 点伤害
-        foreach (var enemy in aliveEnemies)
-        {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCardCompatibility(this, cardPlay)
-                .Targeting(enemy)
-                .Execute(choiceContext);
-        }
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.sandyImpactPath)
+            .SpawningHitVfxOnEachCreature()
+            .TargetingAllOpponents(CombatState)
+            .Execute(choiceContext);
 
         // 给所有存活敌人施加解构与升力（伤害后重新过滤存活者）
         var survivors = CombatState.Enemies.Where(e => e.IsAlive).ToList();

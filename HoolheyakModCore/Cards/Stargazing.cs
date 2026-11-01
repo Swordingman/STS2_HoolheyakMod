@@ -15,7 +15,13 @@ namespace HoolheyakMod.Scripts.Cards;
 [Pool(typeof(HoolheyakModCardPool))]
 public class Stargazing : HoolheyakBaseCard, IVariableCard
 {
-    private readonly List<CardModel> _selectedCards = [];
+    private List<CardModel> _selectedCards = [];
+
+    protected override void DeepCloneFields()
+    {
+        base.DeepCloneFields();
+        _selectedCards = new List<CardModel>(_selectedCards);
+    }
 
     public Stargazing() : base(0, CardType.Skill, CardRarity.Uncommon, TargetType.None, true)
     {
@@ -27,14 +33,15 @@ public class Stargazing : HoolheyakBaseCard, IVariableCard
 
     public bool CanBeAutoTriggered => false;
 
-    public IReadOnlyList<VariableChoice> GetVariableChoices(PlayerChoiceContext choiceContext, CardPlay cardPlay,
-        bool isAutoTriggered = false)
+    public IReadOnlyList<VariableChoice> GetVariableChoices(PlayerChoiceContext choiceContext, CardPlay cardPlay, bool isAutoTriggered = false)
     {
         return StargazingLogic.GetVariableChoices(_selectedCards);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         var amount = DynamicVars["Stargazing-Magic"].IntValue;
         await StargazingLogic.Execute(choiceContext, cardPlay, this, SelectionScreenPrompt, amount, _selectedCards);
     }

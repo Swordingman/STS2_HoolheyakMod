@@ -1,0 +1,100 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://HoolheyakMod/scenes/vfx/heyak/heyak_vfx.gd" id="driver"]
+[ext_resource type="Shader" path="res://HoolheyakMod/scenes/vfx/heyak/heyak_sprite.gdshader" id="sprite_shader"]
+[ext_resource type="Texture2D" path="res://HoolheyakMod/images/vfx/heyak/heyak_02.png" id="heyak_02"]
+[ext_resource type="Texture2D" path="res://HoolheyakMod/images/vfx/heyak/Heyak_trail01.png" id="Heyak_trail01"]
+[ext_resource type="Texture2D" path="res://HoolheyakMod/images/vfx/heyak/star_02.png" id="star_02"]
+
+[sub_resource type="ShaderMaterial" id="add"]
+resource_local_to_scene = true
+shader = ExtResource("sprite_shader")
+
+[sub_resource type="ShaderMaterial" id="cyan"]
+resource_local_to_scene = true
+shader = ExtResource("sprite_shader")
+shader_parameter/tint_color = Color(0.15000, 0.97000, 0.92000, 1.00000)
+shader_parameter/recolor_amount = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="particles_add"]
+blend_mode = 1
+
+[sub_resource type="AtlasTexture" id="arrow"]
+atlas = ExtResource("heyak_02")
+region = Rect2(0, 0, 512, 224)
+filter_clip = true
+
+[sub_resource type="AtlasTexture" id="trail"]
+atlas = ExtResource("Heyak_trail01")
+region = Rect2(0, 256, 512, 128)
+filter_clip = true
+
+[sub_resource type="Animation" id="play"]
+resource_name = "play"
+length = 0.42
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.055, 0.294, 0.42),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1.00000, 1.00000, 1.00000, 0.00000), Color(1.00000, 1.00000, 1.00000, 1.00000), Color(1.00000, 1.00000, 1.00000, 1.00000), Color(1.00000, 1.00000, 1.00000, 0.00000)]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Arrow:scale")
+tracks/1/interp = 1
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.32, 0.42),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.16000, 0.16000), Vector2(0.48000, 0.48000), Vector2(0.50000, 0.48000), Vector2(0.22000, 0.26000)]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Trail:scale")
+tracks/2/interp = 1
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.34, 0.42),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.10000, 0.16000), Vector2(0.58000, 0.24000), Vector2(0.72000, 0.20000), Vector2(0.30000, 0.08000)]
+}
+
+[sub_resource type="AnimationLibrary" id="library"]
+_data = { &"play": SubResource("play") }
+
+[node name="HoolheyakProjectileVfx" type="Node2D"]
+script = ExtResource("driver")
+duration = 0.42
+travel_distance = 420
+texture_filter = 2
+modulate = Color(1.00000, 1.00000, 1.00000, 0.00000)
+
+[node name="Trail" type="Sprite2D" parent="."]
+texture = SubResource("trail")
+position = Vector2(-105.00000, 0.00000)
+scale = Vector2(0.58000, 0.24000)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.70000)
+flip_h = true
+
+[node name="Glow" type="Sprite2D" parent="."]
+texture = ExtResource("star_02")
+position = Vector2(-8.00000, 0.00000)
+scale = Vector2(0.38000, 0.20000)
+rotation = 0
+material = SubResource("cyan")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.60000)
+
+[node name="Arrow" type="Sprite2D" parent="."]
+texture = SubResource("arrow")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.48000, 0.48000)
+rotation = 0
+material = SubResource("add")
+flip_h = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = { &"": SubResource("library") }
+autoplay = "play"

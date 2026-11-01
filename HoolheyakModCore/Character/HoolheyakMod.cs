@@ -75,7 +75,7 @@ public class HoolheyakMod : PlaceholderCharacterModel
     public override string CustomCharacterSelectLockedIconPath => "res://HoolheyakMod/scenes/locked_Hoolheyak_select.png";
     public override string CustomMapMarkerPath => "res://HoolheyakMod/Icon.svg";
 
-    public override string CustomAttackSfx => "res://HoolheyakMod/audio/attack.wav";
+    public override string CustomAttackSfx => "res://HoolheyakMod/audio/attack.mp3";
     public override string CustomDeathSfx => "res://HoolheyakMod/audio/die.wav";
 
     public override RelicIconData? CustomYummyCookie => new RelicIconData(
@@ -106,9 +106,10 @@ public class HoolheyakMod : PlaceholderCharacterModel
             var customDeck = new List<CardModel>
             {
                 ModelDb.Card<FeatherStrike>(),
-                ModelDb.Card<ControlGroup>()
+                ModelDb.Card<ControlGroup>(),
+                ModelDb.Card<Linger>(),
             };
-            customDeck.AddRange(Enumerable.Repeat(ModelDb.Card<StrikeHoolheyak>(), 4));
+            customDeck.AddRange(Enumerable.Repeat(ModelDb.Card<StrikeHoolheyak>(), 3));
             customDeck.AddRange(Enumerable.Repeat(ModelDb.Card<DefendHoolheyak>(), 4));
 
             return customDeck;
@@ -122,7 +123,7 @@ public class HoolheyakMod : PlaceholderCharacterModel
         {
             var relics = new System.Collections.Generic.List<RelicModel>
             {
-                ModelDb.Relic<Bibliotheca>()
+                ModelDb.Relic<HoolheyakBadge>()
             };
             return relics;
         }
@@ -138,7 +139,6 @@ public class HoolheyakMod : PlaceholderCharacterModel
 
     public override CreatureAnimator? SetupCustomAnimationStates(MegaSprite controller)
     {
-#if STS2_BETA
         return SetupAnimationState(
             controller,
             idleName: "idle_loop",
@@ -147,8 +147,5 @@ public class HoolheyakMod : PlaceholderCharacterModel
             attackName: "attack",
             castName: "cast"
         );
-#else
-        return null;
-#endif
     }
 }

@@ -22,10 +22,7 @@ public class WardrobePower : CustomPowerModel
     public override string? CustomPackedIconPath => $"res://HoolheyakMod/images/powers/{nameof(WardrobePower)}.png";
     public override string? CustomBigIconPath => $"res://HoolheyakMod/images/powers/large/{nameof(WardrobePower)}.png";
 
-    /// <summary>
-    /// 是否把生成的牌变为本场战斗 0 费
-    /// </summary>
-    public bool MakeZeroCost { get; set; }
+    public int ZeroCostStacks { get; private set; }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Wardrobe-MakeZeroCost", 0m)
@@ -41,8 +38,21 @@ public class WardrobePower : CustomPowerModel
     {
         if (DynamicVars == null)
             return;
-        DynamicVars["Wardrobe-MakeZeroCost"].BaseValue = MakeZeroCost ? 1m : 0m;
+        DynamicVars["Wardrobe-MakeZeroCost"].BaseValue = ZeroCostStacks;
         InvokeDisplayAmountChanged();
+    }
+
+    public override Task AfterPowerAmountChanged(PlayerChoiceContext context, PowerModel power,
+        decimal amount, Creature? applier, CardModel? cardSource)
+    {
+        if (ReferenceEquals(power, this))
+        {
+            if (amount > 0 && cardSource is HoolheyakMod.Scripts.Cards.Wardrobe { IsUpgraded: true })
+                ZeroCostStacks += (int)amount;
+            ZeroCostStacks = System.Math.Min(ZeroCostStacks, System.Math.Max(0, Amount));
+            RefreshDynamicVars();
+        }
+        return Task.CompletedTask;
     }
 
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
@@ -69,8 +79,8 @@ public class WardrobePower : CustomPowerModel
         // 只从本颜色牌中随机
         var candidates = ModelDb.AllCards
             .Where(c => c.Pool == hoolheyakPool
-                    && c.Type != CardType.Status
-                    && c.Type != CardType.Curse
+                    && c.CanBeGeneratedInCombat
+                    && c.Type is CardType.Attack or CardType.Skill or CardType.Power
                     && c.Rarity != CardRarity.Token)
             .ToList();
 
@@ -84,11 +94,12 @@ public class WardrobePower : CustomPowerModel
             player.RunState.Rng.CombatCardGeneration
         ).ToList();
 
-        foreach (var randomCard in generatedCards)
+        for (int i = 0; i < generatedCards.Count; i++)
         {
+            var randomCard = generatedCards[i];
             randomCard.AddKeyword(CardKeyword.Exhaust);
 
-            if (MakeZeroCost)
+            if (i < ZeroCostStacks)
                 randomCard.SetToFreeThisCombat();
 
             await CardPileCmd.AddGeneratedCardToCombat(

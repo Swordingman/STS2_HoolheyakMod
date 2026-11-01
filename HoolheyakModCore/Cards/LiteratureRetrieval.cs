@@ -27,19 +27,18 @@ public class LiteratureRetrieval : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         var player = Owner;
         if (player == null || player.Creature?.CombatState == null)
             return;
 
-        // 收集非本家、非诅咒/状态的随机卡作为“发现”池
+        // 各颜色仅检索允许在战斗中生成的攻击、技能和能力牌。
         var candidates = ModelDb.AllCardPools
             .SelectMany(pool => pool.AllCardIds)
             .Select(id => ModelDb.GetById<CardModel>(id))
-            .Where(card => card != null
-                && card is not HoolheyakBaseCard
-                && card is not Archive
-                && card.Type != CardType.Curse
-                && card.Type != CardType.Status)
+            .Where(card => card != null && card.CanBeGeneratedInCombat
+                && card.Type is CardType.Attack or CardType.Skill or CardType.Power)
             .ToList();
 
         if (candidates.Count == 0)

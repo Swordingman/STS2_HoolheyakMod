@@ -29,6 +29,8 @@ public class Rapids : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         if (cardPlay.Target == null) return;
 
         // 给目标施加 99 层失重

@@ -38,6 +38,7 @@ public class BorrowedWeapons : HoolheyakBaseCard
         // 造成 9 点伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.slashPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 
@@ -47,6 +48,7 @@ public class BorrowedWeapons : HoolheyakBaseCard
         {
             var candidates = ModelDb.AllCards
                 .Where(c => c.Type == CardType.Attack
+                         && c.CanBeGeneratedInCombat
                          && c.Pool != ModelDb.CardPool<HoolheyakModCardPool>())
                 .ToList();
 

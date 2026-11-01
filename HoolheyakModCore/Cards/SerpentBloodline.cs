@@ -7,6 +7,7 @@ using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -27,6 +28,11 @@ public class SerpentBloodline : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
+        int analysis = Owner.Creature.GetPower<AnalysisPower>()?.Amount ?? 0;
+        if (analysis > 0)
+            await PowerCmd.Apply<RitualPower>(choiceContext, Owner.Creature, analysis, Owner.Creature, this);
         await PowerCmd.Apply<SerpentBloodlinePower>(choiceContext, Owner.Creature, DynamicVars["SerpentBloodline-Magic"].IntValue, Owner.Creature, this);
     }
 

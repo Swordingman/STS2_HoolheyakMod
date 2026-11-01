@@ -32,27 +32,12 @@ public class Footnote : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         // 获得 8 点格挡
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
 
-        // 检索牌库/弃牌堆中的第一张技能牌加入手牌（近似实现）
-        var player = Owner;
-        if (player != null)
-        {
-            var drawPile = PileType.Draw.GetPile(player);
-            var skill = drawPile.Cards.FirstOrDefault(c => c.Type == CardType.Skill);
-
-            if (skill == null)
-            {
-                var discardPile = PileType.Discard.GetPile(player);
-                skill = discardPile.Cards.FirstOrDefault(c => c.Type == CardType.Skill);
-            }
-
-            if (skill != null)
-            {
-                await CardPileCmd.Add(skill, PileType.Hand);
-            }
-        }
+        await HoolheyakMod.Scripts.Utils.TypedDraw.Execute(choiceContext, Owner, CardType.Skill, 1);
     }
 
     protected override void OnUpgrade()

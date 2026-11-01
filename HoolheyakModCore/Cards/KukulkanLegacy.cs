@@ -27,6 +27,8 @@ public class KukulkanLegacy : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         // Java 中卡面 magic 用于显示难度差异，实际施加层数固定为 1。
         await PowerCmd.Apply<KukulkanLegacyPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
     }

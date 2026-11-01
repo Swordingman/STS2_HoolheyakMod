@@ -20,27 +20,29 @@ public sealed class FalseDomeEvent : CustomEventModel
 {
     public override string? CustomInitialPortraitPath => "res://HoolheyakMod/images/events/false_dome.png";
 
-    public override bool IsAllowed(IRunState runState) => true;
+    public override bool IsAllowed(IRunState runState) => runState.CurrentActIndex == 2 &&
+        runState.Players.Count == 1 &&
+        runState.Players[0].Character is HoolheyakMod.Code.Character.HoolheyakMod;
 
     protected override IReadOnlyList<EventOption> GenerateInitialOptions()
     {
         var options = new List<EventOption>();
 
         options.Add(new EventOption(this, RememberPioneer,
-            new LocString("events", "HOOLHEYAKMOD-FALSE_DOME.pages.INITIAL.options.REMEMBER_PIONEER.title"),
-            new LocString("events", "HOOLHEYAKMOD-FALSE_DOME.pages.INITIAL.options.REMEMBER_PIONEER.description"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.REMEMBER_PIONEER.title"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.REMEMBER_PIONEER.description"),
             "REMEMBER_PIONEER", HoverTipFactory.FromRelic<StarryRevelation>()));
 
         bool canUpgrade = Owner != null && Owner.Deck.Cards.Count(c => c.IsUpgradable) >= 3;
         options.Add(new EventOption(this, canUpgrade ? AnalyzeTrajectory : null,
-            new LocString("events", "HOOLHEYAKMOD-FALSE_DOME.pages.INITIAL.options.ANALYZE_TRAJECTORY.title"),
-            new LocString("events", "HOOLHEYAKMOD-FALSE_DOME.pages.INITIAL.options.ANALYZE_TRAJECTORY.description"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.ANALYZE_TRAJECTORY.title"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.ANALYZE_TRAJECTORY.description"),
             "ANALYZE_TRAJECTORY", Array.Empty<IHoverTip>()));
 
         bool hasCurses = Owner != null && Owner.Deck.Cards.Any(c => c.Type == CardType.Curse);
         options.Add(new EventOption(this, hasCurses ? ChaseFuture : null,
-            new LocString("events", "HOOLHEYAKMOD-FALSE_DOME.pages.INITIAL.options.CHASE_FUTURE.title"),
-            new LocString("events", "HOOLHEYAKMOD-FALSE_DOME.pages.INITIAL.options.CHASE_FUTURE.description"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.CHASE_FUTURE.title"),
+            new LocString("events", $"{Id.Entry}.pages.INITIAL.options.CHASE_FUTURE.description"),
             "CHASE_FUTURE", Array.Empty<IHoverTip>()));
 
         return options;

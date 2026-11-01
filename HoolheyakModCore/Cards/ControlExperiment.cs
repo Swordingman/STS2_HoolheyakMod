@@ -60,6 +60,7 @@ public class ControlExperiment : HoolheyakBaseCard, IVariableCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.starryImpactVfx)
             .Targeting(target)
             .Execute(choiceContext);
 

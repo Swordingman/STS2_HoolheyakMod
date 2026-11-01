@@ -44,7 +44,7 @@ public class Compose : HoolheyakBaseCard, IVariableCard
                 if (isAutoTriggered)
                 {
                     var card = hand.Cards[Owner.RunState.Rng.Shuffle.NextInt(hand.Cards.Count)];
-                    card.EnergyCost.AddThisTurnOrUntilPlayed(-3, true);
+                    card.EnergyCost.AddThisTurn(-3, true);
                 }
                 else
                 {
@@ -52,7 +52,7 @@ public class Compose : HoolheyakBaseCard, IVariableCard
                     var selected = (await CardSelectCmd.FromHand(context, Owner, prefs, null, this)).ToList();
                     foreach (var card in selected)
                     {
-                        card.EnergyCost.AddThisTurnOrUntilPlayed(-3, true);
+                        card.EnergyCost.AddThisTurn(-3, true);
                     }
                 }
             }),
@@ -60,7 +60,7 @@ public class Compose : HoolheyakBaseCard, IVariableCard
                 var hand = PileType.Hand.GetPile(Owner);
                 foreach (var card in hand.Cards.ToList())
                 {
-                    card.EnergyCost.AddThisTurnOrUntilPlayed(-1, true);
+                    card.EnergyCost.AddThisTurn(-1, true);
                 }
             })
         ];
@@ -68,6 +68,8 @@ public class Compose : HoolheyakBaseCard, IVariableCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         if (Owner == null || Owner.Creature == null)
             return;
 

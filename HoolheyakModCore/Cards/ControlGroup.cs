@@ -56,6 +56,8 @@ public class ControlGroup : HoolheyakBaseCard, IVariableCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.starryImpactVfx)
+            .WithAttackerAnim(Type == CardType.Skill ? "Cast" : "Attack", 0.2f)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 

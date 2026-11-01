@@ -53,6 +53,8 @@ public class ForbiddenKnowledge : HoolheyakBaseCard, IVariableCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         if (Owner == null || Owner.Creature == null)
             return;
 

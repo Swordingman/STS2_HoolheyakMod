@@ -27,6 +27,8 @@ public class CorrectedVariable : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         await PowerCmd.Apply<CorrectedVariablePower>(choiceContext, Owner.Creature, DynamicVars["Corrected-Magic"].IntValue, Owner.Creature, this);
     }
 

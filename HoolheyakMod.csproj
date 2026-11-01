@@ -26,12 +26,18 @@
     <!-- 导出预设名称，现在在下方命令行中被正确引用 -->
     <ExportPresetName>1</ExportPresetName>
 
-    <!-- 排除不需要被 Godot/C# 编译的文件，这已经足够了，不需要下面的 Compile Remove -->
-    <DefaultItemExcludes>$(DefaultItemExcludes);.godot\**;Loader\**</DefaultItemExcludes>
+    <!-- 只编译模组源码，避免其他项目的 obj 缓存和临时工具参与编译。 -->
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DefaultItemExcludes>$(DefaultItemExcludes);.godot\**;Loader\**;obj\**;bin\**;.codex-backups\**</DefaultItemExcludes>
   
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="HoolheyakModCore/**/*.cs"
+             Exclude="HoolheyakModCore/**/obj/**;HoolheyakModCore/**/bin/**" />
+  </ItemGroup>
 
   <!-- 正确做法：把删除额外目录的逻辑注入到自带的 Clean 流程中 -->
   <PropertyGroup>

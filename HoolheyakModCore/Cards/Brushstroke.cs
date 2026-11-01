@@ -35,6 +35,7 @@ public class Brushstroke : HoolheyakBaseCard
         // 造成 4 点伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.slashPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 

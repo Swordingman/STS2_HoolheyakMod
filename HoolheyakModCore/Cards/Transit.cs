@@ -2,6 +2,7 @@ using BaseLib.Abstracts;
 using BaseLib.Utils;
 using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Powers;
+using HoolheyakMod.Scripts.Phases;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -29,6 +30,8 @@ public class Transit : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         var player = Owner;
         if (player == null || player.Creature?.CombatState == null)
             return;
@@ -52,19 +55,8 @@ public class Transit : HoolheyakBaseCard
         var chosen = selected[0];
         var creature = player.Creature;
 
-        // Java 状态牌被选择时直接施加对应相位 Power。
-        if (chosen is ConjunctionCard)
-            await PowerCmd.Apply<ConjunctionPower>(choiceContext, creature, 1, creature, this);
-        else if (chosen is OppositionCard)
-            await PowerCmd.Apply<OppositionPower>(choiceContext, creature, 1, creature, this);
-        else if (chosen is QuincunxCard)
-            await PowerCmd.Apply<QuincunxPower>(choiceContext, creature, 1, creature, this);
-        else if (chosen is SextileCard)
-            await PowerCmd.Apply<SextilePower>(choiceContext, creature, 1, creature, this);
-        else if (chosen is SquareCard)
-            await PowerCmd.Apply<SquarePower>(choiceContext, creature, 1, creature, this);
-        else if (chosen is TrineCard)
-            await PowerCmd.Apply<TrinePower>(choiceContext, creature, 1, creature, this);
+        if (HoolheyakPhaseManager.TryGetPhase(chosen, out var phase))
+            await HoolheyakPhaseManager.ApplyPhase(choiceContext, creature, phase, this);
     }
 
     protected override void OnUpgrade()

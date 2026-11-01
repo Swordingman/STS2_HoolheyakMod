@@ -1,6 +1,7 @@
 using BaseLib.Abstracts;
 using BaseLib.Utils;
 using HoolheyakMod.Code.Powers;
+using HoolheyakMod.Scripts.Phases;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -53,7 +54,7 @@ public class ConjunctionCard : HoolheyakBaseCard
         if (Owner?.Creature == null)
             return;
 
-        await PowerCmd.Apply<ConjunctionPower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
+        await HoolheyakPhaseManager.ApplyPhase(choiceContext, Owner.Creature, PhaseType.Conjunction, this);
 
         // 抽到时自动消耗：仅当确实在手牌中才消耗，避免在生成/预览阶段误删。
         if (Pile?.Type == PileType.Hand)

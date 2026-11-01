@@ -27,12 +27,10 @@ public class Byproduct : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var power = (ByproductPower)ModelDb.Power<ByproductPower>().ToMutable();
-        power.IsUpgraded = IsUpgraded;
+        await PlayCastAnimation();
 
-        await PowerCmd.Apply(
+        await PowerCmd.Apply<ByproductPower>(
             choiceContext,
-            power,
             Owner.Creature,
             DynamicVars["Byproduct-Magic"].IntValue,
             Owner.Creature,
@@ -41,6 +39,6 @@ public class Byproduct : HoolheyakBaseCard
 
     protected override void OnUpgrade()
     {
-        // 升级状态由 Power 生成牌逻辑读取；当前 C# 桩暂未实现，保持无操作。
+        // The power records upgraded layers from the applying card.
     }
 }

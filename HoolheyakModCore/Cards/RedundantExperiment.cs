@@ -20,7 +20,13 @@ namespace HoolheyakMod.Scripts.Cards;
 [Pool(typeof(HoolheyakModCardPool))]
 public class RedundantExperiment : HoolheyakBaseCard, IVariableCard
 {
-    private readonly List<CardModel> _selectedCards = [];
+    private List<CardModel> _selectedCards = [];
+
+    protected override void DeepCloneFields()
+    {
+        base.DeepCloneFields();
+        _selectedCards = new List<CardModel>(_selectedCards);
+    }
 
     public RedundantExperiment() : base(2, CardType.Skill, CardRarity.Uncommon, TargetType.None, true)
     {
@@ -58,15 +64,7 @@ public class RedundantExperiment : HoolheyakBaseCard, IVariableCard
                     bool usePower = Owner.RunState.Rng.Shuffle.NextInt(2) == 0;
                     if (usePower)
                     {
-                        var power = (RedundantExperimentPower)ModelDb.Power<RedundantExperimentPower>().ToMutable();
-                        power.TrackCards(picks);
-                        await PowerCmd.Apply(
-                            context,
-                            power,
-                            Owner.Creature,
-                            picks.Count,
-                            Owner.Creature,
-                            this);
+                        await RedundantExperimentPower.ApplyToCards(context, Owner, picks, this);
                     }
                     else
                     {
@@ -86,15 +84,7 @@ public class RedundantExperiment : HoolheyakBaseCard, IVariableCard
 
         return [
             new VariableChoice(async context => {
-                var power = (RedundantExperimentPower)ModelDb.Power<RedundantExperimentPower>().ToMutable();
-                power.TrackCards(_selectedCards);
-                await PowerCmd.Apply(
-                    context,
-                    power,
-                    Owner.Creature,
-                    _selectedCards.Count,
-                    Owner.Creature,
-                    this);
+                await RedundantExperimentPower.ApplyToCards(context, Owner, _selectedCards, this);
             }),
             new VariableChoice(async context => {
                 foreach (var card in _selectedCards)
@@ -112,6 +102,8 @@ public class RedundantExperiment : HoolheyakBaseCard, IVariableCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         var player = Owner;
         if (player == null || player.Creature == null)
             return;
@@ -121,7 +113,7 @@ public class RedundantExperiment : HoolheyakBaseCard, IVariableCard
         if (maxCount <= 0)
             return;
 
-        var prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, maxCount);
+        var prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, maxCount);
         var selected = (await CardSelectCmd.FromHand(choiceContext, player, prefs, null, this)).ToList();
         if (selected.Count == 0)
             return;

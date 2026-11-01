@@ -30,37 +30,15 @@ public class Tamper : HoolheyakBaseCard
         new BlockVar(8, ValueProp.Move)
     ];
 
-    public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
-    {
-        if (!ReferenceEquals(card, this) || Owner?.Creature == null)
-            return playCount;
-
-        var creature = Owner.Creature;
-        var meander = creature.GetPower<MeanderPower>();
-        if (meander == null)
-            return playCount;
-
-        if (!WillGainMeanderStack())
-            return playCount;
-
-        // 预判这张技能牌打出后是否会触发逶迤，触发则由原版按整张牌重放一次。
-        if (meander.Progress + 1 >= MeanderPower.GetThreshold(creature))
-            return playCount + 1;
-
-        return playCount;
-    }
-
-    private bool WillGainMeanderStack()
-    {
-        bool willGain = Type == CardType.Skill;
-        if (Owner?.Creature?.GetPower<QuincunxPower>() != null)
-            willGain = Type == CardType.Attack;
-        return willGain;
-    }
+    public override int ConditionalReplayCount =>
+        IsMutable && Owner?.Creature is { CombatState: not null } creature &&
+        creature.GetPower<MeanderPower>()?.WillTrigger(this) == true ? 1 : 0;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得 8 点格挡；是否额外重放由 ModifyCardPlayCount 预判。
+        await PlayCastAnimation();
+
+        // 条件重放进入原生重放计数，整张牌由原生流程重复结算。
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
     }
 

@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://djg1iq78rxrxo"
+path="res://.godot/imported/char_249_mlyss42.skel-ecc705a2d8af5095ad215f3d7a7f2fa7.spskel"
+
+[deps]
+
+source_file="res://HoolheyakMod/scenes/resource/Mlyss/char_249_mlyss42.skel"
+dest_files=["res://.godot/imported/char_249_mlyss42.skel-ecc705a2d8af5095ad215f3d7a7f2fa7.spskel"]
+
+[params]
+

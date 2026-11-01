@@ -30,6 +30,7 @@ public class WindShear : HoolheyakBaseCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.flyingSlashPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
     }

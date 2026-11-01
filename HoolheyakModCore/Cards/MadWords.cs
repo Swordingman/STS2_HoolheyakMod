@@ -3,6 +3,7 @@ using BaseLib.Utils;
 using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Powers;
 using HoolheyakMod.Scripts.Utils;
+using HoolheyakMod.Scripts.Vfx;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
@@ -37,6 +38,8 @@ public class MadWords : HoolheyakBaseCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .AfterAttackerAnim(() => HoolheyakVfx.PlayProjectile(Owner.Creature, target))
+            .WithHitFx(VfxCmd.starryImpactVfx)
             .Targeting(target)
             .Execute(choiceContext);
 

@@ -36,13 +36,12 @@ public class Shockwave : HoolheyakBaseCard
         var magic = DynamicVars["Shockwave-Magic"].IntValue;
 
         // 对所有敌人造成 12 点伤害
-        foreach (var enemy in aliveEnemies)
-        {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCardCompatibility(this, cardPlay)
-                .Targeting(enemy)
-                .Execute(choiceContext);
-        }
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.heavyBluntPath)
+            .SpawningHitVfxOnEachCreature()
+            .TargetingAllOpponents(CombatState)
+            .Execute(choiceContext);
 
         // 给所有存活敌人施加 3 层失重（伤害后重新过滤存活者）
         var survivors = CombatState.Enemies.Where(e => e.IsAlive).ToList();

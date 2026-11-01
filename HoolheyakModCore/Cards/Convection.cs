@@ -28,6 +28,8 @@ public class Convection : HoolheyakBaseCard
         new DamageVar(18, ValueProp.Move)
     ];
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [CardKeyword.Exhaust];
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Target == null) return;
@@ -35,6 +37,7 @@ public class Convection : HoolheyakBaseCard
         // 造成 18 点伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.heavyBluntPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 
@@ -50,6 +53,7 @@ public class Convection : HoolheyakBaseCard
             int attackCount = CombatManager.Instance.History.CardPlaysStarted
                 .Count(entry =>
                     entry.HappenedThisTurn(CombatState) &&
+                    entry.CardPlay.Card.Owner == Owner &&
                     entry.CardPlay.Card.Type == CardType.Attack);
 
             modifiedCost = System.Math.Max(0, originalCost - attackCount);

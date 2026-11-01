@@ -2,6 +2,7 @@ using BaseLib.Abstracts;
 using BaseLib.Utils;
 using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Powers;
+using HoolheyakMod.Scripts;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -24,19 +25,25 @@ public class PoweredExoskeleton : HoolheyakBaseCard
     {
     }
 
+    public override IEnumerable<CardKeyword> CanonicalKeywords => [HoolheyakKeywords.Slough];
+
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("PoweredExoskeleton-Magic", 3m)
     ];
 
+    public override int ConditionalReplayCount =>
+        IsMutable && Owner?.Creature is { CombatState: not null } creature &&
+        SloughMechanics.Active(creature) ? 1 : 0;
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得 3 层多层护甲
+        await PlayCastAnimation();
+
         await PowerCmd.Apply<PlatingPower>(choiceContext, Owner.Creature, DynamicVars["PoweredExoskeleton-Magic"].IntValue, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        // 多层护甲 3 -> 4
         DynamicVars["PoweredExoskeleton-Magic"].UpgradeValueBy(1);
     }
 }

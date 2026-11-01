@@ -35,14 +35,16 @@ public class Coercion : HoolheyakBaseCard
         // 造成 12 点伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.heavyBluntPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 
-        // 近似：若目标有浮空，返还能量并获得少量格挡（原版为坠落伤害转化的格挡）
-        if (cardPlay.Target.GetPower<LevitatePower>() != null)
+        if (cardPlay.Target.IsAlive && cardPlay.Target.GetPower<LevitatePower>() is { } levitate)
         {
+            int fallDamage = await levitate.TriggerFallAsync(choiceContext);
+            if (fallDamage > 0)
+                await CreatureCmd.GainBlock(Owner.Creature, fallDamage, ValueProp.Move, cardPlay);
             await PlayerCmd.GainEnergy(DynamicVars["Coercion-Energy"].IntValue, Owner);
-            await CreatureCmd.GainBlock(Owner.Creature, 5, ValueProp.Move, cardPlay);
         }
     }
 

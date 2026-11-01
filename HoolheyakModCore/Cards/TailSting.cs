@@ -36,6 +36,7 @@ public class TailSting : HoolheyakBaseCard
         // 造成 8 点伤害并施加 1 层易伤
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.dramaticStabPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 

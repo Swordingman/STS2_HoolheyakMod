@@ -54,6 +54,7 @@ public class KnockInExperiment : HoolheyakBaseCard, IVariableCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.dramaticStabPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 

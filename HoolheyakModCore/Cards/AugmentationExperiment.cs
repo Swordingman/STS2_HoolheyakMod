@@ -28,7 +28,7 @@ public class AugmentationExperiment : HoolheyakBaseCard, IVariableCard
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DamageVar(5, ValueProp.Move),
         new DynamicVar("Augmentation-Analysis", 1m),
-        new DynamicVar("Augmentation-BonusAnalysis", 3m)
+        new DynamicVar("Augmentation-BonusAnalysis", 2m)
     ];
 
     public bool CanAllIn => true;
@@ -46,13 +46,24 @@ public class AugmentationExperiment : HoolheyakBaseCard, IVariableCard
                 );
             }),
             new VariableChoice(async context => {
-                var copy = (AugmentationExperiment)CreateClone();
-                await CardPileCmd.AddGeneratedCardToCombat(copy, PileType.Hand, Owner);
+                var player = Owner;
+                var combat = player?.Creature.CombatState;
+                if (player == null || combat == null) return;
+
+                // Generate a fresh card. Cloning this instance carries its cost
+                // reductions, free-play flags, enchantment and replay count forward.
+                var generated = combat.CreateCard<AugmentationExperiment>(player);
+                if (IsUpgraded && generated.IsUpgradable)
+                {
+                    generated.UpgradeInternal();
+                    generated.FinalizeUpgradeInternal();
+                }
+                await CardPileCmd.AddGeneratedCardToCombat(generated, PileType.Hand, player);
                 await PowerCmd.Apply<AnalysisPower>(
                     context,
-                    Owner.Creature,
+                    player.Creature,
                     DynamicVars["Augmentation-BonusAnalysis"].IntValue,
-                    Owner.Creature,
+                    player.Creature,
                     this
                 );
             })
@@ -66,6 +77,7 @@ public class AugmentationExperiment : HoolheyakBaseCard, IVariableCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.starryImpactVfx)
             .Targeting(target)
             .Execute(choiceContext);
 

@@ -70,6 +70,7 @@ public class ApoptosisExperiment : HoolheyakBaseCard, IVariableCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.bloodyImpactPath)
             .Targeting(target)
             .Execute(choiceContext);
 

@@ -35,11 +35,12 @@ public class DynamicPressure : HoolheyakBaseCard
         // 造成 5 点伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.bluntPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 
-        // 近似：精准抽攻击牌暂无 API，先改为普通抽牌
-        await CardPileCmd.Draw(choiceContext, DynamicVars["DynamicPressure-Magic"].IntValue, Owner);
+        await HoolheyakMod.Scripts.Utils.TypedDraw.Execute(
+            choiceContext, Owner, CardType.Attack, DynamicVars["DynamicPressure-Magic"].IntValue);
     }
 
     protected override void OnUpgrade()

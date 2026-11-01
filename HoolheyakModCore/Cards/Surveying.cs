@@ -2,6 +2,8 @@ using BaseLib.Abstracts;
 using BaseLib.Utils;
 using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Powers;
+using HoolheyakMod.Code.Variables;
+using HoolheyakMod.Scripts.Utils;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -17,8 +19,16 @@ using System.Threading.Tasks;
 namespace HoolheyakMod.Scripts.Cards;
 
 [Pool(typeof(HoolheyakModCardPool))]
-public class Surveying : HoolheyakBaseCard
+public class Surveying : HoolheyakBaseCard, IVariableCard
 {
+    private List<CardModel> _selectedCards = [];
+
+    protected override void DeepCloneFields()
+    {
+        base.DeepCloneFields();
+        _selectedCards = new List<CardModel>(_selectedCards);
+    }
+
     public Surveying() : base(1, CardType.Attack, CardRarity.Common, TargetType.AnyEnemy, true)
     {
     }
@@ -28,6 +38,12 @@ public class Surveying : HoolheyakBaseCard
         new DynamicVar("Surveying-Magic", 1m)
     ];
 
+    public bool CanBeAutoTriggered => false;
+
+    public IReadOnlyList<VariableChoice> GetVariableChoices(PlayerChoiceContext choiceContext,
+        CardPlay cardPlay, bool isAutoTriggered = false) =>
+        StargazingLogic.GetVariableChoices(_selectedCards);
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Target == null) return;
@@ -35,17 +51,16 @@ public class Surveying : HoolheyakBaseCard
         // 造成 8 点伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.starryImpactVfx)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 
-        // 获得 1 层解析
-        await PowerCmd.Apply<AnalysisPower>(choiceContext, Owner.Creature, DynamicVars["Surveying-Magic"].IntValue, Owner.Creature, this);
+        await StargazingLogic.Execute(choiceContext, cardPlay, this, SelectionScreenPrompt,
+            DynamicVars["Surveying-Magic"].IntValue, _selectedCards);
     }
 
     protected override void OnUpgrade()
     {
-        // 伤害 8 -> 10，解析 1 -> 2
-        DynamicVars.Damage.UpgradeValueBy(2);
-        DynamicVars["Surveying-Magic"].UpgradeValueBy(1);
+        DynamicVars["Surveying-Magic"].UpgradeValueBy(2);
     }
 }

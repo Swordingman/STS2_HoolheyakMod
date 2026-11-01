@@ -3,6 +3,7 @@ using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
+using MegaCrit.Sts2.Core.Helpers;
 using MegaCrit.Sts2.Core.Localization;
 using MegaCrit.Sts2.Core.Models;
 using System;
@@ -98,7 +99,7 @@ public static class VariableCmd
             option.Configure(
                 sourceCard,
                 index,
-                GetAllInDescription(),
+                GetAllInDescription(sourceCard),
                 true
             );
 
@@ -227,13 +228,14 @@ public static class VariableCmd
         ).FirstOrDefault() as VariableChoiceCard;
     }
 
-    private static string GetAllInDescription()
+    private static string GetAllInDescription(CardModel sourceCard)
     {
         LocString loc = new(
             "cards",
             $"{ModelDb.Card<VariableChoiceCard>().Id.Entry}.allInDescription"
         );
 
+        loc.Add("energyPrefix", EnergyIconHelper.GetPrefix(sourceCard));
         return loc.GetFormattedText();
     }
 }

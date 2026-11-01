@@ -1,0 +1,14 @@
+[remap]
+
+importer="spine.skel"
+type="SpineSkeletonFileResource"
+uid="uid://bb8o1c2jfau8w"
+path="res://.godot/imported/token_10030_mlyss_wtrman42.skel-1f669a08e28556262eed3a2615244aa7.spskel"
+
+[deps]
+
+source_file="res://HoolheyakMod/scenes/resource/Mlyss/token_10030_mlyss_wtrman42.skel"
+dest_files=["res://.godot/imported/token_10030_mlyss_wtrman42.skel-1f669a08e28556262eed3a2615244aa7.spskel"]
+
+[params]
+

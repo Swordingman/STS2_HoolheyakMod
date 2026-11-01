@@ -27,12 +27,10 @@ public class Wardrobe : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        var power = (WardrobePower)ModelDb.Power<WardrobePower>().ToMutable();
-        power.MakeZeroCost = IsUpgraded;
+        await PlayCastAnimation();
 
-        await PowerCmd.Apply(
+        await PowerCmd.Apply<WardrobePower>(
             choiceContext,
-            power,
             Owner.Creature,
             DynamicVars["Wardrobe-Magic"].IntValue,
             Owner.Creature,
@@ -41,6 +39,6 @@ public class Wardrobe : HoolheyakBaseCard
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        // 升级只让生成牌在本场战斗中免费，衣柜本身仍为2费。
     }
 }

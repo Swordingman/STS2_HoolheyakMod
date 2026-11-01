@@ -27,6 +27,8 @@ public class ComplementaryExperiment : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         await PowerCmd.Apply<ComplementaryExperimentPower>(choiceContext, Owner.Creature, DynamicVars["Complementary-Magic"].IntValue, Owner.Creature, this);
     }
 

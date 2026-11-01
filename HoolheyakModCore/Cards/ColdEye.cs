@@ -4,12 +4,14 @@ using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Powers;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Creatures;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
+using MegaCrit.Sts2.Core.Models.Powers;
 using MegaCrit.Sts2.Core.ValueProps;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,45 +22,35 @@ namespace HoolheyakMod.Scripts.Cards;
 [Pool(typeof(HoolheyakModCardPool))]
 public class ColdEye : HoolheyakBaseCard
 {
-    public ColdEye() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AnyEnemy, true)
+    public ColdEye() : base(1, CardType.Skill, CardRarity.Uncommon, TargetType.AllEnemies, true)
     {
     }
 
-    public override bool GainsBlock => true;
-
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new BlockVar(12, ValueProp.Move),
-        new DynamicVar("ColdEye-Magic", 3m)
+        new DynamicVar("ColdEye-Magic", 2m)
     ];
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         if (Owner == null || Owner.Creature == null) return;
 
-        // 若本回合打出过攻击牌则获得解析，否则获得格挡
-        bool hasDealtDamage = false;
-        if (CombatState != null)
-        {
-            hasDealtDamage = CombatManager.Instance.History.CardPlaysStarted
-                .Any(entry => entry.HappenedThisTurn(CombatState)
-                    && entry.CardPlay.Card.Owner == Owner
-                    && entry.CardPlay.Card.Type == CardType.Attack);
-        }
+        var creature = Owner.Creature;
+        if (creature.CombatState == null) return;
 
-        if (hasDealtDamage)
+        await PowerCmd.Apply<AnalysisPower>(choiceContext, creature,
+            DynamicVars["ColdEye-Magic"].IntValue, creature, this);
+
+        foreach (var target in new[] { creature }.Concat(creature.CombatState.HittableEnemies).ToArray())
         {
-            await PowerCmd.Apply<AnalysisPower>(choiceContext, Owner.Creature, DynamicVars["ColdEye-Magic"].IntValue, Owner.Creature, this);
-        }
-        else
-        {
-            await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
+            await PowerCmd.Apply<WeakPower>(choiceContext, target, 2, creature, this);
+            await PowerCmd.Apply<VulnerablePower>(choiceContext, target, 2, creature, this);
         }
     }
 
     protected override void OnUpgrade()
     {
-        // 格挡 12 -> 15，解析 3 -> 4
-        DynamicVars.Block.UpgradeValueBy(3);
         DynamicVars["ColdEye-Magic"].UpgradeValueBy(1);
     }
 }

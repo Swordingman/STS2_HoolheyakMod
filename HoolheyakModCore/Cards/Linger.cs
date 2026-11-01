@@ -3,6 +3,7 @@ using BaseLib.Utils;
 using HoolheyakMod.Code.Character;
 using HoolheyakMod.Code.Powers;
 using HoolheyakMod.Code.Variables;
+using HoolheyakMod.Scripts.Utils;
 using MegaCrit.Sts2.Core.CardSelection;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Cards;
@@ -21,7 +22,13 @@ namespace HoolheyakMod.Scripts.Cards;
 [Pool(typeof(HoolheyakModCardPool))]
 public class Linger : HoolheyakBaseCard, IVariableCard
 {
-    private readonly List<CardModel> _selectedCards = [];
+    private List<CardModel> _selectedCards = [];
+
+    protected override void DeepCloneFields()
+    {
+        base.DeepCloneFields();
+        _selectedCards = new List<CardModel>(_selectedCards);
+    }
 
     public Linger() : base(1, CardType.Skill, CardRarity.Basic, TargetType.Self, true)
     {
@@ -39,55 +46,24 @@ public class Linger : HoolheyakBaseCard, IVariableCard
 
     public IReadOnlyList<VariableChoice> GetVariableChoices(PlayerChoiceContext choiceContext, CardPlay cardPlay, bool isAutoTriggered = false)
     {
-        if (_selectedCards.Count == 0)
-            return [];
-
-        return [
-            new VariableChoice(async context => {
-                foreach (var card in _selectedCards)
-                {
-                    await CardPileCmd.Add(card, PileType.Discard);
-                }
-            }),
-            new VariableChoice(async context => {
-                foreach (var card in _selectedCards)
-                {
-                    await CardPileCmd.Add(card, PileType.Draw, CardPilePosition.Bottom);
-                }
-            })
-        ];
+        return StargazingLogic.GetVariableChoices(_selectedCards);
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
 
-        await CardPileCmd.ShuffleIfNecessary(choiceContext, Owner);
+        var amount = DynamicVars["Linger-Look"].IntValue;
 
-        var drawPile = PileType.Draw.GetPile(Owner);
-        var lookAmount = DynamicVars["Linger-Look"].IntValue;
-        var topCards = drawPile.Cards.Take(lookAmount).ToList();
-
-        if (topCards.Count > 0)
-        {
-            var prefs = new CardSelectorPrefs(base.SelectionScreenPrompt, 0, topCards.Count);
-            var selected = (await CardSelectCmd.FromSimpleGrid(choiceContext, topCards, Owner, prefs)).ToList();
-
-            if (selected.Count > 0)
-            {
-                _selectedCards.Clear();
-                _selectedCards.AddRange(selected);
-
-                await VariableCmd.Choose(choiceContext, this, cardPlay);
-            }
-        }
+        await StargazingLogic.Execute(choiceContext, cardPlay, this, SelectionScreenPrompt, amount, _selectedCards);
 
         await CardPileCmd.Draw(choiceContext, DynamicVars["Linger-Draw"].IntValue, Owner);
     }
 
     protected override void OnUpgrade()
     {
-        DynamicVars["Linger-Look"].UpgradeValueBy(1);
-        DynamicVars["Linger-Draw"].UpgradeValueBy(1);
+        DynamicVars["Linger-Look"].UpgradeValueBy(2);
     }
 }

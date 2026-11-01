@@ -36,6 +36,7 @@ public class StrikeHoolheyak : HoolheyakBaseCard
         // 造成 6 点伤害（升级后 9 点）
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.slashPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
     }

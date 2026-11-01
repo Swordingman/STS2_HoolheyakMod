@@ -12,7 +12,7 @@ script = ExtResource("1_pql4l")
 [node name="SpineSprite" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("2_h17x3")
 preview_skin = "Default"
-preview_animation = "Sit"
+preview_animation = "relaxed_loop"
 preview_frame = false
 preview_time = 0.0
 position = Vector2(-17.385, 50.195)

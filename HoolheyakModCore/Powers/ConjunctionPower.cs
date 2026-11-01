@@ -25,8 +25,10 @@ public class ConjunctionPower : CustomPowerModel
 
     private decimal ModifyDamageMultiplicativeCore(Creature? target, ValueProp props, Creature? dealer)
     {
-        // 合相：造成的伤害和受到的伤害都增加 50%
-        if (!props.HasFlag(ValueProp.Unblockable) && (dealer == Owner || target == Owner))
+        // 联机中只改变持有者的输出，以及敌人对持有者造成的伤害。
+        if (Owner != null && !props.HasFlag(ValueProp.Unblockable) &&
+            ((dealer == Owner && (target == null || target == Owner || target.Side != Owner.Side)) ||
+                (target == Owner && dealer != null && dealer.Side != Owner.Side)))
             return 1.5m;
 
         return 1.0m;

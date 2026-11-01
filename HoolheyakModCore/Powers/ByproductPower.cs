@@ -21,10 +21,7 @@ public class ByproductPower : CustomPowerModel, IVariableTriggeredPower
     public override string? CustomPackedIconPath => $"res://HoolheyakMod/images/powers/{nameof(ByproductPower)}.png";
     public override string? CustomBigIconPath => $"res://HoolheyakMod/images/powers/large/{nameof(ByproductPower)}.png";
 
-    /// <summary>
-    /// 是否给予升级后的随机牌
-    /// </summary>
-    public bool IsUpgraded { get; set; }
+    public int UpgradedStacks { get; private set; }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
         new DynamicVar("Byproduct-Upgraded", 0m)
@@ -40,8 +37,21 @@ public class ByproductPower : CustomPowerModel, IVariableTriggeredPower
     {
         if (DynamicVars == null)
             return;
-        DynamicVars["Byproduct-Upgraded"].BaseValue = IsUpgraded ? 1m : 0m;
+        DynamicVars["Byproduct-Upgraded"].BaseValue = UpgradedStacks;
         InvokeDisplayAmountChanged();
+    }
+
+    public override Task AfterPowerAmountChanged(PlayerChoiceContext context, PowerModel power,
+        decimal amount, Creature? applier, CardModel? cardSource)
+    {
+        if (ReferenceEquals(power, this))
+        {
+            if (amount > 0 && cardSource is HoolheyakMod.Scripts.Cards.Byproduct { IsUpgraded: true })
+                UpgradedStacks += (int)amount;
+            UpgradedStacks = System.Math.Min(UpgradedStacks, System.Math.Max(0, Amount));
+            RefreshDynamicVars();
+        }
+        return Task.CompletedTask;
     }
 
     /// <summary>
@@ -60,8 +70,8 @@ public class ByproductPower : CustomPowerModel, IVariableTriggeredPower
 
         var candidates = ModelDb.AllCards
             .Where(c =>
-                c.Type != CardType.Status &&
-                c.Type != CardType.Curse &&
+                c.CanBeGeneratedInCombat &&
+                c.Type is CardType.Attack or CardType.Skill or CardType.Power &&
                 c.Rarity != CardRarity.Token
             )
             .ToList();
@@ -77,9 +87,10 @@ public class ByproductPower : CustomPowerModel, IVariableTriggeredPower
                 player.RunState.Rng.CombatCardGeneration
             ).ToList();
 
-        foreach (var card in generatedCards)
+        for (int i = 0; i < generatedCards.Count; i++)
         {
-            if (IsUpgraded && card.IsUpgradable)
+            var card = generatedCards[i];
+            if (i < UpgradedStacks && card.IsUpgradable)
             {
                 card.UpgradeInternal();
                 card.FinalizeUpgradeInternal();

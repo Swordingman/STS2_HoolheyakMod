@@ -42,6 +42,7 @@ public class UniversalMapping : HoolheyakBaseCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.starryImpactVfx)
             .Targeting(target)
             .Execute(choiceContext);
 
@@ -53,6 +54,7 @@ public class UniversalMapping : HoolheyakBaseCard
             .SelectMany(pool => pool.AllCardIds)
             .Select(id => ModelDb.GetById<CardModel>(id))
             .Where(card => card != null
+                && card.CanBeGeneratedInCombat
                 && card is not HoolheyakBaseCard
                 && card is not UniversalMapping
                 && card.Type == CardType.Attack
@@ -71,6 +73,9 @@ public class UniversalMapping : HoolheyakBaseCard
 
             randomCard.SetToFreeThisTurn();
             await CardCmd.AutoPlay(choiceContext, randomCard, target);
+            // 等整组打出/重放结算完，再移走这张生成牌，避免留在任何牌堆中。
+            if (randomCard.Pile?.IsCombatPile == true)
+                await CardPileCmd.RemoveFromCombat(randomCard, false);
             await Cmd.Wait(0.2f);
         }
     }

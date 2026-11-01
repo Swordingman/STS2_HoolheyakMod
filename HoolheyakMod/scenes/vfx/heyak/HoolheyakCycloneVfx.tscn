@@ -1,0 +1,266 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://HoolheyakMod/scenes/vfx/heyak/heyak_vfx.gd" id="driver"]
+[ext_resource type="Shader" path="res://HoolheyakMod/scenes/vfx/heyak/heyak_sprite.gdshader" id="sprite_shader"]
+[ext_resource type="Texture2D" path="res://HoolheyakMod/images/vfx/heyak/heyak_01.png" id="heyak_01"]
+[ext_resource type="Texture2D" path="res://HoolheyakMod/images/vfx/heyak/star_02.png" id="star_02"]
+[ext_resource type="Texture2D" path="res://HoolheyakMod/images/vfx/heyak/Heyak_circle01.png" id="Heyak_circle01"]
+[ext_resource type="Texture2D" path="res://HoolheyakMod/images/vfx/heyak/AVG_ray_05.png" id="AVG_ray_05"]
+
+[sub_resource type="ShaderMaterial" id="add"]
+resource_local_to_scene = true
+shader = ExtResource("sprite_shader")
+
+[sub_resource type="ShaderMaterial" id="cyan"]
+resource_local_to_scene = true
+shader = ExtResource("sprite_shader")
+shader_parameter/tint_color = Color(0.15000, 0.97000, 0.92000, 1.00000)
+shader_parameter/recolor_amount = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="particles_add"]
+blend_mode = 1
+
+[sub_resource type="AtlasTexture" id="cyclone_feather"]
+atlas = ExtResource("heyak_01")
+region = Rect2(0, 128, 512, 128)
+filter_clip = true
+
+[sub_resource type="Gradient" id="spark_gradient"]
+offsets = PackedFloat32Array(0, 0.15, 0.65, 1)
+colors = PackedColorArray(0.2, 1, 0.95, 0, 0.4, 1, 0.98, 1, 0.1, 0.65, 0.65, 0.7, 0.05, 0.3, 0.35, 0)
+
+[sub_resource type="Animation" id="play"]
+resource_name = "play"
+length = 1.05
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.055, 0.735, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1.00000, 1.00000, 1.00000, 0.00000), Color(1.00000, 1.00000, 1.00000, 1.00000), Color(1.00000, 1.00000, 1.00000, 1.00000), Color(1.00000, 1.00000, 1.00000, 0.00000)]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("GroundRing:scale")
+tracks/1/interp = 1
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.14, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.12000, 0.04000), Vector2(0.75000, 0.23000), Vector2(1.12000, 0.14000)]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("GroundRing:modulate")
+tracks/2/interp = 1
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1.00000, 1.00000, 1.00000, 0.30000), Color(1.00000, 1.00000, 1.00000, 0.80000), Color(1.00000, 1.00000, 1.00000, 0.00000)]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Swirl:rotation")
+tracks/3/interp = 1
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.283185]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Swirl:position")
+tracks/4/interp = 1
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.00000, 12.00000), Vector2(0.00000, -90.00000)]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("WindArc0:position")
+tracks/5/interp = 1
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0, 0.065625, 0.13125, 0.196875, 0.2625, 0.328125, 0.39375, 0.459375, 0.525, 0.590625, 0.65625, 0.721875, 0.7875, 0.853125, 0.91875, 0.984375, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(76.00000, 26.00000), Vector2(65.76462, 28.97860), Vector2(37.81540, 29.12214), Vector2(-0.31948, 24.35919), Vector2(-38.36830, 13.93990), Vector2(-66.08255, -1.36205), Vector2(-75.99731, -19.45780), Vector2(-65.44204, -37.50600), Vector2(-37.25982, -52.67809), Vector2(0.95841, -62.92021), Vector2(38.91850, -67.50637), Vector2(66.39580, -67.23407), Vector2(75.98926, -64.20941), Vector2(65.11484, -61.27985), Vector2(36.70161, -61.26725), Vector2(-1.59728, -66.20776), Vector2(-39.46594, -76.80342)]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("WindArc0:rotation")
+tracks/6/interp = 1
+tracks/6/keys = {
+"times": PackedFloat32Array(0.0, 0.065625, 0.13125, 0.196875, 0.2625, 0.328125, 0.39375, 0.459375, 0.525, 0.590625, 0.65625, 0.721875, 0.7875, 0.853125, 0.91875, 0.984375, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.17542455163582923, 0.30359812895790594, 0.34999690760258106, 0.3021232783271058, 0.17287210451353122, -0.002942536578502016, -0.17796459921448932, -0.30505152034475586, -0.3499721687511006, -0.30062707269930716, -0.17030743826236136, 0.005884865169522399, 0.180492067711183, 0.3064833497575088, 0.3499226927967572, 0.2991096178308982]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("WindArc1:position")
+tracks/7/interp = 1
+tracks/7/keys = {
+"times": PackedFloat32Array(0.0, 0.065625, 0.13125, 0.196875, 0.2625, 0.328125, 0.39375, 0.459375, 0.525, 0.590625, 0.65625, 0.721875, 0.7875, 0.853125, 0.91875, 0.984375, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(23.48529, 45.97219), Vector2(-15.90544, 38.98809), Vector2(-51.01201, 26.47285), Vector2(-72.37838, 9.76472), Vector2(-74.24949, -8.66871), Vector2(-56.12133, -25.89511), Vector2(-22.87678, -39.30729), Vector2(16.52968, -47.32541), Vector2(51.48384, -49.82255), Vector2(72.57071, -48.15885), Vector2(74.11052, -44.81522), Vector2(55.68849, -42.72502), Vector2(22.26666, -44.48403), Vector2(-17.15275, -51.65121), Vector2(-51.95203, -64.32885), Vector2(-72.75792, -81.13495), Vector2(-73.96631, -99.57553)]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("WindArc1:rotation")
+tracks/8/interp = 1
+tracks/8/keys = {
+"times": PackedFloat32Array(0.0, 0.065625, 0.13125, 0.196875, 0.2625, 0.328125, 0.39375, 0.459375, 0.525, 0.590625, 0.65625, 0.721875, 0.7875, 0.853125, 0.91875, 0.984375, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.3328697807033037, 0.3422493583714236, 0.259443346904462, 0.10675572077101068, -0.07468678472772378, -0.23601224666648674, -0.3337673103857367, -0.34162144254925986, -0.25745911603354477, -0.10394963163655065, 0.07755890607755941, 0.238176788266545, 0.3346412483742393, 0.3409693798790921, 0.25545668716517256, 0.10113619502431938, -0.08042554532679154]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("WindArc2:position")
+tracks/9/interp = 1
+tracks/9/keys = {
+"times": PackedFloat32Array(0.0, 0.065625, 0.13125, 0.196875, 0.2625, 0.328125, 0.39375, 0.459375, 0.525, 0.590625, 0.65625, 0.721875, 0.7875, 0.853125, 0.91875, 0.984375, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-61.48529, 38.34349), Vector2(-75.59472, 20.61896), Vector2(-69.34255, 2.31105), Vector2(-44.41282, -13.68172), Vector2(-7.52040, -25.08443), Vector2(31.39765, -30.85852), Vector2(61.85868, -31.48147), Vector2(75.65795, -28.81827), Vector2(69.07858, -25.61902), Vector2(43.89276, -24.77821), Vector2(6.88432, -28.55508), Vector2(-31.97842, -37.96510), Vector2(-62.22770, -52.50641), Vector2(-75.71583, -70.29506), Vector2(-68.80973, -88.57240), Vector2(-43.36959, -104.44815), Vector2(-6.24775, -115.67892)]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("WindArc2:rotation")
+tracks/10/interp = 1
+tracks/10/keys = {
+"times": PackedFloat32Array(0.0, 0.065625, 0.13125, 0.196875, 0.2625, 0.328125, 0.39375, 0.459375, 0.525, 0.590625, 0.65625, 0.721875, 0.7875, 0.853125, 0.91875, 0.984375, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.20572483830236563, 0.03609718446555396, -0.14325332241591848, -0.2840182436726033, -0.3482822497992856, -0.3187356947146441, -0.20333700557351891, -0.03316906356672286, 0.14593303592252213, 0.2857277632816809, 0.3485611127854997, 0.31750878874237337, 0.2009348003634528, 0.03023859817707071, -0.14860243443598306, -0.28741708677888983, -0.3488153384066006]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("WindArc3:position")
+tracks/11/interp = 1
+tracks/11/keys = {
+"times": PackedFloat32Array(0.0, 0.065625, 0.13125, 0.196875, 0.2625, 0.328125, 0.39375, 0.459375, 0.525, 0.590625, 0.65625, 0.721875, 0.7875, 0.853125, 0.91875, 0.984375, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-61.48529, 13.65651), Vector2(-30.81467, -0.74328), Vector2(8.15595, -9.97248), Vector2(44.92975, -13.57794), Vector2(69.60162, -12.62131), Vector2(75.52615, -9.39301), Vector2(61.10755, -6.79536), Vector2(30.22951, -7.56081), Vector2(-8.79092, -13.51596), Vector2(-45.44350, -25.08953), Vector2(-69.85577, -41.19693), Vector2(-75.45224, -59.53236), Vector2(-60.72549, -77.18990), Vector2(-29.64221, -91.44623), Vector2(9.42528, -100.49413), Vector2(45.95404, -103.92931), Vector2(70.10498, -102.85925)]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("WindArc3:rotation")
+tracks/12/interp = 1
+tracks/12/keys = {
+"times": PackedFloat32Array(0.0, 0.065625, 0.13125, 0.196875, 0.2625, 0.328125, 0.39375, 0.459375, 0.525, 0.590625, 0.65625, 0.721875, 0.7875, 0.853125, 0.91875, 0.984375, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.20572483830236554, -0.3199400714735366, -0.3479787691588469, -0.28228864878572935, -0.14056348332651616, 0.03902275390502645, 0.20809812977067516, 0.3211218338900193, 0.34765069231512286, 0.28053910087411366, 0.13786370878036497, -0.041945565096948266, -0.2104567122269509, -0.32228089843351176, -0.34729804245758794, -0.2787697236011513, -0.13515418960578424]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("WindArc4:position")
+tracks/13/interp = 1
+tracks/13/keys = {
+"times": PackedFloat32Array(0.0, 0.065625, 0.13125, 0.196875, 0.2625, 0.328125, 0.39375, 0.459375, 0.525, 0.590625, 0.65625, 0.721875, 0.7875, 0.853125, 0.91875, 0.984375, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(23.48529, 6.02781), Vector2(56.55021, 4.42326), Vector2(74.38321, 6.59769), Vector2(72.18093, 9.93263), Vector2(50.53657, 11.49705), Vector2(15.28008, 8.83681), Vector2(-24.09214, 0.63567), Vector2(-56.97509, -12.93013), Vector2(-74.51167, -30.23939), Vector2(-71.97838, -48.66258), Vector2(-50.05756, -65.27015), Vector2(-14.65363, -77.62158), Vector2(24.69729, -84.42275), Vector2(57.39594, -85.87452), Vector2(74.63487, -83.61862), Vector2(71.77074, -80.29545), Vector2(49.57502, -78.83287)]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("WindArc4:rotation")
+tracks/14/interp = 1
+tracks/14/keys = {
+"times": PackedFloat32Array(0.0, 0.065625, 0.13125, 0.196875, 0.2625, 0.328125, 0.39375, 0.459375, 0.525, 0.590625, 0.65625, 0.721875, 0.7875, 0.853125, 0.91875, 0.984375, 1.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.33286978070330375, -0.23383102299927008, -0.07180938428760256, 0.10955426408474085, 0.2614092395264195, 0.34285308296257316, 0.33194872276708254, 0.23163327144045248, 0.06892690814065598, -0.1123450637681433, -0.2633566549441168, -0.3434325736496087, -0.331004201680264, -0.22941914733383376, -0.06603956002911038, 0.11512792255896451, 0.26528545550827815]
+}
+
+[sub_resource type="AnimationLibrary" id="library"]
+_data = { &"play": SubResource("play") }
+
+[node name="HoolheyakCycloneVfx" type="Node2D"]
+script = ExtResource("driver")
+duration = 1.05
+travel_distance = 0
+texture_filter = 2
+modulate = Color(1.00000, 1.00000, 1.00000, 0.00000)
+
+[node name="Glow" type="Sprite2D" parent="."]
+texture = ExtResource("star_02")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.70000, 0.30000)
+rotation = 0
+material = SubResource("cyan")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.20000)
+
+[node name="GroundRing" type="Sprite2D" parent="."]
+texture = ExtResource("Heyak_circle01")
+position = Vector2(0.00000, 48.00000)
+scale = Vector2(0.75000, 0.23000)
+rotation = 0
+material = SubResource("cyan")
+
+[node name="Swirl" type="Sprite2D" parent="."]
+texture = ExtResource("AVG_ray_05")
+position = Vector2(0.00000, 12.00000)
+scale = Vector2(1.10000, 0.55000)
+rotation = 0
+material = SubResource("cyan")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.60000)
+
+[node name="WindArc0" type="Sprite2D" parent="."]
+texture = SubResource("cyclone_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.25000, 0.24000)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.75000)
+
+[node name="WindArc1" type="Sprite2D" parent="."]
+texture = SubResource("cyclone_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.25000, 0.24000)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.75000)
+
+[node name="WindArc2" type="Sprite2D" parent="."]
+texture = SubResource("cyclone_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.25000, 0.24000)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.75000)
+
+[node name="WindArc3" type="Sprite2D" parent="."]
+texture = SubResource("cyclone_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.25000, 0.24000)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.75000)
+
+[node name="WindArc4" type="Sprite2D" parent="."]
+texture = SubResource("cyclone_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.25000, 0.24000)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.75000)
+
+[node name="Sparks" type="CPUParticles2D" parent="."]
+material = SubResource("particles_add")
+position = Vector2(0.00000, 35.00000)
+amount = 22
+lifetime = 0.9
+one_shot = true
+explosiveness = 0.85
+randomness = 0.25
+texture = ExtResource("star_02")
+emission_shape = 1
+emission_sphere_radius = 36
+direction = Vector2(0.00000, -1.00000)
+spread = 40
+gravity = Vector2(0, -25)
+initial_velocity_min = 68.75
+initial_velocity_max = 125
+scale_amount_min = 0.035
+scale_amount_max = 0.1
+color_ramp = SubResource("spark_gradient")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = { &"": SubResource("library") }
+autoplay = "play"

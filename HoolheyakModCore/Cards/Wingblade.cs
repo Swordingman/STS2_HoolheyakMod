@@ -28,41 +28,18 @@ public class Wingblade : HoolheyakBaseCard
         new DamageVar(9, ValueProp.Move)
     ];
 
-    public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
-    {
-        if (!ReferenceEquals(card, this) || Owner?.Creature == null)
-            return playCount;
-
-        var creature = Owner.Creature;
-        var erudition = creature.GetPower<EruditionPower>();
-        if (erudition == null)
-            return playCount;
-
-        if (!WillGainEruditionStack())
-            return playCount;
-
-        // 预判这张攻击牌打出后是否会触发博览，触发则由原版按整张牌重放一次。
-        if (erudition.Progress + 1 >= EruditionPower.GetThreshold(creature))
-            return playCount + 1;
-
-        return playCount;
-    }
-
-    private bool WillGainEruditionStack()
-    {
-        bool willGain = Type == CardType.Attack;
-        if (Owner?.Creature?.GetPower<QuincunxPower>() != null)
-            willGain = Type == CardType.Skill;
-        return willGain;
-    }
+    public override int ConditionalReplayCount =>
+        IsMutable && Owner?.Creature is { CombatState: not null } creature &&
+        creature.GetPower<EruditionPower>()?.WillTrigger(this) == true ? 1 : 0;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Target == null) return;
 
-        // 造成 9 点伤害；是否额外重放由 ModifyCardPlayCount 预判。
+        // 条件重放进入原生重放计数，整张牌由原生流程重复结算。
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.giantHorizontalSlashPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
     }

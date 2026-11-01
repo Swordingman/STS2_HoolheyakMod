@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 namespace HoolheyakMod.Scripts.Cards;
 
 [Pool(typeof(HoolheyakModCardPool))]
-public class FeatherStrike : HoolheyakBaseCard
+public class FeatherStrike : HoolheyakBaseCard, ITranscendenceCard
 {
     public FeatherStrike() : base(0, CardType.Attack, CardRarity.Basic, TargetType.AnyEnemy, true)
     {
@@ -28,6 +28,8 @@ public class FeatherStrike : HoolheyakBaseCard
         new DynamicVar("FeatherStrike-Lift", 1m)
     ];
 
+    public CardModel GetTranscendenceTransformedCard() => ModelDb.Card<ForTheQuest>();
+
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (cardPlay.Target == null) return;
@@ -35,6 +37,7 @@ public class FeatherStrike : HoolheyakBaseCard
         // 造成 3 点伤害
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.flyingSlashPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 

@@ -27,6 +27,8 @@ public class OmniscientHorizon : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         await PowerCmd.Apply<OmniscientHorizonPower>(choiceContext, Owner.Creature, DynamicVars["OmniscientHorizon-Magic"].IntValue, Owner.Creature, this);
     }
 

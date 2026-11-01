@@ -114,6 +114,7 @@ public class FactorialExperiment :
                 this,
                 cardPlay
             )
+            .WithHitFx(VfxCmd.starryImpactVfx)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 
@@ -136,6 +137,8 @@ public class FactorialExperiment :
             ModelDb.AllCards
                 .Where(card =>
                     card is IVariableCard &&
+                    card.CanBeGeneratedInCombat &&
+                    card.Type is CardType.Attack or CardType.Skill or CardType.Power &&
                     (
                         card.Rarity == CardRarity.Common ||
                         card.Rarity == CardRarity.Uncommon ||

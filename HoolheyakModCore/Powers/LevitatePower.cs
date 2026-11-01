@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using System.Linq;
 using BaseLib.Abstracts;
 using Godot;
 using HoolheyakMod.Code.Relics;
@@ -20,6 +21,7 @@ public class LevitatePower : CustomPowerModel
     private Vector2 _originalPosition;
     private Vector2 _originalScale;
     private float _originalRotation;
+    private bool _falling;
     private Vector2 _hoverCenter;
 
     public override PowerType Type => PowerType.Debuff;
@@ -50,25 +52,13 @@ public class LevitatePower : CustomPowerModel
         // 施加 20 层解构
         await PowerCmd.Apply<DeconstructionPower>(ctx, Owner, 20, source, null);
 
-        // 全知视界联动：每层抽 2 张牌并回复 2 点能量
-        var horizon = source.GetPower<OmniscientHorizonPower>();
-        if (horizon != null && source.Player != null)
-        {
-            horizon.FlashIcon();
-            int bonus = (int)horizon.Amount * 2;
-
-            if (bonus > 0)
-            {
-                await CardPileCmd.Draw(ctx, bonus, source.Player);
-                await PlayerCmd.GainEnergy(bonus, source.Player);
-            }
-        }
-
         // WeatherBalloon 遗物联动：玩家拥有热气球时，敌人进入浮空会额外获得升力
         if (Owner.CombatState != null)
         {
             foreach (var playerCreature in Owner.CombatState.PlayerCreatures)
             {
+                if (playerCreature.GetPower<OmniscientHorizonPower>() is { } horizon)
+                    await horizon.Trigger(ctx, Owner);
                 var balloon = playerCreature.Player?.GetRelic<WeatherBalloon>();
                 if (balloon != null)
                     await balloon.TriggerOnEnemyLevitate(Owner);
@@ -92,7 +82,7 @@ public class LevitatePower : CustomPowerModel
 
     private decimal ModifyDamageMultiplicativeCore(Creature? target, ValueProp props, Creature? dealer)
     {
-        if (props.HasFlag(ValueProp.Unblockable))
+        if (props.HasFlag(ValueProp.Unblockable) || (_falling && target == Owner && dealer == Owner))
             return 1.0m;
 
         // 受到伤害增加 50%
@@ -254,43 +244,43 @@ public class LevitatePower : CustomPowerModel
     /// <summary>
     /// 结算摔落伤害并移除浮空/升力
     /// </summary>
-    public async Task TriggerFallAsync(PlayerChoiceContext choiceContext)
+    public async Task<int> TriggerFallAsync(PlayerChoiceContext choiceContext)
     {
-        if (Owner == null)
-            return;
+        if (Owner == null || _falling || !Owner.Powers.Contains(this))
+            return 0;
 
-        int gravity = Owner.GetPower<GravityPower>()?.Amount ?? 0;
-        int lift = Owner.GetPower<LiftPower>()?.Amount ?? 0;
-        int damage = (gravity + lift) * 2;
-
-        Flash();
-
-        // 先让模型真正砸到地面，再出现伤害数字
-        await PlayFallVisualAsync();
-
-        if (damage > 0)
+        _falling = true;
+        try
         {
-            #if STS2_BETA
-            await CreatureCmd.Damage(
-                choiceContext,
-                targets: new[] { Owner },
-                damage,
-                ValueProp.Unpowered,
-                Owner,
-                null,
-                null);
-            #else
-            await CreatureCmd.Damage(
-                choiceContext,
-                targets: new[] { Owner },
-                damage,
-                ValueProp.Unpowered,
-                Owner,
-                null);
-            #endif
-        }
+            int gravity = Owner.GetPower<GravityPower>()?.Amount ?? 0;
+            int lift = Owner.GetPower<LiftPower>()?.Amount ?? 0;
+            int damage = (gravity + lift) * 2;
+            int dealt = 0;
 
-        await PowerCmd.Remove<LevitatePower>(Owner);
-        await PowerCmd.Remove<LiftPower>(Owner);
+            Flash();
+            // 先让模型真正砸到地面，再出现伤害数字。
+            await PlayFallVisualAsync();
+            if (damage > 0 && Owner.IsAlive)
+            {
+#if STS2_BETA
+                var results = await CreatureCmd.Damage(choiceContext, new[] { Owner }, damage,
+                    ValueProp.Unpowered, Owner, null, null);
+#else
+                var results = await CreatureCmd.Damage(choiceContext, new[] { Owner }, damage,
+                    ValueProp.Unpowered, Owner, null);
+#endif
+                dealt = results.Sum(result => result.TotalDamage);
+            }
+
+            if (Owner.Powers.Contains(this))
+                await PowerCmd.Remove(this);
+            if (Owner.GetPower<LiftPower>() is { } remainingLift)
+                await PowerCmd.Remove(remainingLift);
+            return dealt;
+        }
+        finally
+        {
+            _falling = false;
+        }
     }
 }

@@ -18,6 +18,10 @@ public class InheritedEndPower : CustomPowerModel
 
     private CardType? _firstCardType;
 
+    public bool WillTrigger(CardModel card) =>
+        card.Owner?.Creature == Owner && card.Type is CardType.Attack or CardType.Skill &&
+        _firstCardType != null && _firstCardType != card.Type;
+
     public override async Task AfterCardPlayed(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (Owner == null || cardPlay.Card.Owner?.Creature != Owner)
@@ -27,7 +31,7 @@ public class InheritedEndPower : CustomPowerModel
         if (type != CardType.Attack && type != CardType.Skill)
             return;
 
-        if (_firstCardType != null && _firstCardType != type)
+        if (WillTrigger(cardPlay.Card))
         {
             Flash();
 
@@ -37,12 +41,8 @@ public class InheritedEndPower : CustomPowerModel
                 await CardPileCmd.Draw(choiceContext, Amount, Owner.Player);
             }
 
-            _firstCardType = null;
         }
-        else
-        {
-            _firstCardType = type;
-        }
+        _firstCardType = type;
     }
 
     public override async Task AfterSideTurnEnd(

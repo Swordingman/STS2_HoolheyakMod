@@ -15,7 +15,7 @@ namespace HoolheyakMod.Code.Relics;
 [Pool(typeof(HoolheyakModRelicPool))]
 public class ZodiacModel : CustomRelicModel
 {
-    public override RelicRarity Rarity => RelicRarity.Common;
+    public override RelicRarity Rarity => RelicRarity.Uncommon;
 
     public override string PackedIconPath => $"res://HoolheyakMod/images/relics/large/{nameof(ZodiacModel)}.png";
     protected override string PackedIconOutlinePath => $"res://HoolheyakMod/images/relics/large/{nameof(ZodiacModel)}.png";

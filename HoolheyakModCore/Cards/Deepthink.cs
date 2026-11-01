@@ -30,6 +30,8 @@ public class Deepthink : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         // 获得 2 层解析，以及 2 层博览和 2 层逶迤
         await PowerCmd.Apply<AnalysisPower>(choiceContext, Owner.Creature, DynamicVars["Deepthink-Analysis"].IntValue, Owner.Creature, this);
         await PowerCmd.Apply<EruditionPower>(choiceContext, Owner.Creature, DynamicVars["Deepthink-Magic"].IntValue, Owner.Creature, this);
@@ -38,7 +40,7 @@ public class Deepthink : HoolheyakBaseCard
 
     protected override void OnUpgrade()
     {
-        // 解析 2 -> 4
-        DynamicVars["Deepthink-Analysis"].UpgradeValueBy(2);
+        // 解析 2 -> 3
+        DynamicVars["Deepthink-Analysis"].UpgradeValueBy(1);
     }
 }

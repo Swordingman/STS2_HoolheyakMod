@@ -50,6 +50,8 @@ public class ChimeraExperiment : HoolheyakBaseCard, IVariableCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         if (Owner == null || Owner.Creature?.CombatState == null)
             return;
 

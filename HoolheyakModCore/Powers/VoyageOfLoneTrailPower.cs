@@ -2,8 +2,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Combat;
+using MegaCrit.Sts2.Core.Combat.History.Entries;
 using MegaCrit.Sts2.Core.Commands;
 using MegaCrit.Sts2.Core.Entities.Creatures;
+using MegaCrit.Sts2.Core.Entities.Cards;
 using MegaCrit.Sts2.Core.Entities.Powers;
 using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Models;
@@ -18,24 +20,12 @@ public class VoyageOfLoneTrailPower : CustomPowerModel
     public override string? CustomPackedIconPath => $"res://HoolheyakMod/images/powers/{nameof(VoyageOfLoneTrailPower)}.png";
     public override string? CustomBigIconPath => $"res://HoolheyakMod/images/powers/large/{nameof(VoyageOfLoneTrailPower)}.png";
 
-    private int _damageDealtThisTurn;
-
-    public override Task AfterDamageGiven(
-        PlayerChoiceContext choiceContext,
-        Creature? dealer,
-        DamageResult result,
-        ValueProp props,
-        Creature target,
-        CardModel? cardSource)
-    {
-        // 只统计本能力持有者造成的正常攻击伤害；不统计纯生命流失（Unblockable）
-        if (dealer == Owner && result.UnblockedDamage > 0 && !props.HasFlag(ValueProp.Unblockable))
-        {
-            _damageDealtThisTurn += result.UnblockedDamage;
-        }
-
-        return Task.CompletedTask;
-    }
+    internal int AttackDamageThisTurn() => Owner?.CombatState is { } combat
+        ? CombatManager.Instance.History.Entries.OfType<DamageReceivedEntry>()
+            .Where(entry => entry.HappenedThisTurn(combat) && entry.Dealer == Owner &&
+                entry.Receiver.Side != Owner.Side && entry.CardSource?.Type == CardType.Attack)
+            .Sum(entry => entry.Result.UnblockedDamage)
+        : 0;
 
     public override async Task AfterSideTurnEnd(
         PlayerChoiceContext choiceContext,
@@ -46,23 +36,15 @@ public class VoyageOfLoneTrailPower : CustomPowerModel
             return;
 
         // 本回合伤害不足 6 时，额外触发 1 次博览与 1 次逶迤
-        if (_damageDealtThisTurn < 6)
+        if (AttackDamageThisTurn() < 6)
         {
             Flash();
-            await PowerCmd.Apply<EruditionPower>(
-                choiceContext,
-                Owner,
-                EruditionPower.GetThreshold(Owner),
-                Owner,
-                null);
-            await PowerCmd.Apply<MeanderPower>(
-                choiceContext,
-                Owner,
-                MeanderPower.GetThreshold(Owner),
-                Owner,
-                null);
+            for (int i = 0; i < Amount; i++)
+            {
+                await TriggerMeander.Trigger(choiceContext, Owner);
+                await TriggerErudition.Trigger(choiceContext, Owner);
+            }
         }
 
-        _damageDealtThisTurn = 0;
     }
 }

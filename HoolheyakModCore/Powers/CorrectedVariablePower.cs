@@ -17,7 +17,7 @@ public class CorrectedVariablePower : CustomPowerModel
 
     public override async Task AfterCardDrawn(PlayerChoiceContext choiceContext, CardModel card, bool fromHandDraw)
     {
-        if (Owner == null || Amount <= 0)
+        if (Owner == null || card.Owner?.Creature != Owner || Amount <= 0)
             return;
 
         // 抽到状态牌 -> 获得博览

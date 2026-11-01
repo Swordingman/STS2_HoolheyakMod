@@ -69,10 +69,10 @@ public class EruditionPower : CustomPowerModel
         if (owner?.GetPower<SextilePower>() != null)
             threshold -= 2;
 
-        // 库库尔坎遗泽：每层上限 +3。
+        // 库库尔坎遗泽：按当前难度，每层上限 +2 或 +3。
         var legacy = owner?.GetPower<KukulkanLegacyPower>();
         if (legacy != null)
-            threshold += 3 * legacy.Amount;
+            threshold += (HoolheyakConfig.CurrentDifficulty == 0 ? 2 : 3) * legacy.Amount;
 
         return Math.Max(1, threshold);
     }
@@ -91,22 +91,22 @@ public class EruditionPower : CustomPowerModel
         if (Owner == null || cardPlay.Card.Owner?.Creature != Owner)
             return;
 
-        // Variable 卡不参与普通 Attack / Skill 自动计数。
-        if (cardPlay.Card.Tags.Contains(HoolheyakCardTags.Variable))
-            return;
-
-        bool isTriggerType = cardPlay.Card.Type == CardType.Attack;
-
-        // 奎因库尼：博览改成由技能牌提供。
-        if (Owner.GetPower<QuincunxPower>() != null)
-            isTriggerType = cardPlay.Card.Type == CardType.Skill;
-
-        if (!isTriggerType)
+        if (!CountsCard(cardPlay.Card))
             return;
 
         Flash();
         await PowerCmd.Apply<EruditionPower>(choiceContext, Owner, 1, Owner, null);
     }
+
+    public static CardType GetTriggerCardType(Creature? owner) =>
+        owner?.GetPower<QuincunxPower>() != null ? CardType.Skill : CardType.Attack;
+
+    public bool WillTrigger(CardModel card) =>
+        CountsCard(card) && Progress + 1 >= GetThreshold(Owner);
+
+    private bool CountsCard(CardModel card) =>
+        Owner != null && card.Owner?.Creature == Owner &&
+        !card.Tags.Contains(HoolheyakCardTags.Variable) && card.Type == GetTriggerCardType(Owner);
 
     public override async Task AfterPowerAmountChanged(PlayerChoiceContext choiceContext, PowerModel power, decimal amount, Creature? applier, CardModel? cardSource)
     {
@@ -116,7 +116,7 @@ public class EruditionPower : CustomPowerModel
         await CheckAndTriggerAsync(choiceContext);
     }
 
-    private async Task CheckAndTriggerAsync(PlayerChoiceContext choiceContext)
+    internal async Task CheckAndTriggerAsync(PlayerChoiceContext choiceContext)
     {
         if (_isTriggering)
             return;

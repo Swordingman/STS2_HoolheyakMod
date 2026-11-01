@@ -71,13 +71,11 @@ public class TwinExperiment : HoolheyakBaseCard, IVariableCard
 
         foreach (var target in targets)
         {
-            for (int i = 0; i < 2; i++)
-            {
-                await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                    .FromCardCompatibility(this, cardPlay)
-                    .Targeting(target)
-                    .Execute(choiceContext);
-            }
+            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+                .FromCardCompatibility(this, cardPlay)
+                .WithHitFx(VfxCmd.slashPath)
+                .Targeting(target).WithHitCount(2)
+                .Execute(choiceContext);
         }
 
         if (_target2 != null)
@@ -108,13 +106,11 @@ public class TwinExperiment : HoolheyakBaseCard, IVariableCard
 
     private async Task DealExtraDamage(PlayerChoiceContext choiceContext, CardPlay cardPlay, Creature target)
     {
-        for (int i = 0; i < 2; i++)
-        {
-            await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
-                .FromCardCompatibility(this, cardPlay)
-                .Targeting(target)
-                .Execute(choiceContext);
-        }
+        await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
+            .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.slashPath)
+            .Targeting(target).WithHitCount(2)
+            .Execute(choiceContext);
     }
 
     protected override void OnUpgrade()

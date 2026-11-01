@@ -35,6 +35,7 @@ public class LaminarFlow : HoolheyakBaseCard
         // 造成 3 点伤害并抽 1 张牌
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.flyingSlashPath)
             .Targeting(cardPlay.Target)
             .Execute(choiceContext);
 

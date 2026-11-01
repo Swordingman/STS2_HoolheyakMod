@@ -32,25 +32,27 @@ public class Wake : HoolheyakBaseCard
         new DynamicVar("Wake-Magic", 1m)
     ];
 
-    public override int ModifyCardPlayCount(CardModel card, Creature? target, int playCount)
+    public override int ConditionalReplayCount
     {
-        if (!ReferenceEquals(card, this) || Owner == null || CombatState == null)
-            return playCount;
+        get
+        {
+            if (!IsMutable || Owner == null || CombatState == null)
+                return 0;
 
-        var lastPlay = CombatManager.Instance.History.CardPlaysStarted
-            .Where(entry => entry.CardPlay.Card.Owner == Owner)
-            .LastOrDefault();
+            var lastPlay = CombatManager.Instance.History.CardPlaysStarted
+                .Where(entry => entry.CardPlay.Card.Owner == Owner)
+                .LastOrDefault();
 
-        // ModifyCardPlayCount 在本次出牌写入历史前调用，因此最后一条就是上一张牌。
-        if (lastPlay?.CardPlay.Card.Type == CardType.Skill)
-            return playCount + 1;
-
-        return playCount;
+            // The native play loop reads the replay count before adding this play to history.
+            return lastPlay?.CardPlay.Card.Type == CardType.Skill ? 1 : 0;
+        }
     }
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        // 获得 5 点格挡和 1 层解析；若上一张是技能牌，由 ModifyCardPlayCount 让整张牌重放一次。
+        await PlayCastAnimation();
+
+        // 条件重放进入原生重放计数，整张牌由原生流程重复结算。
         await CreatureCmd.GainBlock(Owner.Creature, DynamicVars.Block.BaseValue, ValueProp.Move, cardPlay);
         await PowerCmd.Apply<AnalysisPower>(choiceContext, Owner.Creature, DynamicVars["Wake-Magic"].IntValue, Owner.Creature, this);
     }

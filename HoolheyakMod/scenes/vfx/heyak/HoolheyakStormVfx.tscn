@@ -1,0 +1,368 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://HoolheyakMod/scenes/vfx/heyak/heyak_vfx.gd" id="driver"]
+[ext_resource type="Shader" path="res://HoolheyakMod/scenes/vfx/heyak/heyak_sprite.gdshader" id="sprite_shader"]
+[ext_resource type="Shader" path="res://HoolheyakMod/scenes/vfx/heyak/heyak_wind.gdshader" id="wind_shader"]
+[ext_resource type="Texture2D" path="res://HoolheyakMod/images/vfx/heyak/heyak_01.png" id="heyak_01"]
+[ext_resource type="Texture2D" path="res://HoolheyakMod/images/vfx/heyak/Heyak_circle01.png" id="Heyak_circle01"]
+[ext_resource type="Texture2D" path="res://HoolheyakMod/images/vfx/heyak/star_02.png" id="star_02"]
+
+[sub_resource type="ShaderMaterial" id="add"]
+resource_local_to_scene = true
+shader = ExtResource("sprite_shader")
+
+[sub_resource type="ShaderMaterial" id="cyan"]
+resource_local_to_scene = true
+shader = ExtResource("sprite_shader")
+shader_parameter/tint_color = Color(0.15000, 0.97000, 0.92000, 1.00000)
+shader_parameter/recolor_amount = 1.0
+
+[sub_resource type="CanvasItemMaterial" id="particles_add"]
+blend_mode = 1
+
+[sub_resource type="ShaderMaterial" id="wind"]
+resource_local_to_scene = true
+shader = ExtResource("wind_shader")
+shader_parameter/intensity = 0.9
+shader_parameter/wind_color = Color(0.10000, 0.80000, 0.76000, 1.00000)
+
+[sub_resource type="AtlasTexture" id="wind_feather"]
+atlas = ExtResource("heyak_01")
+region = Rect2(0, 0, 512, 128)
+filter_clip = true
+
+[sub_resource type="Gradient" id="spark_gradient"]
+offsets = PackedFloat32Array(0, 0.15, 0.65, 1)
+colors = PackedColorArray(0.2, 1, 0.95, 0, 0.4, 1, 0.98, 1, 0.1, 0.65, 0.65, 0.7, 0.05, 0.3, 0.35, 0)
+
+[sub_resource type="Animation" id="play"]
+resource_name = "play"
+length = 1.65
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.055, 1.1549999999999998, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1.00000, 1.00000, 1.00000, 0.00000), Color(1.00000, 1.00000, 1.00000, 1.00000), Color(1.00000, 1.00000, 1.00000, 1.00000), Color(1.00000, 1.00000, 1.00000, 0.00000)]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Body:material:shader_parameter/vfx_time")
+tracks/1/interp = 1
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.65]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Body:scale")
+tracks/2/interp = 1
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.16, 1.25, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.12000, 0.25000), Vector2(0.58000, 0.68000), Vector2(0.62000, 0.72000), Vector2(0.76000, 0.38000)]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("GroundRing:scale")
+tracks/3/interp = 1
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 1.3, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.12000, 0.03000), Vector2(0.65000, 0.19000), Vector2(0.72000, 0.20000), Vector2(1.00000, 0.12000)]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("GroundRing:rotation")
+tracks/4/interp = 1
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.65),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.08, 0.08]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("OrbitFeather0:position")
+tracks/5/interp = 1
+tracks/5/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(42.00000, 100.00000), Vector2(30.94478, 110.81811), Vector2(3.59903, 115.94115), Vector2(-25.64140, 112.67214), Vector2(-41.38319, 102.73203), Vector2(-35.33926, 91.35367), Vector2(-10.69137, 84.52707), Vector2(19.58488, 85.84603), Vector2(39.55088, 94.61619), Vector2(38.69576, 106.22059), Vector2(17.46969, 114.55024), Vector2(-12.95311, 115.22007), Vector2(-36.55689, 107.87747), Vector2(-40.91569, 96.38786), Vector2(-23.73489, 86.79982), Vector2(5.94089, 84.16087), Vector2(32.48915, 89.86026), Vector2(41.93386, 100.89760), Vector2(29.30295, 111.46241), Vector2(1.24583, 115.99296), Vector2(-27.46714, 112.10419)]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("OrbitFeather0:rotation")
+tracks/6/interp = 1
+tracks/6/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.12, 0.11664619088363681, 0.2287126133002223, 0.15720313929410312, -0.06023685986709914, -0.3091385028131434, -0.45847027395739565, -0.4296181148843818, -0.23777092546047646, 0.016075464420582608, 0.19828643186672756, 0.21293902941010717, 0.052319559219461215, -0.1990156360362917, -0.4087539240867291, -0.4664809041488383, -0.34180684637492464, -0.10036502883857984, 0.13074017541016825, 0.22984598900172015, 0.14477925307443473]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("OrbitFeather1:position")
+tracks/7/interp = 1
+tracks/7/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(64.83219, 13.95945), Vector2(26.59232, 21.86872), Vector2(-25.64678, 21.95052), Vector2(-64.38442, 14.16179), Vector2(-69.22759, 2.60281), Vector2(-37.62667, -6.64132), Vector2(13.78240, -8.70412), Vector2(57.93588, -2.49967), Vector2(71.58965, 8.70579), Vector2(47.55585, 19.01325), Vector2(-1.51321, 22.99647), Vector2(-49.78565, 18.55852), Vector2(-71.84899, 8.03572), Vector2(-56.08822, -3.03232), Vector2(-10.80043, -8.81896), Vector2(40.17313, -6.27788), Vector2(69.99799, 3.25319), Vector2(62.97318, 14.75673), Vector2(22.79684, 22.17682), Vector2(-29.38065, 21.60725), Vector2(-66.09102, 13.34785)]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("OrbitFeather1:rotation")
+tracks/8/interp = 1
+tracks/8/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.03223793693893057, 0.20525332518365486, 0.2070426996344673, 0.03666406391293192, -0.21618863461309354, -0.4184038908692226, -0.4635277209107856, -0.32780518375211176, -0.08268590717657176, 0.1427897781493352, 0.2299226927967572, 0.13284267806124772, -0.09734356658585194, -0.33945703988803533, -0.46603978304988275, -0.41045371169681216, -0.20196149797791252, 0.04967843936659938, 0.21199303996594587, 0.19953357850583908, 0.018859200595714776]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("OrbitFeather2:position")
+tracks/9/interp = 1
+tracks/9/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(63.40422, -73.46677), Vector2(-7.30751, -70.04111), Vector2(-74.17228, -75.01684), Vector2(-101.98987, -85.77453), Vector2(-76.11603, -96.65091), Vector2(-10.17174, -101.92024), Vector2(61.12734, -98.80854), Vector2(100.24662, -88.95392), Vector2(86.59217, -77.54424), Vector2(27.35223, -70.58601), Vector2(-46.28699, -71.74229), Vector2(-95.55893, -80.40439), Vector2(-94.52493, -92.01224), Vector2(-43.72933, -100.45501), Vector2(30.08710, -101.28810), Vector2(88.06450, -94.07294), Vector2(99.68133, -82.60787), Vector2(58.82202, -72.92855), Vector2(-13.00349, -70.13055), Vector2(-77.98345, -75.68685), Vector2(-101.90989, -86.67239)]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("OrbitFeather2:rotation")
+tracks/10/interp = 1
+tracks/10/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.1541644183696192, 0.2291006375007531, 0.12025668916268359, -0.11506773450771478, -0.3529886947661417, -0.4682553349147685, -0.4001868077864762, -0.18461703624252745, 0.06496965898002605, 0.2171811241043607, 0.19188731768584438, 0.002403884212574897, -0.25151771958462976, -0.43620327527986325, -0.4544271158053027, -0.29659550198111007, -0.04579714034246701, 0.16593794695733788, 0.22714416626701678, 0.1056001807382084, -0.1347085234515943]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("OrbitFeather3:position")
+tracks/11/interp = 1
+tracks/11/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-21.00000, 113.85641), Vector2(-40.06538, 104.80007), Vector2(-38.03879, 93.21680), Vector2(-15.98710, 85.20446), Vector2(14.48083, 84.98107), Vector2(37.32548, 92.66423), Vector2(40.52055, 104.20923), Vector2(22.38402, 113.53832), Vector2(-7.53633, 115.74031), Vector2(-33.48926, 109.65599), Vector2(-41.81214, 98.48838), Vector2(-28.12348, 88.11655), Vector2(0.37047, 84.00062), Vector2(28.66939, 88.30739), Vector2(41.87563, 98.76961), Vector2(33.03691, 109.87955), Vector2(6.80627, 115.78851), Vector2(-23.00745, 113.38579), Vector2(-40.70916, 103.93626), Vector2(-36.97998, 92.41454), Vector2(-13.78309, 84.88610)]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("OrbitFeather3:rotation")
+tracks/12/interp = 1
+tracks/12/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.18310889132455355, -0.014998364936665884, -0.26838257003026333, -0.44365241313099935, -0.44853902487227215, -0.2804699025780703, -0.02792317582947708, 0.17615072575547097, 0.2243193549664917, 0.09122486998886106, -0.15306661038276914, -0.37995053963306663, -0.4699863839027926, -0.37577576931161977, -0.14691483137764755, 0.09611512169591727, 0.22537366047976326, 0.17281405760442736, -0.03389426562024471, -0.2859319998642136, -0.4506166689809977]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("OrbitFeather4:position")
+tracks/13/interp = 1
+tracks/13/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-59.53786, 15.99724), Vector2(-71.24128, 4.68333), Vector2(-45.44051, -5.41099), Vector2(4.28191, -8.97168), Vector2(51.75017, -4.12426), Vector2(71.97512, 6.57941), Vector2(54.30957, 17.50449), Vector2(8.05334, 22.89960), Vector2(-42.44247, 19.92454), Vector2(-70.59492, 10.14550), Vector2(-61.58345, -1.28945), Vector2(-20.15206, -8.36051), Vector2(31.88817, -7.34521), Vector2(67.14122, 1.22198), Vector2(67.04852, 12.83094), Vector2(31.65887, 21.37026), Vector2(-20.39724, 22.34452), Vector2(-61.71545, 15.24083), Vector2(-70.54424, 3.79884), Vector2(-42.23580, -5.95793), Vector2(8.30721, -8.89315)]
+}
+tracks/14/type = "value"
+tracks/14/path = NodePath("OrbitFeather4:rotation")
+tracks/14/interp = 1
+tracks/14/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.07681455442106139, -0.1706770942910441, -0.39149034750568895, -0.46938051158458266, -0.3633431715799237, -0.12920051172935373, 0.10978565570839285, 0.22780370750350293, 0.16272434627465182, -0.051192118426588176, -0.3013317309550373, -0.4560112603367597, -0.4338013800103869, -0.24639423569949453, 0.007551755318445014, 0.1943495362350381, 0.215661482388533, 0.060268155564138975, -0.19002534691195477, -0.40345478040581856, -0.4676625814619158]
+}
+tracks/15/type = "value"
+tracks/15/path = NodePath("OrbitFeather5:position")
+tracks/15/interp = 1
+tracks/15/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-100.89697, -83.65333), Vector2(-84.45385, -94.97215), Vector2(-23.55094, -101.56767), Vector2(49.75011, -99.96777), Vector2(96.86076, -91.01469), Vector2(92.98014, -79.42168), Vector2(40.15115, -71.29176), Vector2(-33.81497, -70.90482), Vector2(-89.97957, -78.46458), Vector2(-98.77542, -89.99128), Vector2(-55.57205, -99.41681), Vector2(16.88662, -101.77921), Vector2(80.45551, -95.83482), Vector2(101.66948, -84.71300), Vector2(69.36069, -74.26871), Vector2(0.53773, -70.00022), Vector2(-68.56832, -74.15464), Vector2(-101.57733, -84.54492), Vector2(-81.11208, -95.70121), Vector2(-17.94627, -101.75040), Vector2(54.66715, -99.50797)]
+}
+tracks/16/type = "value"
+tracks/16/path = NodePath("OrbitFeather5:rotation")
+tracks/16/interp = 1
+tracks/16/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.0686667008659975, -0.3162657204833821, -0.46054282342617453, -0.42554492541866734, -0.229696282580633, 0.02390075432435354, 0.20174283151914102, 0.2102069554626233, 0.044837281768638104, -0.20730915482525197, -0.41349265302334837, -0.4651701918231456, -0.33513670278645585, -0.09184687726776303, 0.13662204833062996, 0.2299951363615782, 0.13911715789655404, -0.08817018095604584, -0.3322139758159755, -0.4645400714646539, -0.41548685916666966]
+}
+tracks/17/type = "value"
+tracks/17/path = NodePath("OrbitFeather6:position")
+tracks/17/interp = 1
+tracks/17/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-21.00000, 86.14359), Vector2(9.12060, 84.38181), Vector2(34.43976, 90.84206), Vector2(41.62849, 102.12340), Vector2(26.90236, 112.28690), Vector2(-1.98622, 115.98210), Vector2(-29.82918, 111.26370), Vector2(-41.96890, 100.61565), Vector2(-32.01455, 89.64350), Vector2(-5.20650, 84.12341), Vector2(24.34245, 86.96138), Vector2(41.07659, 96.66338), Vector2(36.18642, 108.12191), Vector2(12.24630, 115.30475), Vector2(-18.14074, 114.43057), Vector2(-38.97780, 105.95958), Vector2(-39.29542, 94.35123), Vector2(-18.92640, 85.71662), Vector2(11.40621, 84.60133), Vector2(35.73415, 91.59250), Vector2(41.25024, 103.00971)]
+}
+tracks/18/type = "value"
+tracks/18/path = NodePath("OrbitFeather6:rotation")
+tracks/18/interp = 1
+tracks/18/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.4231088913245534, -0.46164782594697096, -0.32033004326995884, -0.07355072616310396, 0.1487758847393711, 0.2296084053912137, 0.1263934497868724, -0.10653261087108945, -0.3465484295060151, -0.4673003344094437, -0.4052198214839585, -0.19298848977704086, 0.057666824683331036, 0.21479140534791114, 0.19566875546437662, 0.010365782452920747, -0.2435668141048388, -0.43244902876584745, -0.45684590978992323, -0.30391398913750733, -0.05416258409343676]
+}
+tracks/19/type = "value"
+tracks/19/path = NodePath("OrbitFeather7:position")
+tracks/19/interp = 1
+tracks/19/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-5.29433, -8.95669), Vector2(44.64895, -5.55206), Vector2(71.08729, 4.46046), Vector2(60.10251, 15.80989), Vector2(17.47743, 22.52145), Vector2(-34.34845, 21.06192), Vector2(-68.09197, 12.19964), Vector2(-65.98922, 0.60007), Vector2(-29.14718, -7.63033), Vector2(23.03907, -8.15875), Vector2(63.09666, -0.70702), Vector2(69.93771, 10.80199), Vector2(39.96082, 20.30948), Vector2(-11.05299, 22.81034), Vector2(-56.24809, 16.98802), Vector2(-71.83200, 5.90762), Vector2(-49.60075, -4.59771), Vector2(-1.25773, -8.99756), Vector2(47.74740, -4.97567), Vector2(71.61644, 5.35068), Vector2(57.78380, 16.54530)]
+}
+tracks/20/type = "value"
+tracks/20/path = NodePath("OrbitFeather7:rotation")
+tracks/20/interp = 1
+tracks/20/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.46905249135999194, -0.3945762308926109, -0.1755523521287783, 0.07271644767165059, 0.2195318061930172, 0.18760440259857636, -0.0062579347976070565, -0.259998523751391, -0.4400384390980797, -0.4515976597227469, -0.28859096184172006, -0.03683141772448796, 0.17114494659623913, 0.2258512755875302, 0.09848802773143803, -0.14389582453822589, -0.3736999844106207, -0.46994659493073865, -0.38196769305399136, -0.15607879810001998, 0.08880338086620113]
+}
+tracks/21/type = "value"
+tracks/21/path = NodePath("OrbitFeather8:position")
+tracks/21/interp = 1
+tracks/21/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(37.49275, -100.87990), Vector2(91.76136, -92.98674), Vector2(97.72321, -81.41549), Vector2(52.23976, -72.25771), Vector2(-20.74473, -70.33440), Vector2(-82.80839, -76.65808), Vector2(-101.27849, -87.89970), Vector2(-66.43165, -98.14125), Vector2(3.38740, -101.99117), Vector2(71.42319, -97.42272), Vector2(101.85903, -86.84090), Vector2(78.67231, -75.81640), Vector2(14.06943, -70.15294), Vector2(-57.94016, -72.83199), Vector2(-99.44778, -82.44320), Vector2(-88.60223, -93.92684), Vector2(-31.11301, -101.23749), Vector2(42.75531, -100.52653), Vector2(94.11557, -92.16824), Vector2(95.92973, -80.56275), Vector2(47.24274, -71.81964)]
+}
+tracks/22/type = "value"
+tracks/22/path = NodePath("OrbitFeather8:rotation")
+tracks/22/interp = 1
+tracks/22/keys = {
+"times": PackedFloat32Array(0.0, 0.0825, 0.165, 0.2475, 0.33, 0.4125, 0.495, 0.5775, 0.66, 0.7425, 0.825, 0.9075, 0.99, 1.0725, 1.155, 1.2375, 1.32, 1.4025, 1.485, 1.5675, 1.65),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.4454977175036216, -0.27283491701737106, -0.019713865736509087, 0.1806126599263821, 0.22268497734677484, 0.0843545805904152, -0.1615560237326644, -0.3855899192200955, -0.4698069407486642, -0.3698719692791089, -0.13839466466249606, 0.10276630761057085, 0.22665442237108546, 0.16805015254762595, -0.04219493252532748, -0.29339963438046773, -0.45332001755408674, -0.43776776600129197, -0.25493019045104093, -0.0010601092735542522, 0.1901953826182633]
+}
+
+[sub_resource type="AnimationLibrary" id="library"]
+_data = { &"play": SubResource("play") }
+
+[node name="HoolheyakStormVfx" type="Node2D"]
+script = ExtResource("driver")
+duration = 1.65
+travel_distance = 0
+texture_filter = 2
+modulate = Color(1.00000, 1.00000, 1.00000, 0.00000)
+
+[node name="Body" type="Sprite2D" parent="."]
+texture = ExtResource("heyak_01")
+position = Vector2(0.00000, -8.00000)
+scale = Vector2(0.58000, 0.68000)
+rotation = 0
+material = SubResource("wind")
+
+[node name="GroundRing" type="Sprite2D" parent="."]
+texture = ExtResource("Heyak_circle01")
+position = Vector2(0.00000, 150.00000)
+scale = Vector2(0.65000, 0.19000)
+rotation = 0
+material = SubResource("cyan")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.65000)
+
+[node name="OrbitFeather0" type="Sprite2D" parent="."]
+texture = SubResource("wind_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.16000, 0.11520)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.72000)
+
+[node name="OrbitFeather1" type="Sprite2D" parent="."]
+texture = SubResource("wind_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.21500, 0.15480)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.72000)
+
+[node name="OrbitFeather2" type="Sprite2D" parent="."]
+texture = SubResource("wind_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.27000, 0.19440)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.72000)
+
+[node name="OrbitFeather3" type="Sprite2D" parent="."]
+texture = SubResource("wind_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.16000, 0.11520)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.72000)
+
+[node name="OrbitFeather4" type="Sprite2D" parent="."]
+texture = SubResource("wind_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.21500, 0.15480)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.72000)
+
+[node name="OrbitFeather5" type="Sprite2D" parent="."]
+texture = SubResource("wind_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.27000, 0.19440)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.72000)
+
+[node name="OrbitFeather6" type="Sprite2D" parent="."]
+texture = SubResource("wind_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.16000, 0.11520)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.72000)
+
+[node name="OrbitFeather7" type="Sprite2D" parent="."]
+texture = SubResource("wind_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.21500, 0.15480)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.72000)
+
+[node name="OrbitFeather8" type="Sprite2D" parent="."]
+texture = SubResource("wind_feather")
+position = Vector2(0.00000, 0.00000)
+scale = Vector2(0.27000, 0.19440)
+rotation = 0
+material = SubResource("add")
+modulate = Color(1.00000, 1.00000, 1.00000, 0.72000)
+
+[node name="Sparks" type="CPUParticles2D" parent="."]
+material = SubResource("particles_add")
+position = Vector2(0.00000, 115.00000)
+amount = 32
+lifetime = 1.3
+one_shot = true
+explosiveness = 0.85
+randomness = 0.25
+texture = ExtResource("star_02")
+emission_shape = 1
+emission_sphere_radius = 38
+direction = Vector2(0.00000, -1.00000)
+spread = 35
+gravity = Vector2(0, -25)
+initial_velocity_min = 82.5
+initial_velocity_max = 150
+scale_amount_min = 0.035
+scale_amount_max = 0.1
+color_ramp = SubResource("spark_gradient")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = { &"": SubResource("library") }
+autoplay = "play"

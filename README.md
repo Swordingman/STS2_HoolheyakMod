@@ -50,7 +50,8 @@ dotnet build HoolheyakMod.csproj -c Release -p:GameBranch=Stable -p:SkipGodotExp
 ## 当前状态
 
 - 工程骨架、Loader、Stable/Beta 双 DLL 方案已完成。
-- 82 张卡牌、34 个 Power、16 个遗物、3 个药水均已建立 C# 类；多数已实现主要效果，部分复杂机制保留 TODO。
+- 原有 82 张卡牌基础上，已新增设计表中的 15 张卡牌，并调整动力外骨骼、岁月蒸馏；多数已实现主要效果，部分复杂机制保留 TODO。
+- 新增“蜕生”关键词及相关持续效果，支持 Beta / Stable 双分支编译。
 - 事件/怪物/遭遇为占位实现。
 - 本地化已转换为 STS2 JSON 格式（`eng`/`zhs`）。
 - 已修复 net9.0 编译错误，并用本地 Stable/Beta 引用完成 C# 编译验证（0 错误/0 警告）。

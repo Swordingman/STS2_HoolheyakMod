@@ -1,5 +1,4 @@
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 using BaseLib.Abstracts;
 using MegaCrit.Sts2.Core.Entities.Creatures;
@@ -41,12 +40,7 @@ public class GravityPower : CustomPowerModel
 
     public static int CalculateGravity(Creature owner)
     {
-        int baseGravity = Math.Max(1, (owner.MaxHp + 9) / 10);
-
-        bool hasOpposition = owner.CombatState?.PlayerCreatures
-            .Any(c => c.GetPower<OppositionPower>() != null) ?? false;
-
-        return hasOpposition ? Math.Max(1, baseGravity / 2) : baseGravity;
+        return Math.Max(1, owner.MaxHp / 10);
     }
 
     public void RecalculateGravity()

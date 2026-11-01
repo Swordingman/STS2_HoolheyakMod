@@ -11,6 +11,8 @@ using MegaCrit.Sts2.Core.GameActions.Multiplayer;
 using MegaCrit.Sts2.Core.Localization.DynamicVars;
 using MegaCrit.Sts2.Core.Models;
 using MegaCrit.Sts2.Core.Models.CardPools;
+using MegaCrit.Sts2.Core.Saves;
+using MegaCrit.Sts2.Core.Saves.Runs;
 using MegaCrit.Sts2.Core.ValueProps;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,12 +28,39 @@ public class CrossExperiment : HoolheyakBaseCard, IVariableCard
     }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(4, ValueProp.Move),
-        new BlockVar(4, ValueProp.Move),
+        new DamageVar(2, ValueProp.Move),
+        new BlockVar(2, ValueProp.Move),
         new DynamicVar("Cross-Growth", 1m)
     ];
 
     public bool CanAllIn => true;
+
+    private int _damageGrowth;
+    private int _blockGrowth;
+
+    [SavedProperty(SerializationCondition.SaveIfNotTypeDefault)]
+    public int Hoolheyak_DamageGrowth
+    {
+        get => _damageGrowth;
+        set
+        {
+            AssertMutable();
+            DynamicVars.Damage.BaseValue += value - _damageGrowth;
+            _damageGrowth = value;
+        }
+    }
+
+    [SavedProperty(SerializationCondition.SaveIfNotTypeDefault)]
+    public int Hoolheyak_BlockGrowth
+    {
+        get => _blockGrowth;
+        set
+        {
+            AssertMutable();
+            DynamicVars.Block.BaseValue += value - _blockGrowth;
+            _blockGrowth = value;
+        }
+    }
 
     public IReadOnlyList<VariableChoice> GetVariableChoices(PlayerChoiceContext choiceContext, CardPlay cardPlay, bool isAutoTriggered = false)
     {
@@ -39,20 +68,14 @@ public class CrossExperiment : HoolheyakBaseCard, IVariableCard
 
         return [
             new VariableChoice(async context => {
-                DynamicVars.Damage.UpgradeValueBy(amount);
-
-                foreach (var deckCard in Owner.Deck.Cards.Where(c => c.Id == Id && !ReferenceEquals(c, this)))
-                {
-                    deckCard.DynamicVars.Damage.UpgradeValueBy(amount);
-                }
+                Hoolheyak_DamageGrowth += amount;
+                if (DeckVersion is CrossExperiment deckCard && !ReferenceEquals(deckCard, this))
+                    deckCard.Hoolheyak_DamageGrowth += amount;
             }),
             new VariableChoice(async context => {
-                DynamicVars.Block.UpgradeValueBy(amount);
-
-                foreach (var deckCard in Owner.Deck.Cards.Where(c => c.Id == Id && !ReferenceEquals(c, this)))
-                {
-                    deckCard.DynamicVars.Block.UpgradeValueBy(amount);
-                }
+                Hoolheyak_BlockGrowth += amount;
+                if (DeckVersion is CrossExperiment deckCard && !ReferenceEquals(deckCard, this))
+                    deckCard.Hoolheyak_BlockGrowth += amount;
             })
         ];
     }
@@ -64,6 +87,7 @@ public class CrossExperiment : HoolheyakBaseCard, IVariableCard
 
         await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
             .FromCardCompatibility(this, cardPlay)
+            .WithHitFx(VfxCmd.starryImpactVfx)
             .Targeting(target)
             .Execute(choiceContext);
 

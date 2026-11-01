@@ -24,6 +24,8 @@ public class Observation : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         await CardPileCmd.Draw(choiceContext, DynamicVars["Observation-Draw"].IntValue, Owner);
         await PlayerCmd.GainEnergy(1, Owner);
     }

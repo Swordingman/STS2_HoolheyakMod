@@ -19,43 +19,48 @@ namespace HoolheyakMod.Scripts.Cards;
 [Pool(typeof(HoolheyakModCardPool))]
 public class Headwind : HoolheyakBaseCard
 {
-    public Headwind() : base(1, CardType.Attack, CardRarity.Common, TargetType.AllEnemies, true)
+    private bool _attacking;
+    protected override void DeepCloneFields()
+    {
+        base.DeepCloneFields();
+        _attacking = false;
+    }
+    public Headwind() : base(2, CardType.Attack, CardRarity.Common, TargetType.AllEnemies, true)
     {
     }
 
     protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DamageVar(2, ValueProp.Move),
-        new DynamicVar("Headwind-Hits", 3m)
+        new DamageVar(4, ValueProp.Move)
     ];
+
+    public override int CanonicalReplayCount => 1;
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
         if (CombatState == null || Owner == null) return;
 
-        var rng = Owner.RunState.Rng.CombatTargets;
-        int hits = DynamicVars["Headwind-Hits"].IntValue;
-
-        // 随机攻击 3 次，每次对随机存活敌人造成 2 点伤害并施加 1 层升力
-        for (int i = 0; i < hits; i++)
+        _attacking = true;
+        try
         {
-            var aliveEnemies = CombatState.Enemies.Where(e => e.IsAlive).ToList();
-            if (aliveEnemies.Count == 0) break;
-
-            var target = rng.NextItem(aliveEnemies);
-            if (target == null) continue;
-
             await DamageCmd.Attack(DynamicVars.Damage.BaseValue)
                 .FromCardCompatibility(this, cardPlay)
-                .Targeting(target)
+                .WithHitFx(VfxCmd.flyingSlashPath)
+                .TargetingRandomOpponents(CombatState)
                 .Execute(choiceContext);
-
-            await PowerCmd.Apply<LiftPower>(choiceContext, target, 1, Owner.Creature, this);
         }
+        finally { _attacking = false; }
+    }
+
+    public override async Task AfterDamageGiven(PlayerChoiceContext context, Creature? dealer,
+        DamageResult result, ValueProp props, Creature target, CardModel? source)
+    {
+        if (_attacking && ReferenceEquals(source, this) && dealer == Owner.Creature && target.IsAlive)
+            await PowerCmd.Apply<LiftPower>(context, target, 1, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        // 伤害 2 -> 3
+        // 伤害 4 -> 5
         DynamicVars.Damage.UpgradeValueBy(1);
     }
 }

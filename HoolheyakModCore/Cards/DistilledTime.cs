@@ -20,18 +20,19 @@ public class DistilledTime : HoolheyakBaseCard
     {
     }
 
-    protected override IEnumerable<DynamicVar> CanonicalVars => [
-        new DynamicVar("DistilledTime-Magic", 1m)
-    ];
+    protected override IEnumerable<DynamicVar> CanonicalVars => [];
 
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
-        await PowerCmd.Apply<DistilledTimePower>(choiceContext, Owner.Creature, DynamicVars["DistilledTime-Magic"].IntValue, Owner.Creature, this);
+        await PlayCastAnimation();
+
+        await DistilledTimePower.GrantPotion(Owner);
+        await PowerCmd.Apply<DistilledTimePower>(choiceContext, Owner.Creature, 1, Owner.Creature, this);
     }
 
     protected override void OnUpgrade()
     {
-        EnergyCost.UpgradeBy(-1);
+        AddKeyword(CardKeyword.Innate);
     }
 }

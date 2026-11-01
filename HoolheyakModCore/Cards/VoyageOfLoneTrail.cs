@@ -27,6 +27,8 @@ public class VoyageOfLoneTrail : HoolheyakBaseCard
 
     protected override async Task OnPlay(PlayerChoiceContext choiceContext, CardPlay cardPlay)
     {
+        await PlayCastAnimation();
+
         await PowerCmd.Apply<VoyageOfLoneTrailPower>(choiceContext, Owner.Creature, DynamicVars["VoyageOfLoneTrail-Magic"].IntValue, Owner.Creature, this);
     }
 
