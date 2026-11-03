@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
 using BaseLib.Abstracts;
+using Godot;
 using HoolheyakMod.Scripts.Utils;
 using MegaCrit.Sts2.Core.Multiplayer.Game;
 using MegaCrit.Sts2.Core.Multiplayer.Game.Lobby;
-
 #if STS2_BETA
 using LobbyPlayerCompat = MegaCrit.Sts2.Core.Entities.Multiplayer.StartRunLobbyPlayer;
 #else
@@ -16,80 +16,107 @@ namespace HoolheyakMod.Code.Networking;
 internal static class HoolheyakSkinNetwork
 {
     private static StartRunLobby? _activeLobby;
+    private static LoadRunLobby? _activeLoadLobby;
+    private static INetGameService? ActiveService => _activeLoadLobby?.NetService ?? _activeLobby?.NetService;
+    private static readonly Dictionary<StartRunLobby, Action<LobbyPlayerCompat>> ConnectedHandlers = new();
+    private static readonly HashSet<INetGameService> Registrations = new();
 
-    private sealed class Registration
+    private static void Register(INetGameService service)
     {
-        public StartRunLobby Lobby { get; }
-        public Action<LobbyPlayerCompat> PlayerConnectedHandler { get; }
-
-        public Registration(StartRunLobby lobby, Action<LobbyPlayerCompat> playerConnectedHandler)
-        {
-            Lobby = lobby;
-            PlayerConnectedHandler = playerConnectedHandler;
-        }
+        if (Registrations.Add(service))
+            service.RegisterMessageHandler<CustomMessageWrapper>(HandleCustomMessage);
     }
-
-    private static readonly Dictionary<INetGameService, Registration> Registrations = new();
 
     public static void Attach(StartRunLobby lobby)
     {
-        var netService = lobby.NetService;
-        if (Registrations.ContainsKey(netService)) return;
-
+        if (ConnectedHandlers.ContainsKey(lobby)) return;
+        HoolheyakSkinState.Clear();
         _activeLobby = lobby;
+        Register(lobby.NetService);
+        Action<LobbyPlayerCompat> handler = _ => PublishLocalSkin(lobby);
+        ConnectedHandlers[lobby] = handler;
+        lobby.PlayerConnected += handler;
+        GD.Print("[HoolheyakMod Skin] 新建大厅皮肤同步已连接。");
+    }
 
-        netService.RegisterMessageHandler<CustomMessageWrapper>(HandleCustomMessage);
+    public static void Attach(LoadRunLobby lobby)
+    {
+        _activeLoadLobby = lobby;
+        Register(lobby.NetService);
+        HoolheyakSkinState.Clear();
+        foreach (var player in lobby.Run.Players) HoolheyakSkinState.TryRestore(player);
+        GD.Print("[HoolheyakMod Skin] 继续存档大厅皮肤已恢复，等待玩家确认。");
+    }
 
-        Action<LobbyPlayerCompat> playerConnectedHandler = _ => PublishLocalSkin(lobby);
-
-        lobby.PlayerConnected += playerConnectedHandler;
-
-        Registrations[netService] = new Registration(lobby, playerConnectedHandler);
-
-        Console.WriteLine("[HoolheyakMod Skin] 已连接角色大厅皮肤同步。");
+    private static void Unregister(INetGameService service)
+    {
+        if (Registrations.Remove(service))
+            service.UnregisterMessageHandler<CustomMessageWrapper>(HandleCustomMessage);
     }
 
     public static void Detach(StartRunLobby lobby)
     {
-        var netService = lobby.NetService;
-
-        if (!Registrations.Remove(netService, out var registration))
-            return;
-
-        registration.Lobby.PlayerConnected -= registration.PlayerConnectedHandler;
-        netService.UnregisterMessageHandler<CustomMessageWrapper>(HandleCustomMessage);
-
-        if (ReferenceEquals(_activeLobby, lobby))
-            _activeLobby = null;
-
-        Console.WriteLine("[HoolheyakMod Skin] 已断开角色大厅皮肤同步。");
+        if (ConnectedHandlers.Remove(lobby, out var handler)) lobby.PlayerConnected -= handler;
+        Unregister(lobby.NetService);
+        if (ReferenceEquals(_activeLobby, lobby)) _activeLobby = null;
     }
 
-    public static void PublishLocalSkin(StartRunLobby lobby)
+    public static void Detach(LoadRunLobby lobby)
     {
-        ulong localNetId = lobby.NetService.NetId;
-        int skinIndex = HoolheyakSkinState.Normalize(HoolheyakConfig.CurrentSkinIndex);
-
-        HoolheyakSkinState.SetSkin(localNetId, skinIndex);
-        CustomMessageWrapper.Send(new SkinSelectionMessage(skinIndex), lobby.NetService);
-
-        Console.WriteLine($"[HoolheyakMod Skin] 发送本地皮肤：NetId={localNetId}, Skin={skinIndex}");
+        Unregister(lobby.NetService);
+        if (ReferenceEquals(_activeLoadLobby, lobby)) _activeLoadLobby = null;
     }
 
+    internal static int GetLocalSelection()
+    {
+        var service = ActiveService;
+        return service != null && HoolheyakSkinState.TryGetSkin(service.NetId, out int skin)
+            ? skin : HoolheyakSkinState.Normalize(HoolheyakConfig.CurrentSkinIndex);
+    }
+
+    public static void SelectLocalSkin(int skin)
+    {
+        HoolheyakConfig.CurrentSkinIndex = HoolheyakSkinState.Normalize(skin);
+        if (ActiveService is not { } service) return;
+        HoolheyakSkinState.SetSkin(service.NetId, skin);
+        Publish(service, true);
+    }
+
+    public static void PublishLocalSkin(StartRunLobby lobby) => Publish(lobby.NetService, true);
+    public static void PublishLocalSkin(LoadRunLobby lobby) => Publish(lobby.NetService, true);
     public static void PublishLocalSkin()
     {
-        if (_activeLobby == null)
-        {
-            Console.WriteLine("[HoolheyakMod Skin] 当前没有可用的角色大厅，未发送皮肤。");
-            return;
-        }
+        if (ActiveService is { } service) Publish(service, true);
+    }
 
-        PublishLocalSkin(_activeLobby);
+    private static void Publish(INetGameService service, bool requestReply)
+    {
+        int skin = GetLocalSelection();
+        HoolheyakSkinState.SetSkin(service.NetId, skin);
+        StoreLoadedSelection(service.NetId, skin);
+        CustomMessageWrapper.Send(new SkinSelectionMessage(skin, requestReply), service);
+        GD.Print($"[HoolheyakMod Skin] 发送玩家皮肤：NetId={service.NetId}, Skin={skin}, RequestReply={requestReply}");
+    }
+
+    private static void StoreLoadedSelection(ulong playerId, int skin)
+    {
+        if (_activeLoadLobby == null) return;
+        foreach (var player in _activeLoadLobby.Run.Players)
+            if (player.NetId == playerId) HoolheyakSkinState.Store(player, skin);
+    }
+
+    internal static void Receive(ulong senderId, int skin, bool requestReply)
+    {
+        HoolheyakSkinState.SetSkin(senderId, skin);
+        StoreLoadedSelection(senderId, skin);
+        GD.Print($"[HoolheyakMod Skin] 收到玩家皮肤：NetId={senderId}, Skin={skin}");
+        // A ready client asks once; the reply never asks again, avoiding echo loops.
+        if (requestReply && ActiveService is { } service && senderId != service.NetId)
+            Publish(service, false);
     }
 
     private static void HandleCustomMessage(CustomMessageWrapper wrapper, ulong senderId)
     {
-        if (wrapper.Message is SkinSelectionMessage message)
-            message.HandleMessage(senderId);
+        if (wrapper.Message is SkinSelectionMessage message) message.HandleMessage(senderId);
     }
 }

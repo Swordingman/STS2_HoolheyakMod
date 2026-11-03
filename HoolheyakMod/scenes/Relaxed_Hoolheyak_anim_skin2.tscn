@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://neawdgvgpoi8"]
+[gd_scene load_steps=3 format=3 uid="uid://neawdgvgpoi8"]
 
+[ext_resource type="Script" path="res://HoolheyakModCore/Scripts/HoolheyakMerchant.cs" id="1_merchant_script"]
 [ext_resource type="SpineSkeletonDataResource" uid="uid://bepkntywxt1cm" path="res://HoolheyakMod/scenes/Relaxed_Hoolheyak_anim_skin2.tres" id="1_oumrg"]
 
 [node name="HoolheyakMerchant" type="Node2D"]
+script = ExtResource("1_merchant_script")
 
 [node name="SpineSprite" type="SpineSprite" parent="."]
 skeleton_data_res = ExtResource("1_oumrg")

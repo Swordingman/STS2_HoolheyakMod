@@ -46,6 +46,7 @@ public partial class MainFile
                 "HoolheyakMod",
                 new HoolheyakConfig());
 
+            HoolheyakSkinState.RegisterSave();
             _initialized = true;
 
             Console.WriteLine(

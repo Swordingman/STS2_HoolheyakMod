@@ -18,8 +18,10 @@ public class HoolheyakMod : PlaceholderCharacterModel
 {
     public const string CharacterId = "HoolheyakMod";
 
-    public static readonly Color Color = new(40, 150, 190);
+    public static readonly Color Color = Godot.Color.Color8(40, 150, 190);
+
     public override Color NameColor => Color;
+    public override Color MapDrawingColor => Color;
 
     public override Color EnergyLabelOutlineColor => new(40f / 255f, 150f / 255f, 190f / 255f, 1f);
 

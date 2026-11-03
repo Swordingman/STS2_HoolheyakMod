@@ -188,67 +188,44 @@ internal static class FakeMerchantAnimationHelper
     }
 }
 
+// Let the game (or another character mod) build the shared player list first.
+// Only replace our own visuals afterwards; never take over other characters.
 [HarmonyPatch(typeof(NMerchantRoom), "AfterRoomIsLoaded")]
 internal static class MerchantPlayerSkinPatch
 {
-    [HarmonyPrefix]
-    private static bool Prefix(List<Player> ____players, Control ____characterContainer, List<NMerchantCharacter> ____playerVisuals)
+    [HarmonyPostfix]
+    private static void Postfix(List<Player> ____players, Control ____characterContainer,
+        List<NMerchantCharacter> ____playerVisuals)
     {
-        Player? localPlayer = LocalContext.GetMe(____players);
-        if (localPlayer == null)
+        for (int i = 0; i < ____players.Count && i < ____playerVisuals.Count; i++)
         {
-            GD.PushWarning("[HoolheyakMod Skin] 商店中未找到本地玩家，使用原版加载逻辑。");
-            return true;
+            Player player = ____players[i];
+            if (player.Character is not Code.Character.HoolheyakMod)
+                continue;
+
+            int skinIndex = PlayerSkinSceneHelper.GetSkin(player);
+            string path = Code.Character.HoolheyakMod.GetMerchantAnimPath(skinIndex);
+            NMerchantCharacter oldCharacter = ____playerVisuals[i];
+            if (oldCharacter.SceneFilePath == path)
+                continue;
+
+            // All three scenes carry a concrete NMerchantCharacter script, so
+            // direct PackedScene instantiation also works in other mods' loaders.
+            var scene = ResourceLoader.Load<PackedScene>(path);
+            NMerchantCharacter character = scene.Instantiate<NMerchantCharacter>();
+            character.Transform = oldCharacter.Transform;
+            character.Modulate = oldCharacter.Modulate;
+            character.ZIndex = oldCharacter.ZIndex;
+            int childIndex = oldCharacter.GetIndex();
+
+            ____characterContainer.AddChildSafely(character);
+            ____characterContainer.MoveChild(character, childIndex);
+            ____characterContainer.RemoveChild(oldCharacter);
+            oldCharacter.QueueFree();
+            ____playerVisuals[i] = character;
+
+            GD.Print($"[HoolheyakMod Skin] 商店皮肤更新：NetId={player.NetId}, Skin={skinIndex}, Path={path}");
         }
-
-        ____players.Remove(localPlayer);
-        ____players.Insert(0, localPlayer);
-
-        int rowCount = Mathf.CeilToInt(Mathf.Sqrt(____players.Count));
-
-        for (int row = 0; row < rowCount; row++)
-        {
-            float x = -140f * row;
-            for (int column = 0; column < rowCount; column++)
-            {
-                int playerIndex = row * rowCount + column;
-                if (playerIndex >= ____players.Count) break;
-
-                Player player = ____players[playerIndex];
-                NMerchantCharacter character = CreateMerchantCharacter(player);
-
-                ____characterContainer.AddChildSafely(character);
-                ____characterContainer.MoveChild(character, 0);
-                PlayerSkinSceneHelper.PlayMerchantLoop(character);
-                character.Position = new Vector2(x, -50f * row);
-
-                if (row > 0)
-                {
-                    character.Modulate = new Color(0.5f, 0.5f, 0.5f);
-                }
-
-                x -= 275f;
-                ____playerVisuals.Add(character);
-            }
-        }
-
-        return false;
-    }
-
-    private static NMerchantCharacter CreateMerchantCharacter(Player player)
-    {
-        if (player.Character is not Code.Character.HoolheyakMod)
-        {
-            return PreloadManager.Cache.GetScene(player.Character.MerchantAnimPath)
-                .Instantiate<NMerchantCharacter>(PackedScene.GenEditState.Disabled);
-        }
-
-        int skinIndex = PlayerSkinSceneHelper.GetSkin(player);
-        string path = Code.Character.HoolheyakMod.GetMerchantAnimPath(skinIndex);
-
-        GD.Print($"[HoolheyakMod Skin] 商店模型：NetId={player.NetId}, Skin={skinIndex}, Path={path}");
-
-        return NodeFactory<NMerchantCharacter>.CreateFromScene(path);
     }
 }
 

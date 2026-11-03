@@ -1,0 +1,8 @@
+{
+  "HOOLHEYAKMOD-ENEMY_MANIFOLD.name": "Текучий облик",
+  "HOOLHEYAKMOD-ENEMY_MANIFOLD.title": "Текучий облик",
+  "HOOLHEYAKMOD-FRIENDLY_MANIFOLD.name": "Текучий облик",
+  "HOOLHEYAKMOD-FRIENDLY_MANIFOLD.title": "Текучий облик",
+  "HOOLHEYAKMOD-MUELSYSE.name": "Мулсис",
+  "HOOLHEYAKMOD-MUELSYSE.title": "Мулсис"
+}

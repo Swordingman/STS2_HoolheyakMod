@@ -30,7 +30,7 @@
   "HOOLHEYAKMOD-TAIL_CARE_KIT.title": "尾巴养护套装",
   "HOOLHEYAKMOD-TAIL_CARE_KIT.description": "对局开始时，给予所有敌人[blue]7[/blue]层[gold]解构[/gold]。",
   "HOOLHEYAKMOD-TAIL_CARE_KIT.short_description": "对局开始时，给予所有敌人[blue]7[/blue]层[gold]解构[/gold]。",
-  "HOOLHEYAKMOD-TAIL_CARE_KIT.flavor": "“你是粗尾巴党，还是细尾巴党？”",
+  "HOOLHEYAKMOD-TAIL_CARE_KIT.flavor": "“喂，你是粗尾巴党，还是细尾巴党？”",
   "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.title": "装帧精美的历史书",
   "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.description": "本局游戏中曾击败过的敌人，在战斗开始时失去[blue]50%[/blue]的最大生命值。\n（右键点击查看名单。）",
   "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.short_description": "本局游戏中曾击败过的敌人，在战斗开始时失去[blue]50%[/blue]的最大生命值。\n（右键点击查看名单。）",
@@ -67,5 +67,9 @@
   "HOOLHEYAKMOD-EYES_OF_PRIESTESS.title": "女祭司之眼",
   "HOOLHEYAKMOD-EYES_OF_PRIESTESS.description": "在你每次洗牌后进行回合开始的抽牌时，查看牌堆顶的[blue]5[/blue]张牌，选择至多[blue]5[/blue]张卡，[gold]变量[/gold]：[gold]弃掉它们[/gold]；[gold]将它们置于抽牌堆底部[/gold]。",
   "HOOLHEYAKMOD-EYES_OF_PRIESTESS.short_description": "在你每次洗牌后进行回合开始的抽牌时，查看牌堆顶的[blue]5[/blue]张牌，选择至多[blue]5[/blue]张卡，[gold]变量[/gold]：[gold]弃掉它们[/gold]；[gold]将它们置于抽牌堆底部[/gold]。",
-  "HOOLHEYAKMOD-EYES_OF_PRIESTESS.flavor": "进入你的梦，塑造你的梦。"
+  "HOOLHEYAKMOD-EYES_OF_PRIESTESS.flavor": "进入你的梦，塑造你的梦。",
+  "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.list_title": "已记录的敌人（{Count}种）",
+  "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.list_empty": "尚无已完成战斗的记录。",
+  "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.list_close": "关闭",
+  "HOOLHEYAKMOD-BEAUTIFUL_HISTORY_BOOK.list_hint": "包括获得历史书之前的本局战斗记录。"
 }

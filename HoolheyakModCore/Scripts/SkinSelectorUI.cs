@@ -36,13 +36,13 @@ public partial class SkinSelectorUI : Control
 
     public override void _Ready()
     {
-        if (IsInsideMultiplayerLoadScreen())
+        bool isLoadScreen = IsInsideMultiplayerLoadScreen();
+        if (isLoadScreen)
         {
-            GetNode<TextureRect>("TextureRect").Visible = true;
-            GetNode<Control>("SkinSelectorPanel").Visible = false;
+            GetNode<Control>("SkinSelectorPanel").Visible = true;
             GetNode<Control>("ChallengeSelectorPanel").Visible = false;
-            return;
         }
+        HoolheyakConfig.CurrentSkinIndex = HoolheyakSkinNetwork.GetLocalSelection();
 
         // 皮肤节点
         _leftBtn = GetNode<TextureButton>("SkinSelectorPanel/ArrowContainer/LeftArrow");
@@ -138,7 +138,7 @@ public partial class SkinSelectorUI : Control
 
         ModConfig.SaveDebounced<HoolheyakConfig>();
         UpdateUI();
-        HoolheyakSkinNetwork.PublishLocalSkin();
+        HoolheyakSkinNetwork.SelectLocalSkin(HoolheyakConfig.CurrentSkinIndex);
     }
 
     private void OnRightPressed()
@@ -149,7 +149,7 @@ public partial class SkinSelectorUI : Control
 
         ModConfig.SaveDebounced<HoolheyakConfig>();
         UpdateUI();
-        HoolheyakSkinNetwork.PublishLocalSkin();
+        HoolheyakSkinNetwork.SelectLocalSkin(HoolheyakConfig.CurrentSkinIndex);
     }
 
     private void UpdateUI()

@@ -1,0 +1,9 @@
+{
+  "HOOLHEYAKMOD-ANTI_GRAVITY_GEL.description": "Примените к цели [blue]{Gel-Weightless:diff()}[/blue] [gold]Невесомости[/gold] и [blue]{Gel-Lift:diff()}[/blue] [gold]Подъёма[/gold].",
+  "HOOLHEYAKMOD-ANTI_GRAVITY_GEL.title": "Антигравитационный гель",
+  "HOOLHEYAKMOD-ASTROLABE_RESIDUE.description": "Выберите и активируйте [blue]1[/blue] [gold]Аспект[/gold].",
+  "HOOLHEYAKMOD-ASTROLABE_RESIDUE.select_message": "Выберите карту Аспекта.",
+  "HOOLHEYAKMOD-ASTROLABE_RESIDUE.title": "Осадок астролябии",
+  "HOOLHEYAKMOD-ELIXIR_OF_EPIPHANY.description": "Получите [blue]{Elixir-Analysis:diff()}[/blue] [gold]Анализа[/gold]. Немедленно активируйте [gold]Эрудицию[/gold] и [gold]Извилину[/gold] [blue]1[/blue] раз.",
+  "HOOLHEYAKMOD-ELIXIR_OF_EPIPHANY.title": "Эликсир озарения"
+}

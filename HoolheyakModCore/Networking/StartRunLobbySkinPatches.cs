@@ -29,3 +29,34 @@ internal static class StartRunLobbyCleanUpPatch
         HoolheyakSkinNetwork.Detach(__instance);
     }
 }
+
+[HarmonyPatch]
+internal static class LoadRunLobbyConstructorSkinPatch
+{
+    private static IEnumerable<MethodBase> TargetMethods() => typeof(LoadRunLobby).GetConstructors();
+    [HarmonyPostfix]
+    private static void Postfix(LoadRunLobby __instance) => HoolheyakSkinNetwork.Attach(__instance);
+}
+
+[HarmonyPatch(typeof(LoadRunLobby), nameof(LoadRunLobby.CleanUp))]
+internal static class LoadRunLobbyCleanUpSkinPatch
+{
+    [HarmonyPrefix]
+    private static void Prefix(LoadRunLobby __instance) => HoolheyakSkinNetwork.Detach(__instance);
+}
+
+[HarmonyPatch(typeof(StartRunLobby), nameof(StartRunLobby.SetReady))]
+internal static class StartRunLobbyReadySkinPatch
+{
+    [HarmonyPrefix]
+    private static void Prefix(StartRunLobby __instance, bool __0)
+    { if (__0) HoolheyakSkinNetwork.PublishLocalSkin(__instance); }
+}
+
+[HarmonyPatch(typeof(LoadRunLobby), nameof(LoadRunLobby.SetReady))]
+internal static class LoadRunLobbyReadySkinPatch
+{
+    [HarmonyPrefix]
+    private static void Prefix(LoadRunLobby __instance, bool __0)
+    { if (__0) HoolheyakSkinNetwork.PublishLocalSkin(__instance); }
+}

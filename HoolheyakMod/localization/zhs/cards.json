@@ -99,10 +99,10 @@
   "HOOLHEYAKMOD-RECURSIVE_EXPERIMENT.variable.0": "终止本次实验。",
   "HOOLHEYAKMOD-RECURSIVE_EXPERIMENT.variable.1": "消耗1点费用，随机从卡组中打出1张牌并将其从卡组中永久移除。战斗结束后，额外获得一组相同类型的选牌奖励。然后再开启一次实验。",
   "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.title": "冗余实验",
-  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.description": "选择手牌中的{Redundant-Count:diff()}张牌，[gold]变量[/gold]：\n在本回合中，被选中的牌在被丢弃时视为被打出。（回合结束的弃牌也会触发！）；\n弃掉它们，并抽等量的牌。",
-  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.variable.0": "使它们在丢弃时视为被打出。",
-  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.variable.1": "弃掉它们，并抽等量的牌。",
-  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.selectionScreenPrompt": "选择要进行变量操作的手牌。",
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.description": "选择至多{Redundant-Count:diff()}张手牌，[gold]变量[/gold]：\n洗牌，然后将它们弃掉；\n洗牌，然后将它们放在抽牌堆顶部。",
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.variable.0": "洗牌，然后将它们弃掉。",
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.variable.1": "洗牌，然后将它们放在抽牌堆顶部。",
+  "HOOLHEYAKMOD-REDUNDANT_EXPERIMENT.selectionScreenPrompt": "选择至多{Redundant-Count}张手牌。",
   "HOOLHEYAKMOD-BYGONE_WINGS.title": "曾有羽翼",
   "HOOLHEYAKMOD-BYGONE_WINGS.description": "每当你打出1张其他颜色的牌，使1张随机手牌耗能-1，直到它下次打出或本回合结束。",
   "HOOLHEYAKMOD-INHERITED_MEMORIES.title": "传承记忆",
@@ -255,5 +255,8 @@
   "HOOLHEYAKMOD-FOR_THE_QUEST.description": "造成{Damage:diff()}点伤害。\n给予目标相当于其[gold]重力[/gold]一半的[gold]升力[/gold]（向下取整）。",
   "HOOLHEYAKMOD-FORGETFULNESS.title": "忘却",
   "HOOLHEYAKMOD-FORGETFULNESS.description": "你的回合开始时，从3张随机牌中选择1张加入手牌。它在本回合可以免费打出，打出后移出本场战斗。",
-  "HOOLHEYAKMOD-CROSS_SEARCH.selectionScreenPrompt": "选择1张手牌弃置。"
+  "HOOLHEYAKMOD-CROSS_SEARCH.selectionScreenPrompt": "选择1张手牌弃置。",
+  "HOOLHEYAKMOD-DEEP_INQUIRY.title": "深度求索",
+  "HOOLHEYAKMOD-DEEP_INQUIRY.description": "选择1名友军（可以选择自己）。每名友军从3张该角色颜色的随机牌中选择1张加入自己的手牌。这张牌在本回合可以免费打出。",
+  "HOOLHEYAKMOD-DEEP_INQUIRY.selectionScreenPrompt": "选择1张牌加入你的手牌。它在本回合可以免费打出。"
 }
